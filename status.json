@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "exit": 0,
@@ -15,7 +15,16 @@
     "summary": "Wrote projects/bzip2/docs/surface-area.md and surface-area.json (two commits; nothing outside docs/ changed). They cover all 24 BZ_API functions and the 11 exported internals (9 functions, 2 data tables, each marked non-public); bz_stream (every field: who sets it, who reads it, what it means between calls) and BZFILE; all 23 BZ_* macros, including what BZ_NO_STDIO, BZ_IMPORT, BZ_EXPORT, BZ_API and BZ_EXTERN change; and the 11 installed programs with options, exit codes, files and environment variables. The .md also has compression and decompression state-machine tables, the .bz2 format as the code reads and writes it, 24 manual-vs-code discrepancies and the open questions. Claims carry file:line citations; uncertain ones are marked. Key quirks were confirmed by compiling the vendored sources in /tmp and running them: for example, BZ_RUN with no progress returns BZ_PARAM_ERROR, BZ_FINISH with no progress returns BZ_SEQUENCE_ERROR, bzCompressInit does not range-check verbosity, BZ_FLUSH output cannot be decoded on its own, and bzip2 -df appends the whole input after trailing garbage. An independent subagent review checked about 115 claims and found one real error (the BZ_FLUSH wording) plus minor issues; all are fixed. check_surface.py --only-docs passes.",
     "worker": "imlvts/corey"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-13T18:06:56Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-13T18:06:56Z",
+    "kind": "review",
+    "nonce": "1cc5bb0ac6bcbd45",
+    "spec": "7792576c8fffa797",
+    "spec_rev": "515dd83d8df6c0183b9810c501cec6239984bece",
+    "worker": "imlvts/corey-review"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/surface-area/e1",
