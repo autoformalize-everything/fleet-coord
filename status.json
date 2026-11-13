@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey",
-  "epoch": 4,
+  "epoch": 5,
   "last": {
     "at": "2026-11-13T18:16:40Z",
     "comments": [
@@ -46,7 +46,16 @@
     "summary": "This is a careful, well-cited inventory. Only projects/bzip2/docs/surface-area.{md,json} changed, and `check_surface.py --only-docs` passes (24 public functions, 35 exported symbols, 23 macros, 2 types, 11 programs).\n\nI checked well over five non-obvious claims against the cited upstream lines, and they hold:\n- the full BZ2_bzCompress transition table, including BZ_PARAM_ERROR for BZ_RUN with no progress (bzlib.c:425), the `goto preswitch` on entering flush/finish (428-438), and BZ_SEQUENCE_ERROR for a finish call that makes no progress (457)\n- BZ2_bzCompressInit does not range-check verbosity (159-162), while DecompressInit, WriteOpen, ReadOpen and the BuffToBuff functions do\n- ReadOpen's nUnused/unused rules (1103-1108)\n- ReadGetUnused resets lastErr, so a second call returns BZ_SEQUENCE_ERROR (1233-1238)\n- BuffToBuffCompress returns BZ_SEQUENCE_ERROR exactly when sourceLen==0 and *destLen==0, and BuffToBuffDecompress maps BZ_OK to BZ_UNEXPECTED_EOF or BZ_OUTBUFF_FULL\n- every RETURN site in decompress.c, plus the BZ_MAX_SELECTORS clamp and the origPtr bound\n- BZ2_hbCreateDecodeTables needs code lengths of at most 21 (BZ_MAX_CODE_LEN 23)\n- the flush bit-buffer argument (bsNEEDW and bsFinishWrite only on the last block)\n- the bzip2recover limit: 49999 matches pass and the 50000th aborts (398, 441-443); names of 1980+ characters\n- bzip2's two-pass option parsing, the lone `-` token, and -c/-t rejected only in F2O mode\n- -f trycat rewinds the input (506-517)\n- exit codes 1/2/3, including the SIGSEGV handler at 875\n- bzgrep and bzdiff behaviour\n- the manual discrepancies at manual.xml:1176-1180, 1250-1256, 1325-1345, 1574-1576 and 2471-2482\n\nTwo things need fixing before approval:\n\n1. **Wrong claim about BZ2_bzWriteClose64 after an earlier error** (md \u00a75.3 'Consequences', and the JSON postcondition). The text says that with abandon==0 after an earlier BZ2_bzWrite error, f is still flushed and the result is BZ_OK. That ignores the ferror(f) check at bzlib.c:1040-1041, which runs before everything else. The most common BZ2_bzWrite failure is BZ_IO_ERROR from a short or failed fwrite or from ferror on entry (bzlib.c:978-979, 996-999), and it leaves ferror(f) set. In that case the close returns BZ_IO_ERROR and does not free the handle. A failing fflush (1068-1072) also gives BZ_IO_ERROR. The BZ_OK outcome only holds when ferror(f) is clear and fflush succeeds, for example after a BZ_SEQUENCE_ERROR from BZ2_bzWrite. Your ordered steps 1-7 are correct; the summary sentence just contradicts them. \u00a79 item 11 should be qualified the same way.\n\n2. **The JSON drops preconditions and postconditions that the .md states.** `preconditions` is `[]` for 26 of 33 functions and `postconditions` is `[]` for many of them. The task lists preconditions and postconditions for every function, and the JSON is the machine-readable input for later specification work, so information that exists only in .md prose is lost there. Concrete cases where the .md has a precondition that the JSON lacks:\n- BZ2_bzerror: b and errnum non-NULL and dereferenced unchecked; b still open\n- BZ2_bzread: b non-NULL, dereferenced unchecked at 1484\n- BZ2_bzWrite / BZ2_bzWriteClose: b is a live write handle\n- BZ2_bzReadClose / BZ2_bzReadGetUnused: b is a live read handle, not yet freed\n- BZ2_bzDecompressEnd: strm initialised by DecompressInit and not ended\n- BZ2_bzDecompressInit / BZ2_bzReadOpen / BZ2_bzWriteOpen: strm or f must stay valid and in place until End/Close\n- BZ2_blockSort: s->nblock > 0 and work arrays as allocated by CompressInit\n- BZ2_hbCreateDecodeTables: every length in minLen..maxLen and at most 21\n- BZ2_hbMakeCodeLengths: alphaSize \u2264 258\n\nThe same goes for empty postconditions such as BZ2_bzWrite (all len bytes consumed on BZ_OK) and the BuffToBuff functions (*destLen updated only on BZ_OK; dest may hold partial data on errors). Please fill these from the .md. Where a function really has none, say so explicitly (for example \"none\" for BZ2_bzlibVersion and BZ2_bzflush), so an empty list can't be mistaken for an omission.\n\nNits (fix while you're there):\n- md \u00a75.1 says BZ2_bzCompressInit makes 'four bzalloc calls'. That is true on success, but there is only one when the EState allocation fails (bzlib.c:169).\n- The table row for the `unused` parameter of BZ2_bzReadOpen (md line 543) is missing a `|`, so the Valid text ends up inside the Meaning column.",
     "worker": "imlvts/corey-review"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-13T18:23:10Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-13T18:23:10Z",
+    "kind": "work",
+    "nonce": "d64d32ce81ee06a6",
+    "spec": "7792576c8fffa797",
+    "spec_rev": "515dd83d8df6c0183b9810c501cec6239984bece",
+    "worker": "imlvts/corey"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/surface-area/e3",
