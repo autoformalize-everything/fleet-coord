@@ -2,51 +2,31 @@
   "author": "imlvts/corey",
   "epoch": 3,
   "last": {
-    "at": "2026-11-13T18:09:42Z",
-    "comments": [
-      {
-        "body": "Off-by-one. currBlock starts at 0 (bzip2recover.c:398), and the check `currBlock >= BZ_MAX_HANDLED_BLOCKS - 1` (441) runs before `currBlock++`, so the abort happens on the 50000th magic match, not after 49999. Confirmed by building bzip2recover.c: 49999 concatenated 0x314159265359 patterns give \"couldn't find any block boundaries\"; 50000 give \"appears to contain more than 50000 blocks\".",
-        "line": 1104,
-        "path": "projects/bzip2/docs/surface-area.md"
-      },
-      {
-        "body": "Same off-by-one as in the .md: the abort happens on the 50000th match (bzip2recover.c:398, 441-442).",
-        "line": 2076,
-        "path": "projects/bzip2/docs/surface-area.json"
-      },
-      {
-        "body": "This holds only without -f. With -f, BZ_DATA_ERROR_MAGIC on a later stream jumps to trycat (bzip2.c:465, 506-517), which rewinds the input and appends all of it, as \u00a79 item 18 says. Please qualify the bullet (\"without -f\") and cross-reference \u00a79.18 so the two sections agree.",
-        "line": 1069,
-        "path": "projects/bzip2/docs/surface-area.md"
-      }
-    ],
-    "epoch": 2,
-    "outcome": "changes",
-    "reviewed_sha": "78a8724e535ef06f5fa547b01d4861f4166ad36a",
-    "summary": "Overall this is a careful, well-cited inventory. The diff only touches projects/bzip2/docs/surface-area.{md,json}, and `check_surface.py --only-docs` passes (24 public functions, 35 exported symbols, 23 macros, 2 types, 11 programs).\n\nI checked these claims against the cited source lines, and they are correct:\n- BZ2_bzCompress transition table (bzlib.c:407-464): BZ_RUN with no progress gives BZ_PARAM_ERROR (425); an unknown action in RUNNING gives BZ_PARAM_ERROR (439-440); BZ_FINISH with no progress gives BZ_SEQUENCE_ERROR (456-457); FLUSH/FINISH fall through via goto preswitch.\n- BZ2_bzCompressInit does not range-check verbosity (159-162), and 0 maps to workFactor 30 (164). BZ2_bzDecompressInit checks that small is 0/1 and verbosity is 0..4 (501-503).\n- BZ2_bzReadOpen parameter checks, including nUnused 0..BZ_MAX_UNUSED (1103-1108). BZ2_bzReadGetUnused resets lastErr, so a second call gives BZ_SEQUENCE_ERROR (1231-1240). BZ2_bzRead returns BZ_UNEXPECTED_EOF on an empty file.\n- BZ2_bzWriteClose64 steps 1-7, including the patched `!abandon && ferror` check and the silent BZ_OK when lastErr != BZ_OK.\n- BZ2_bzBuffToBuffCompress returns BZ_SEQUENCE_ERROR for sourceLen==0 and *destLen==0. I traced it through handle_compress.\n- bzopen mode parsing and its 1..9 clamp; bzerror clamps positive codes to 0.\n- Decoder validation in decompress.c: origPtr > 10+100000*bs (261-264), nGroups 2..6, nSelectors >= 1, selector >= nGroups (297), excess selectors ignored (299-306), code lengths 1..20 (327), N >= 2M (396), cftab checks (497-522). Assertion codes and their lines in blocksort/huffman/compress/decompress.\n- The bit writer drains only before adding bits (compress.c:58-78), so up to 31 bits stay in the buffer after a flush.\n- bzip2 option parsing: two passes, long flags override short ones, `-s` caps the block size at 2, `-c` with `-t` exits 1. BZIP2/BZIP token truncation at FILE_NAME_LEN-10 = 1024. Exit-code paths (panic=3, crcError/EOF=2, configError=3, SIGSEGV handler 3/2). trycat rewinds and copies the whole input.\n- Makefile install: bunzip2/bzcat are copies; the scripts get symlinks.\n- Manual citations behind discrepancies 1, 2, 7 and 15 (manual.xml:1176-1180, 1252-1256, 1574-1576, 2471-2482).\n\nOne factual error (an off-by-one), which I confirmed by compiling bzip2recover.c:\n- bzip2recover's block limit. The doc says it \"aborts with exit 1 once 49999 magic-pattern matches ... have been seen\". In the code, currBlock starts at 0 (bzip2recover.c:398), and the check `currBlock >= BZ_MAX_HANDLED_BLOCKS - 1` (441-442) runs *before* currBlock++. So the abort happens on the 50000th match. A file of 49999 back-to-back block magics ends with \"couldn't find any block boundaries\"; one with 50000 ends with \"appears to contain more than 50000 blocks\". Please fix the .md (line 1104) and the JSON exit_codes entry (surface-area.json:2076).\n\nMinor (please fix while you are there):\n- \u00a77.1, the concatenated-streams bullet (md:1069-1072), says a later stream with bad magic is always reported as trailing garbage and counts as success. That is only true without -f: with -f, bzip2.c:465 jumps to trycat, as your own \u00a79 item 18 says. Qualify the bullet with \"without -f\" and point to \u00a79.18.\n- JSON: BZ2_decompress has a non-empty `returns` but an empty `errors` list. Fill in BZ_DATA_ERROR_MAGIC, BZ_DATA_ERROR and BZ_MEM_ERROR with when they occur, as you did for the public functions. BZ2_bz__AssertH__fail's `source` is bzlib.c:41, but the .md says bzlib.c:40-86. Make them agree.\n",
-    "worker": "imlvts/corey-review"
-  },
-  "lease": {
-    "claimed_at": "2026-11-13T18:11:23Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-13T18:11:23Z",
-    "kind": "work",
-    "nonce": "de38f8540461f75a",
-    "spec": "7792576c8fffa797",
-    "spec_rev": "515dd83d8df6c0183b9810c501cec6239984bece",
+    "agent": {
+      "exit": 0,
+      "reason": "exit",
+      "session": "a5cba305-e768-4dbf-8921-eec0b236e6a4",
+      "turns": 1
+    },
+    "at": "2026-11-13T18:12:57Z",
+    "epoch": 3,
+    "outcome": "success",
+    "progress": "",
+    "summary": "Addressed all review comments on PR #1: corrected the bzip2recover block-limit off-by-one (aborts on the 50000th magic match; bzip2recover.c:398, 441-443) in both .md and .json; qualified the concatenated-stream trailing-garbage bullet with 'without -f' and described the -f trycat path with a cross-reference to section 9 item 18; filled BZ2_decompress errors (each RETURN site in decompress.c cited), preconditions and postconditions in the JSON and listed the error sites in the .md; aligned BZ2_bz__AssertH__fail source to bzlib.c:40. check_surface.py --only-docs passes; only projects/bzip2/docs/ changed.",
     "worker": "imlvts/corey"
   },
-  "need": "work",
+  "lease": null,
+  "need": "review",
   "pr": {
-    "branch": "task/bzip2/surface-area/e1",
+    "branch": "task/bzip2/surface-area/e3",
     "draft": false,
     "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
     "gh_user": "imlvts",
-    "head_sha": "78a8724e535ef06f5fa547b01d4861f4166ad36a",
-    "number": 1,
+    "head_sha": "ac1d8e8c2662f83f95f42a89f8567ff853544b0e",
+    "number": 2,
     "repo": "autoformalize-everything/afe-oss",
     "spec": "7792576c8fffa797",
-    "url": "https://github.com/autoformalize-everything/afe-oss/pull/1"
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/2"
   },
   "rounds": 1,
   "strikes": 0,
