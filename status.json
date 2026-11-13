@@ -2,30 +2,32 @@
   "author": "imlvts/corey",
   "epoch": 6,
   "last": {
-    "agent": {
-      "exit": 0,
-      "reason": "exit",
-      "session": "ee80882b-4c9c-4c85-b797-4e763830d0e2",
-      "turns": 1
-    },
-    "at": "2026-11-13T18:27:29Z",
-    "epoch": 5,
-    "outcome": "success",
-    "progress": "",
-    "summary": "Addressed all epoch-4 review comments on projects/bzip2/docs/surface-area.{md,json}. (1) Corrected the BZ2_bzWriteClose64 after-error claim: with abandon==0 and ferror(f) set (usual after BZ_IO_ERROR from BZ2_bzWrite) it returns BZ_IO_ERROR at bzlib.c:1040-1041 without flushing/freeing; BZ_OK only if ferror is clear and fflush succeeds (md 5.3 consequences, md 9 item 11, JSON summary/errors/postconditions). (2) Filled preconditions and postconditions for every one of the 33 functions in the JSON from the md, with citations checked against the source, using explicit \"none\" where none apply. (3) Nits: CompressInit makes one bzalloc call when the EState allocation fails; fixed the BZ2_bzReadOpen table row. Also added BZ2_bzWrite postconditions/lastErr reset to the md and corrected the BZ2_indexIntoF read range (cftab[1..255]). check_surface.py --only-docs passes; only projects/bzip2/docs/ changed.",
-    "worker": "imlvts/corey"
-  },
-  "lease": {
-    "claimed_at": "2026-11-13T18:27:34Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-13T18:27:34Z",
-    "kind": "review",
-    "nonce": "a83fd1cf46070492",
-    "spec": "7792576c8fffa797",
-    "spec_rev": "515dd83d8df6c0183b9810c501cec6239984bece",
+    "at": "2026-11-13T18:30:31Z",
+    "comments": [
+      {
+        "body": "Nit (non-blocking): a BZ2_bzRead call after BZ_STREAM_END does not fail immediately. If avail_in == 0 and f is not at EOF, it first fread()s up to 5000 bytes from f into the handle buffer (bzlib.c:1192-1200). Only then does BZ2_bzDecompress return BZ_SEQUENCE_ERROR. That consumes bytes of a following stream, and since lastErr becomes BZ_SEQUENCE_ERROR, BZ2_bzReadGetUnused can no longer recover them. Worth one sentence under side effects.",
+        "line": 578,
+        "path": "projects/bzip2/docs/surface-area.md"
+      },
+      {
+        "body": "Nit (non-blocking): the BZ_PARAM_ERROR for NULL unused/nUnused also goes through BZ_SETERR, which overwrites b->lastErr (bzlib.c:886-890, 1235-1236). A retry with valid pointers therefore gets BZ_SEQUENCE_ERROR, and the unused bytes are lost. Same mechanism as the 'second call' case; consider saying so.",
+        "line": 603,
+        "path": "projects/bzip2/docs/surface-area.md"
+      },
+      {
+        "body": "Nit (non-blocking): cite the man page by line, as elsewhere: `bzip2.1:230-234` (the -s entry, '2300 k') rather than '(`bzip2.1`, `-s` entry)'.",
+        "line": 1355,
+        "path": "projects/bzip2/docs/surface-area.md"
+      }
+    ],
+    "epoch": 6,
+    "outcome": "approve",
+    "reviewed_sha": "d547ccd5d3effe5871b94599af4b057327c71e56",
+    "summary": "Approve. Only projects/bzip2/docs/surface-area.{md,json} change (git diff --name-only origin/master..HEAD), and `python3 projects/bzip2/tools/check_surface.py --only-docs` passes (24 public functions, 35 exported symbols, 23 macros, 2 types, 11 programs). The JSON has all 33 functions, each with parameters, errors, preconditions, postconditions, side_effects, no_stdio and source. Empty `errors` arrays appear only on functions that have no error codes (void internals, BZ2_bzlibVersion, the zlib-style wrappers that return NULL or -1), which is correct.\n\nI checked well over five non-obvious claims against the cited upstream lines. All of them hold:\n- BZ2_bzCompressInit: BZ_CONFIG_ERROR is checked first. PARAM_ERROR covers only strm, blockSize100k 1..9 and workFactor 0..250; verbosity is not checked (bzlib.c:157-162), so manual discrepancy #1 is right. workFactor 0 becomes 30 (164). With one bzalloc call when the EState allocation fails versus all three array calls before any free (168-187), the side-effect text is exact. blockNo is 1 after prepare_new_block (bzlib.c:125).\n- BZ2_bzCompress state table (bzlib.c:407-464): BZ_RUN with no progress gives PARAM_ERROR (425). An unknown action in RUNNING gives PARAM_ERROR (439-440). RUNNING with FLUSH/FINISH falls through via `goto preswitch`. avail_in, not next_in, is compared against avail_in_expect. FINISH with no progress gives SEQUENCE_ERROR (457). IDLE is entered only on STREAM_END, and End sets state=NULL.\n- BZ2_bzDecompress (808-858): no avail_out check. BZ_X_IDLE gives SEQUENCE_ERROR. Block CRC is checked at 830-831, combined CRC at 847-848, corrupt unRLE at 823. The verbosity thresholds at 826/829 match.\n- BZ2_decompress validation (decompress.c): magic and block-size byte give DATA_ERROR_MAGIC (197-208). The checks for block/end magic (225-235, 591-599), origPtr (261-264, 497-498), nInUse==0 (283), nGroups 2..6 (288), nSelectors<1 (290), selector >= nGroups (297), code length 1..20 (327), N >= 2M (396), nblockMAX (358, 410/417/427), unzftab/cftab (502-522) and excess selectors ignored (299-306) all match.\n- High-level API: ReadOpen PARAM_ERROR conditions (1103-1108). bzRead UNEXPECTED_EOF condition, including an empty file (1207-1209). ReadGetUnused ordering of the sequence check before the NULL check, and the lastErr reset that makes a second call fail (1231-1240). WriteClose64 step order: ferror on entry, then trailer only when lastErr==BZ_OK, then fflush, then free (1033-1085), and the corrected 'usual case is BZ_IO_ERROR, handle not freed' wording. bzclose's abandon retry (1524-1528).\n- Buffer utilities: BuffToBuffCompress gives SEQUENCE_ERROR only for sourceLen==0 && *destLen==0, and OUTBUFF_FULL on FINISH_OK. BuffToBuffDecompress distinguishes UNEXPECTED_EOF from OUTBUFF_FULL by avail_out (1340-1345).\n- zlib-style layer: the mode parser (last r/w wins, last digit wins, clamped to 1..9 when writing, 1405-1442), bzread's lastErr==STREAM_END short-circuit, bzflush as a no-op, and bzerror's positive-to-0 clamp (1566).\n- bzip2: BZIP2 is read before BZIP and both go before argv (1841-1845). Tokens are truncated to FILE_NAME_LEN-10=1024 characters. Flags are handled in two passes, with the long pass overriding the short one. A lone '-' is ignored. -s caps the block size only when compressing. -V/-L do not exit. -c with -t exits 1. Exit codes are 1/2/3 via cleanUpAndFail/setExit (757, 770, 787, 801, 812, 875, 888, 902). The -f trycat path rewinds and copies the whole input (465, 506-517).\n- bzip2recover: the 50000th magic match aborts, given currBlock starting at 0 and the check before the increment (398, 441-443). Names of BZ_MAX_FILENAME-20 = 1980 or more characters are rejected (378-383). writeError prints 'I/O error reading' (104-113).\n- Makefile: bunzip2/bzcat are copies (79-80) and the scripts are symlinks (92-101). bzip2recover does not link libbz2 (43-44).\n\nSpeculative points are marked (uncertain) and collected in \u00a710: reachability of the assertions, calls after an error, BZ_PARAM_ERROR from BZ2_bzWrite, bzmore's exit status, and Windows. The manual/code discrepancies in \u00a79 that I checked are accurate.\n\nThe three nits below are non-blocking; fold them into a later edit if convenient.",
     "worker": "imlvts/corey-review"
   },
-  "need": "review",
+  "lease": null,
+  "need": "merge",
   "pr": {
     "branch": "task/bzip2/surface-area/e3",
     "draft": false,
