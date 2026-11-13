@@ -1,0 +1,21 @@
+{
+  "author": null,
+  "epoch": 1,
+  "last": null,
+  "lease": {
+    "claimed_at": "2026-11-13T17:37:32Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-13T17:37:32Z",
+    "kind": "work",
+    "nonce": "0d6d9542b1351bc3",
+    "spec": "7792576c8fffa797",
+    "spec_rev": "515dd83d8df6c0183b9810c501cec6239984bece",
+    "worker": "imlvts/corey"
+  },
+  "need": "work",
+  "pr": null,
+  "rounds": 0,
+  "strikes": 0,
+  "task": "bzip2/surface-area",
+  "v": 1
+}
