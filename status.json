@@ -1,19 +1,33 @@
 {
-  "author": null,
+  "author": "imlvts/corey",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-13T17:37:32Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-13T17:57:39Z",
-    "kind": "work",
-    "nonce": "0d6d9542b1351bc3",
-    "spec": "7792576c8fffa797",
-    "spec_rev": "515dd83d8df6c0183b9810c501cec6239984bece",
+  "last": {
+    "agent": {
+      "exit": 0,
+      "reason": "exit",
+      "session": "c5999e69-ed01-4bec-a27b-b960db17b0ce",
+      "turns": 1
+    },
+    "at": "2026-11-13T18:02:01Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "Nothing left for this task. Windows-specific paths (_WIN32, BZ_LCCWIN32) were read but not built or tested.",
+    "summary": "Wrote projects/bzip2/docs/surface-area.md and surface-area.json (two commits; nothing outside docs/ changed). They cover all 24 BZ_API functions and the 11 exported internals (9 functions, 2 data tables, each marked non-public); bz_stream (every field: who sets it, who reads it, what it means between calls) and BZFILE; all 23 BZ_* macros, including what BZ_NO_STDIO, BZ_IMPORT, BZ_EXPORT, BZ_API and BZ_EXTERN change; and the 11 installed programs with options, exit codes, files and environment variables. The .md also has compression and decompression state-machine tables, the .bz2 format as the code reads and writes it, 24 manual-vs-code discrepancies and the open questions. Claims carry file:line citations; uncertain ones are marked. Key quirks were confirmed by compiling the vendored sources in /tmp and running them: for example, BZ_RUN with no progress returns BZ_PARAM_ERROR, BZ_FINISH with no progress returns BZ_SEQUENCE_ERROR, bzCompressInit does not range-check verbosity, BZ_FLUSH output cannot be decoded on its own, and bzip2 -df appends the whole input after trailing garbage. An independent subagent review checked about 115 claims and found one real error (the BZ_FLUSH wording) plus minor issues; all are fixed. check_surface.py --only-docs passes.",
     "worker": "imlvts/corey"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/surface-area/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "78a8724e535ef06f5fa547b01d4861f4166ad36a",
+    "number": 1,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "7792576c8fffa797",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/1"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/surface-area",
