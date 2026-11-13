@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "exit": 0,
@@ -15,7 +15,16 @@
     "summary": "Addressed all review comments on PR #1: corrected the bzip2recover block-limit off-by-one (aborts on the 50000th magic match; bzip2recover.c:398, 441-443) in both .md and .json; qualified the concatenated-stream trailing-garbage bullet with 'without -f' and described the -f trycat path with a cross-reference to section 9 item 18; filled BZ2_decompress errors (each RETURN site in decompress.c cited), preconditions and postconditions in the JSON and listed the error sites in the .md; aligned BZ2_bz__AssertH__fail source to bzlib.c:40. check_surface.py --only-docs passes; only projects/bzip2/docs/ changed.",
     "worker": "imlvts/corey"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-13T18:13:02Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-13T18:13:02Z",
+    "kind": "review",
+    "nonce": "1b3fb3a7a6d650c8",
+    "spec": "7792576c8fffa797",
+    "spec_rev": "515dd83d8df6c0183b9810c501cec6239984bece",
+    "worker": "imlvts/corey-review"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/surface-area/e3",
