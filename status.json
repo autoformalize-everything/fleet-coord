@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey",
-  "epoch": 5,
+  "epoch": 6,
   "last": {
     "agent": {
       "exit": 0,
@@ -15,7 +15,16 @@
     "summary": "Addressed all epoch-4 review comments on projects/bzip2/docs/surface-area.{md,json}. (1) Corrected the BZ2_bzWriteClose64 after-error claim: with abandon==0 and ferror(f) set (usual after BZ_IO_ERROR from BZ2_bzWrite) it returns BZ_IO_ERROR at bzlib.c:1040-1041 without flushing/freeing; BZ_OK only if ferror is clear and fflush succeeds (md 5.3 consequences, md 9 item 11, JSON summary/errors/postconditions). (2) Filled preconditions and postconditions for every one of the 33 functions in the JSON from the md, with citations checked against the source, using explicit \"none\" where none apply. (3) Nits: CompressInit makes one bzalloc call when the EState allocation fails; fixed the BZ2_bzReadOpen table row. Also added BZ2_bzWrite postconditions/lastErr reset to the md and corrected the BZ2_indexIntoF read range (cftab[1..255]). check_surface.py --only-docs passes; only projects/bzip2/docs/ changed.",
     "worker": "imlvts/corey"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-13T18:27:34Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-13T18:27:34Z",
+    "kind": "review",
+    "nonce": "a83fd1cf46070492",
+    "spec": "7792576c8fffa797",
+    "spec_rev": "515dd83d8df6c0183b9810c501cec6239984bece",
+    "worker": "imlvts/corey-review"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/surface-area/e3",
