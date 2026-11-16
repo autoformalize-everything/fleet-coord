@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "Added Bzip2.Spec.Huffman: code assignment (BZ2_hbAssignCodes), decoder tables (perm/limit/base) and decodeSym mirroring GET_MTF_VAL on all tables, with outcomes sym/dataError/needMoreInput/staleEntry; module doc lists malformed-table cases; examples for complete, incomplete and over-subscribed tables; DecodeAssigned stated as a Prop for proofs/huffman. verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:08:29Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:08:29Z",
+    "kind": "review",
+    "nonce": "04c5f5f3103adb0c",
+    "spec": "328a9106af1b9005",
+    "spec_rev": "6058430c2204f9eec1ff940fed3d91cf398ef425",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/huffman/e2",
