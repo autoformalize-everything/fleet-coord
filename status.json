@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "Added spec/Bzip2/Spec/Crc.lean (BitVec 32; bitwise MSB-first CRC-32, blockCrc, combineCrc, streamCrc) and imported it from Bzip2/Spec.lean. Examples: crc32 \"123456789\"=0xFC891918, empty=0, and a real two-block bzip2 -1 stream (150000 bytes (7i+i/251)%256; block CRCs 0xfc70ec8f, 0xb88cb15b -> 0x406d6844, cross-checked in Python). verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:17:52Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:17:52Z",
+    "kind": "review",
+    "nonce": "117e62ced5b2ec3f",
+    "spec": "b915ff51fbb09570",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
