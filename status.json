@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Resolved the merge conflict in projects/bzip2/oracle/Bzip2/Oracle.lean by taking origin/master's version (file not owned by this task; Huffman.lean is a glob-built module and no longer imported from Oracle.lean). Then fixed what verify.sh reported: two over-100-char lines and three missing docstrings (groupSize/numIters/numGroups, now citing bzlib_private.h:122/123/121, which I read). Also brought the diff within the task's allowed paths: moved the tests from tests/Bzip2/Tests.lean (reverted to master) into tests/Bzip2/Test/CompressHuffman.lean (#eval that throws on mismatch, run when the library builds), moved tests/vectors/huffman to tests/vectors/compress-huffman, and removed the stray projects/out/result.json that an earlier attempt had committed. Checked: `sh projects/bzip2/tools/verify.sh` ends 'verify: ok' (packages, sources, build, style, axioms, lint, test all ok); corrupting a vector line and rebuilding Bzip2.Test.CompressHuffman fails with 'tiny-b0.txt: code lengths differ', so the test does run; git status is clean; `git diff --stat origin/master...HEAD` lists only Oracle/Compress/Huffman.lean, Test/CompressHuffman.lean and vectors/compress-huffman/* (10 files). tools/check-task.sh has no check for this task. I did not re-audit the Huffman logic against the C source beyond what verify and the 15 vector files cover.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:30:44Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:30:44Z",
+    "kind": "review",
+    "nonce": "9f0883a5361e2d75",
+    "spec": "0fb30a091183b2ad",
+    "spec_rev": "23e33e274cc88d529484f5fc0eab2d503c661477",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/huffman/e1",
