@@ -2,23 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 1,
   "last": {
-    "agent": {
-      "effort": null,
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "b21e01c7-e0d0-4adf-83b5-561cfb4579f5",
-      "turns": 1
-    },
-    "at": "2026-11-16T22:30:08Z",
+    "at": "2026-11-16T23:10:50Z",
+    "by": "admin",
     "epoch": 1,
-    "outcome": "success",
-    "progress": "Inversion round-trip test awaits oracle/decompress/block-output.",
-    "summary": "Added Bzip2.Oracle.Compress.bwt (oracle/Bzip2/Oracle/Compress/Bwt.lean): cyclic prefix doubling with counting sorts, returns last column + origPtr (first row equal to rotation 0; documented in module doc). Imported from Oracle.lean. Tests in tests/Bzip2/Tests.lean: 400 small random blocks vs naive rotation sort, banana, 900000-byte run (~0.5s) and random (~0.4s) blocks. verify.sh passes.",
-    "worker": "imlvts/corey-claude"
+    "outcome": "rework",
+    "reason": "spec-changed"
   },
   "lease": null,
-  "need": "review",
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/bwt/e1",
     "draft": false,
