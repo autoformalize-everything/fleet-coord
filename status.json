@@ -1,19 +1,41 @@
 {
   "author": null,
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-16T22:09:04Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:09:04Z",
-    "kind": "work",
-    "nonce": "ff7ae75785730a64",
-    "spec": "1efabb05f5989b74",
-    "spec_rev": "4109a30ffe7732b121afac1420347f501d01852c",
+  "last": {
+    "agent": {
+      "effort": null,
+      "exit": 143,
+      "model": "claude-sonnet-5-5",
+      "reason": "cancelled",
+      "session": "5b3ed48c-825a-462b-a41d-9d4042299fb6",
+      "turns": 0
+    },
+    "at": "2026-11-16T22:11:33Z",
+    "debug": {
+      "detail": null,
+      "kind": "task",
+      "verify_log": "docker: Error response from daemon: Conflict. The container name \"/afe-fleet-afe-0-verify\" is already in use by container \"34269edf4cf7cc87cfb6568298ead496f57a3c21f127bc667e46bd515b42147c\". You have to remove (or rename) that container to be able to reuse that name.\n\nRun 'docker run --help' for more information\n",
+      "verify_ok": false
+    },
+    "epoch": 1,
+    "outcome": "partial",
+    "progress": null,
+    "summary": "",
     "worker": "imlvts/corey-claude"
   },
+  "lease": null,
   "need": "work",
-  "pr": null,
+  "pr": {
+    "branch": "task/bzip2/spec/rle1/e1",
+    "draft": true,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "538fb80587f455bac1a41c829a6d0db1967a8efa",
+    "number": 4,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "1efabb05f5989b74",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/4"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/spec/rle1",
