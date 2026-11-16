@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "Addressed review: Crc.lean module doc now cites bzlib.c 825-847 for the decompressor combined CRC and 217-221/263-267 for block CRC update sites; fixed a garbled doc sentence. verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:22:05Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:22:05Z",
+    "kind": "review",
+    "nonce": "0af005823bdb735b",
+    "spec": "b915ff51fbb09570",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
