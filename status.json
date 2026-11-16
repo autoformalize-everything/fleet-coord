@@ -1,19 +1,35 @@
 {
-  "author": null,
+  "author": "imlvts/corey-claude",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-16T23:49:41Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T23:54:46Z",
-    "kind": "work",
-    "nonce": "ed30aa0b1a98dc0b",
-    "spec": "c54cf300db4095cf",
-    "spec_rev": "2fc9fdfa1732935710296430695846965b8d9733",
+  "last": {
+    "agent": {
+      "effort": "high",
+      "exit": 0,
+      "model": "claude-sonnet-5-5",
+      "reason": "exit",
+      "session": "128cdade-283c-4ffd-b47b-c0a9dfd14876",
+      "turns": 1
+    },
+    "at": "2026-11-16T23:56:37Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "Nothing left for this task. Selector/groupPos handling of GET_MTF_VAL (decompress.c:76-87, groupNo >= nSelectors -> Error.data) is deliberately left to bzip2/oracle/decompress/stream.",
+    "summary": "Added Bzip2.Oracle.Decompress.Huffman (oracle/.../Decompress/Huffman.lean): Tables {limit, base, perm, minLen} with the C structure; createDecodeTables = BZ2_hbCreateDecodeTables (huffman.c:170-200) line for line (limit/base 23 entries as Int, perm 258 entries); ofLengths computes minLen/maxLen as decompress.c:339-352 and refuses lengths outside 1..20 (decompress.c:327, Error.data) or alphabets of 0 or >258 (Error.param); decodeSym = GET_MTF_VAL without selector bookkeeping (decompress.c:74-102): reads minLen bits, extends one bit at a time, zn>20 -> Error.data, index outside 0..<258 -> Error.data, input exhausted -> Error.eof. Tests: tests/Bzip2/Test/DecompressHuffman.lean (#guards over 4 vector files, 48 cases: real.txt 17 = tables of 3 real bzip2 -9 streams incl. alphaSize 258 and 6 groups, incomplete.txt 9, oversubscribed.txt 7, failures.txt 15 incl. raw tables for index -1/258/257 boundaries, zn=20 vs 21, eof). Expected results are printed by the vendored libbz2: tests/vectors/decompress-huffman/huff.c calls the library's BZ2_hbCreateDecodeTables and runs GET_MTF_VAL whose text regenerate.sh copies from upstream/decompress.c:40-102 (no re-implementation); for real streams generate.py asserts the tables equal those libbz2 built in DState while decompressing. Checked: `sh projects/bzip2/tools/verify.sh` -> verify: packages/sources/build/style/axioms/lint/test: ok, final `verify: ok`; rerunning regenerate.sh leaves git status clean (only the intended edit shown); mutation checks (zn bound 20->21, idx>=258 -> idx>258) make the guards fail; `git diff --stat origin/master...HEAD`: 9 files, all under the allowed paths, git status clean. Citations re-read against upstream (decompress.c:54 avail_in check, 74-102 macro, 91 zn>20, 98-101 index check, 327 length check, 339-352; huffman.c:180-183, 185-188, 190-197, 198-199, bzlib_private.h:115-116).",
     "worker": "imlvts/corey-claude"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/oracle/decompress/huffman/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "141b3b74016197881b1d3f58c4015aff980bad02",
+    "number": 14,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "c54cf300db4095cf",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/14"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/oracle/decompress/huffman",
