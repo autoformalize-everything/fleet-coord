@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 5,
+  "epoch": 6,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Addressed review: Crc.lean module doc now cites crctable.c:31-99 and bzlib_private.h:157-172 (157-160, 162-165, 167-172), crctable.c:35, compress.c:607-608, bzlib.c:192 (all read before citing), and states the edge cases settled (empty input = 0, stop clamped to data.size, start >= stop gives empty slice). Test/Crc.lean doc cites crctable.c:35/67/98 and lists the empty-input and slice-boundary cases checked. Verified: `verify.sh && check-task.sh oracle/crc` gave 'verify: packages: ok; sources: ok; build: ok; style: ok; axioms: ok; lint: ok; test: ok; verify: ok' and 'check-task: oracle/crc: ok'. git status clean; git diff --stat origin/master...HEAD lists only oracle/Bzip2/Oracle/Crc.lean and tests/Bzip2/Test/Crc.lean.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:27:24Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:27:24Z",
+    "kind": "review",
+    "nonce": "9284bd0fa9d870e8",
+    "spec": "02722e89e4b84ef8",
+    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/crc/e1",
