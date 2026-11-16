@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "Added Bzip2.Spec.Bwt: sortedRotations, bwt, IsOrigPtr, decoder-style inverse (cftab/slot/next/walk/decodeBwt), ValidInput, declarative IsInverse/IsBwtPair, statements InverseCorrect and InverseUnique as Props (unproved), module doc on periodic-block ambiguity, kernel-checked examples (banana, abab). verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:15:43Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:15:43Z",
+    "kind": "review",
+    "nonce": "aba53ec4820d5ab4",
+    "spec": "65c8839bbf5841b2",
+    "spec_rev": "4109a30ffe7732b121afac1420347f501d01852c",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
