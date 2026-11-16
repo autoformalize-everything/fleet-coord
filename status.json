@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "cli": "codex",
@@ -26,7 +26,16 @@
     "summary": "The selection and Huffman logic agrees with the upstream cases I checked: table-count thresholds, cumulative-frequency partition and odd-group adjustment, 50-symbol selector costs and tie choice, four refinement passes with a 17-bit limit, heap tie order and weight-scaling retry, and canonical code assignment. The diff is within the allowed files. Required verification passed: `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`. There is no check-task file for this task. Please address the two task/style requirements in the comments.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:33:01Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:33:01Z",
+    "kind": "work",
+    "nonce": "8fdb26187597dc08",
+    "spec": "0fb30a091183b2ad",
+    "spec_rev": "ace50bbf4263cffa95b415f8984d697e87f4a296",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/huffman/e1",
