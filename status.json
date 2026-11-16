@@ -1,0 +1,21 @@
+{
+  "author": null,
+  "epoch": 1,
+  "last": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:16:51Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:16:51Z",
+    "kind": "work",
+    "nonce": "e95ace528a286617",
+    "spec": "07dadc3d3572c08e",
+    "spec_rev": "4109a30ffe7732b121afac1420347f501d01852c",
+    "worker": "imlvts/corey-claude"
+  },
+  "need": "work",
+  "pr": null,
+  "rounds": 0,
+  "strikes": 0,
+  "task": "bzip2/tests/golden",
+  "v": 1
+}
