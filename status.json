@@ -2,23 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 1,
   "last": {
-    "agent": {
-      "effort": null,
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "fba2da4c-6393-4e78-82cd-0c160d100f52",
-      "turns": 1
-    },
-    "at": "2026-11-16T22:23:14Z",
+    "at": "2026-11-16T23:10:48Z",
+    "by": "admin",
     "epoch": 1,
-    "outcome": "success",
-    "progress": null,
-    "summary": "",
-    "worker": "imlvts/corey-claude"
+    "outcome": "rework",
+    "reason": "spec-changed"
   },
   "lease": null,
-  "need": "review",
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/bitio/e1",
     "draft": false,
