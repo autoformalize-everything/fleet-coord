@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 9,
+  "epoch": 10,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Resolved the Spec.lean merge conflict with origin/master and committed the merge (cf094ac). Checked the BWT module against its cited vendored C lines. Ran the required verification: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"check-task: spec/bwt: ok\". Git status is clean; origin/master...HEAD changes only projects/bzip2/spec/Bzip2/Spec/Bwt.lean.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:13:12Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:13:12Z",
+    "kind": "review",
+    "nonce": "6871fcc68465b085",
+    "spec": "3b89e4718cb1ac55",
+    "spec_rev": "6058430c2204f9eec1ff940fed3d91cf398ef425",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
