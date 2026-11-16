@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "cli": "codex",
@@ -26,7 +26,16 @@
     "summary": "The bit reader and writer match the checked upstream bit order and byte flushing, and the task check passes. I checked `decompress.c:43-65` (MSB extraction and input exhaustion), `decompress.c:89-95` (Huffman width limit), `compress.c:58-78` (byte flushing and bit placement), `compress.c:650` (24-bit origPtr), and `compress.c:46-55` (final byte); the task's `Error.eof` choice for a short read is implemented. Two STYLE.md issues remain below. Verification output: `verify: packages: ok`; `verify: sources: ok`; `verify: build: ok`; `verify: style: ok`; `verify: axioms: ok`; `verify: lint: ok`; `verify: test: ok`; `verify: ok`. `check-task: oracle/bitio: ok`.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:20:25Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:20:25Z",
+    "kind": "work",
+    "nonce": "2382134c7d9b937d",
+    "spec": "bcb5efb7a52b57db",
+    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/bitio/e1",
