@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 5,
+  "epoch": 6,
   "last": {
     "agent": {
       "cli": "codex",
@@ -21,7 +21,16 @@
     "summary": "The implementation and seven block guards agree with the inspected C loops; an out-of-tree driver also matched all 8 code-length vectors, including retry cases. The initial-partition documentation has two incorrect source citations that need correction. Verification: `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:44:39Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:44:39Z",
+    "kind": "work",
+    "nonce": "b7d804c0f5cec167",
+    "spec": "0fb30a091183b2ad",
+    "spec_rev": "2fc9fdfa1732935710296430695846965b8d9733",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/huffman/e1",
