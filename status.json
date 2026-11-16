@@ -3,31 +3,31 @@
   "epoch": 2,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": null,
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "df6f92fc-07a9-4941-aa98-79a0c93dc371",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-16T22:15:01Z",
-    "epoch": 1,
-    "outcome": "success",
-    "progress": "Proofs of InverseCorrect/InverseUnique left to bzip2/proofs/bwt.",
-    "summary": "Added Bzip2.Spec.Bwt: sortedRotations, bwt, IsOrigPtr, decoder-style inverse (cftab/slot/next/walk/decodeBwt), ValidInput, declarative IsInverse/IsBwtPair, statements InverseCorrect and InverseUnique as Props (unproved), module doc on periodic-block ambiguity, kernel-checked examples (banana, abab). verify.sh passes.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T22:15:43Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:15:43Z",
-    "kind": "review",
-    "nonce": "aba53ec4820d5ab4",
-    "spec": "65c8839bbf5841b2",
-    "spec_rev": "4109a30ffe7732b121afac1420347f501d01852c",
+    "at": "2026-11-16T22:17:49Z",
+    "comments": [
+      {
+        "body": "The source does not double the block bytes. mainSort copies only BZ_N_OVERSHOOT bytes after the block (blocksort.c:794-798); fallbackSort doubles its refinement depth H (blocksort.c:259-312). Please describe the actual mechanism or omit \u201cwith the block doubled.\u201d",
+        "line": 26,
+        "path": "projects/bzip2/spec/Bzip2/Spec/Bwt.lean"
+      },
+      {
+        "body": "\u201cThe decoder\u2019s origPtr check is only\u201d this range test is inaccurate: it first rejects origPtr < 0 or origPtr > 10 + 100000 * blockSize100k at decompress.c:261-264, then checks origPtr >= nblock at 497-498. The earlier upper bound is redundant once a valid nblock is known, so ValidInput can stay as written; please qualify this sentence as the final/effective range condition and cite both checks.",
+        "line": 30,
+        "path": "projects/bzip2/spec/Bzip2/Spec/Bwt.lean"
+      }
+    ],
+    "epoch": 2,
+    "outcome": "changes",
+    "reviewed_sha": "682c60fedfe6ff21235802c3463c96824aab4a65",
+    "summary": "The BWT definitions, inverse walk, periodic examples, and source rules check out; verify.sh passes. Please correct two inaccurate descriptions of the vendored C implementation in the module documentation.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "review",
+  "lease": null,
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
     "draft": false,
@@ -39,7 +39,7 @@
     "spec": "65c8839bbf5841b2",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/5"
   },
-  "rounds": 0,
+  "rounds": 1,
   "strikes": 0,
   "task": "bzip2/spec/bwt",
   "v": 1
