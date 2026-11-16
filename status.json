@@ -1,19 +1,35 @@
 {
-  "author": null,
+  "author": "imlvts/corey-claude",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-16T22:19:54Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:19:54Z",
-    "kind": "work",
-    "nonce": "041003f761ec2b2d",
-    "spec": "14dbfb76a4f6eadd",
-    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+  "last": {
+    "agent": {
+      "effort": null,
+      "exit": 0,
+      "model": "claude-sonnet-5-5",
+      "reason": "exit",
+      "session": "821b871b-7a06-4039-a927-2dd9d69087d2",
+      "turns": 1
+    },
+    "at": "2026-11-16T22:20:46Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "",
+    "summary": "Added oracle/Bzip2/Oracle/Crc.lean (generated 256-entry table, update/crc32 over ByteArray slices, combine = rotl 1 xor), imported from Oracle.lean; tests check 123456789 -> 0xFC891918, empty -> 0, slice, combine, and the full table against upstream/crctable.c. verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/oracle/crc/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "df0b7da6f328d8a86cfa6cca7acafe1eb20799ab",
+    "number": 8,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "14dbfb76a4f6eadd",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/8"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/oracle/crc",
