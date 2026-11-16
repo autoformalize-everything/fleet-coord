@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "cli": "codex",
@@ -21,7 +21,16 @@
     "summary": "The CRC definitions and examples match the vendored bzip2, and verification passes. Please correct the source attribution for decompression and the original-byte block CRC claim.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:20:49Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:20:49Z",
+    "kind": "work",
+    "nonce": "c1f769e7a66b4c4c",
+    "spec": "b915ff51fbb09570",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
