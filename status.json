@@ -1,0 +1,21 @@
+{
+  "author": null,
+  "epoch": 1,
+  "last": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:21:29Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:21:29Z",
+    "kind": "work",
+    "nonce": "2a4298fb58fd9e05",
+    "spec": "a8b95d823fb738c6",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-claude"
+  },
+  "need": "work",
+  "pr": null,
+  "rounds": 0,
+  "strikes": 0,
+  "task": "bzip2/oracle/bitio",
+  "v": 1
+}
