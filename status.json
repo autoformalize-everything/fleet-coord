@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "Added tests/vectors (decompress/ and compress/ case dirs: input + expected|error; 22 decompression cases, 9 compression cases at levels 1 and 9), build-bzip2.sh (out-of-tree build of vendored bzip2 + classify.c driver mirroring uncompressStream), generate.py/regenerate.sh (reproduces all committed files; git status clean after rerun), README format docs, and the lake test runner in Tests.lean (PASS/SKIP/FAIL counts, non-zero exit on failure; Error.unimplemented is skipped; compress cases roundtrip via oracle and vendored bzip2 -d). lake test currently: 0 passed, 53 skipped, 0 failed. tools/verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:23:42Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:23:42Z",
+    "kind": "review",
+    "nonce": "9ab276f458a47f1f",
+    "spec": "07dadc3d3572c08e",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/tests/golden/e1",
