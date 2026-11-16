@@ -1,6 +1,6 @@
 {
   "author": null,
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "effort": null,
@@ -22,7 +22,16 @@
     "summary": "Bzip2.Spec.Rle1 (decodeRle1, encodeRle1, Rle1Roundtrip statement, module doc with decoder edge cases cited to bzlib.c, decide examples for runs 3/4/5/255/256 and count >251) already committed in 538fb80; re-checked against bzlib.c and verify.sh passes. Roundtrip is stated, not proved (left to proofs/rle).",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:10:49Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:10:49Z",
+    "kind": "work",
+    "nonce": "ce597155bbb0ef7f",
+    "spec": "8d9872aa8d6c1279",
+    "spec_rev": "6058430c2204f9eec1ff940fed3d91cf398ef425",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/rle1/e1",
