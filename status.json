@@ -1,19 +1,35 @@
 {
-  "author": null,
+  "author": "imlvts/corey-claude",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-16T22:30:49Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:30:49Z",
-    "kind": "work",
-    "nonce": "8c0a34dbeb5f29c3",
-    "spec": "9ab7da4981d57457",
-    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+  "last": {
+    "agent": {
+      "effort": null,
+      "exit": 0,
+      "model": "claude-sonnet-5-5",
+      "reason": "exit",
+      "session": "bfbbabdf-eee7-4304-a5dc-1da6c27f629e",
+      "turns": 1
+    },
+    "at": "2026-11-16T22:32:25Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "",
+    "summary": "Added oracle/Bzip2/Oracle/Compress/Mtf.lean (inUseOf, makeMaps, generateMtf returning symbols ending in EOB, frequencies, nInUse), imported from Oracle.lean. Tests in tests/Bzip2/Tests.lean compare against a C copy of generateMTFValues: small blocks, runs 1-7 (+y) and 1-6 alone, 1000 zeros, 999 zeros+1, one byte value, empty. verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/oracle/compress/mtf-rle2/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "c8d3a3d6f931c73938681f84305f71ecc17ceb51",
+    "number": 12,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "9ab7da4981d57457",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/12"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/oracle/compress/mtf-rle2",
