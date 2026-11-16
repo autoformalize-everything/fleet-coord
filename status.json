@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 4,
+  "epoch": 5,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Corrected BWT C citations and the prefix-doubling description; checked the cited upstream lines, clean git status, and the two-file allowed-path diff. Full verification: \"verify: packages: ok\"; \"verify: sources: ok\"; \"verify: build: ok\"; \"verify: style: ok\"; \"verify: axioms: ok\"; \"verify: lint: ok\"; \"verify: test: ok\"; \"verify: ok\".",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:56:40Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:56:40Z",
+    "kind": "review",
+    "nonce": "d2ff9abe9a51e87d",
+    "spec": "9177880769b0f85d",
+    "spec_rev": "6917d668738020ab4f4d9fa1eabf54846af66157",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/bwt/e1",
