@@ -3,31 +3,26 @@
   "epoch": 2,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": null,
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "40a1bddc-11f1-44e4-839e-fdb8762cb7a5",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-16T22:15:57Z",
-    "epoch": 1,
-    "outcome": "success",
-    "progress": "",
-    "summary": "Added spec/Bzip2/Spec/Crc.lean (BitVec 32; bitwise MSB-first CRC-32, blockCrc, combineCrc, streamCrc) and imported it from Bzip2/Spec.lean. Examples: crc32 \"123456789\"=0xFC891918, empty=0, and a real two-block bzip2 -1 stream (150000 bytes (7i+i/251)%256; block CRCs 0xfc70ec8f, 0xb88cb15b -> 0x406d6844, cross-checked in Python). verify.sh passes.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T22:17:52Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:17:52Z",
-    "kind": "review",
-    "nonce": "117e62ced5b2ec3f",
-    "spec": "b915ff51fbb09570",
-    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "at": "2026-11-16T22:20:24Z",
+    "comments": [
+      {
+        "body": "Please cite `upstream/bzlib.c` for the decompressor's combined-CRC calculation and comparison (`BZ2_bzDecompress`, lines 825\u2013847). `upstream/decompress.c` lines 601\u2013609 only read the stored trailer CRC, so the current citation attributes the combination to the wrong file. `bzlib.c` lines 217\u2013221 and 263\u2013267 also support the original-byte block CRC claim at line 35; please cite those update sites.",
+        "line": 9,
+        "path": "projects/bzip2/spec/Bzip2/Spec/Crc.lean"
+      }
+    ],
+    "epoch": 2,
+    "outcome": "changes",
+    "reviewed_sha": "a0bd4c91d015a29e649ea5148e6ec2e7ce60c352",
+    "summary": "The CRC definitions and examples match the vendored bzip2, and verification passes. Please correct the source attribution for decompression and the original-byte block CRC claim.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "review",
+  "lease": null,
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
     "draft": false,
@@ -39,7 +34,7 @@
     "spec": "b915ff51fbb09570",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/6"
   },
-  "rounds": 0,
+  "rounds": 1,
   "strikes": 0,
   "task": "bzip2/spec/crc",
   "v": 1
