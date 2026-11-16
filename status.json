@@ -1,19 +1,41 @@
 {
   "author": null,
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-16T22:32:28Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:32:28Z",
-    "kind": "work",
-    "nonce": "d01598397e4be8af",
-    "spec": "0be761cbd9a828e1",
-    "spec_rev": "85ffee737c24c245c2982b0a7b5a6d2e38ce773d",
+  "last": {
+    "agent": {
+      "effort": null,
+      "exit": 143,
+      "model": "claude-sonnet-5-5",
+      "reason": "cancelled",
+      "session": "27c7a333-c4c8-4ea9-805a-e34c853ae613",
+      "turns": 0
+    },
+    "at": "2026-11-16T22:37:04Z",
+    "debug": {
+      "detail": null,
+      "kind": "task",
+      "verify_log": "== lake build\n== tools/check-sources.sh\n== lake test\nbzip2-tests: no golden vectors yet\nhuffman: 15/15 vector files ok\nverify: ok\n",
+      "verify_ok": true
+    },
+    "epoch": 1,
+    "outcome": "partial",
+    "progress": null,
+    "summary": "",
     "worker": "imlvts/corey-claude"
   },
+  "lease": null,
   "need": "work",
-  "pr": null,
+  "pr": {
+    "branch": "task/bzip2/oracle/compress/huffman/e1",
+    "draft": true,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "87d98358764d58e725124298cc8f0693ed14c487",
+    "number": 13,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "0be761cbd9a828e1",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/13"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/oracle/compress/huffman",
