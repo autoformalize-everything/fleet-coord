@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 4,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": null,
-      "model": null
-    },
-    "at": "2026-11-16T22:22:02Z",
-    "comments": [],
+    "at": "2026-11-16T22:22:26Z",
+    "by": "admin",
     "epoch": 4,
-    "outcome": "approve",
-    "reviewed_sha": "f5b2ad60805cded1f91a638cd1fccf29e8370e50",
-    "summary": "The BWT spec covers sorted cyclic rotations, valid origin pointers, the decoder-style inverse, declarative inverse statements, and banana/periodic examples. I checked the pointer scan, 24-bit header field, sort fallback, decoder bounds, cftab construction, tt bit layout, and last-column extraction against the vendored C source. The proposed inverse also matched every valid pointer for all blocks of lengths 1\u20138 over a three-byte alphabet. The change stays within spec/, follows the import and proof-hole rules, and verify.sh passes.",
-    "worker": "imlvts/corey-codex"
+    "outcome": "rework",
+    "reason": "merge conflict"
   },
   "lease": null,
-  "need": "merge",
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
     "draft": false,
