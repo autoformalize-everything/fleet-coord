@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Merged origin/master. The only conflict was oracle/Bzip2/Oracle.lean; it is a root module this task does not own, so I took origin/master's version (`git checkout --theirs`) and committed the merge. The merge brought in the new STYLE.md and style stage, which failed on the old branch: (1) Bwt.lean declared in `Bzip2.Oracle.Compress` instead of `Bzip2.Oracle.Compress.Bwt`, now fixed (the function is `Bzip2.Oracle.Compress.Bwt.bwt`); (2) the BWT tests were edits to tests/Bzip2/Tests.lean, which this task does not own, so I reverted that file to origin/master and moved the tests to tests/Bzip2/Test/CompressBwt.lean as `#guard`s (naive-sort comparison on small blocks over 1-4 symbol alphabets, empty and one-byte blocks, banana, unsigned byte order, periodic blocks 'abab' (origPtr 0) and 'baba' (origPtr 2), and 20000-byte run and random blocks). Checked: `sh projects/bzip2/tools/verify.sh` ends 'verify: ok' (packages, sources, build, style, axioms, lint, test all ok). `git diff --stat origin/master...HEAD` lists only oracle/Bzip2/Oracle/Compress/Bwt.lean and tests/Bzip2/Test/CompressBwt.lean; git status is clean. The blocksort.c:1031-1089 and 1084-1088 citations in the module doc were re-read and match.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:44:18Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:44:18Z",
+    "kind": "review",
+    "nonce": "d2c5d4c091fbf05c",
+    "spec": "9177880769b0f85d",
+    "spec_rev": "2fc9fdfa1732935710296430695846965b8d9733",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/bwt/e1",
