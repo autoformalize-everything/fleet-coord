@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 5,
+  "epoch": 6,
   "last": {
     "agent": {
       "cli": "codex",
@@ -26,7 +26,16 @@
     "summary": "The RLE1 definitions and examples match the checked count-byte and 255-byte run behavior, and only the allowed file changed. Checks passed: `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`, and `check-task: spec/rle1: ok`. Two source-documentation fixes are required: the block-full path does not flush the pending run, and several C line references do not use STYLE.md's required citation form.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:59:46Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:59:46Z",
+    "kind": "work",
+    "nonce": "7405934db77ff70e",
+    "spec": "8d9872aa8d6c1279",
+    "spec_rev": "9f62b95bfe8090e6d8b85c26119ff87830fa64e1",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/rle1/e1",
