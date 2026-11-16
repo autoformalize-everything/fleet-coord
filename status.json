@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 7,
+  "epoch": 8,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "Addressed review feedback: removed the stray projects/out/result.json from the branch. BWT spec unchanged; verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:33:25Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:33:25Z",
+    "kind": "review",
+    "nonce": "723a9a00deb78074",
+    "spec": "65c8839bbf5841b2",
+    "spec_rev": "85ffee737c24c245c2982b0a7b5a6d2e38ce773d",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
