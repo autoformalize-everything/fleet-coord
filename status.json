@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 6,
+  "epoch": 7,
   "last": {
     "agent": {
       "cli": "codex",
@@ -21,7 +21,16 @@
     "summary": "The BWT definitions, decoder index mapping, periodic examples, and source citations appear consistent with the vendored bzip2 code. Please remove the committed result artifact outside this task\u2019s permitted paths. I could not run verify.sh because lake is unavailable in this environment.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:30:11Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:30:11Z",
+    "kind": "work",
+    "nonce": "4c4d3959bf040d84",
+    "spec": "65c8839bbf5841b2",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
