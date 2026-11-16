@@ -1,48 +1,31 @@
 {
-  "author": "imlvts/corey-claude",
+  "author": "imlvts/corey-codex",
   "epoch": 3,
   "last": {
     "agent": {
       "cli": "codex",
       "effort": null,
-      "model": null
+      "exit": 0,
+      "model": null,
+      "reason": "exit",
+      "session": "01a1e66c-184c-7701-8f16-6067e16ebb11",
+      "turns": 1
     },
-    "at": "2026-11-16T22:13:17Z",
-    "comments": [
-      {
-        "body": "This return-code claim is wrong for the decoder being modeled: when input runs out before EOB, GET_BITS in upstream/decompress.c:54 returns BZ_OK so BZ2_decompress can resume with more input. BZ_UNEXPECTED_EOF is produced by higher-level wrappers (for example bzlib.c:1339-1345). decode returns none for this case, so the statements at lines 24 and 137 that none corresponds exactly to BZ_DATA_ERROR are false. State an explicit domain requiring an EOB, or distinguish incomplete input from BZ_DATA_ERROR in the result and documentation.",
-        "line": 39,
-        "path": "projects/bzip2/spec/Bzip2/Spec/MtfRle2.lean"
-      },
-      {
-        "body": "The cited run-place-value guard is at upstream/decompress.c:396, not line 392. The final origPtr rejection cited at line 35 is at decompress.c:497-498. Please update these exact source references so the failure claims are traceable.",
-        "line": 29,
-        "path": "projects/bzip2/spec/Bzip2/Spec/MtfRle2.lean"
-      }
-    ],
-    "epoch": 2,
-    "outcome": "changes",
-    "reviewed_sha": "efeee179fd3640c76e9878ecec7d0b7d77e0db35",
-    "summary": "The symbol map, MTF steps, RUNA/RUNB encoding, run-digit bound, and block-length checks match the cited C paths. Please correct the decoder failure contract for input ending before EOB and the affected return-code claim. The source citations for the run guard and final origPtr check also point to the wrong lines. I could not run verify.sh because lake is unavailable in this environment.",
+    "at": "2026-11-16T22:15:39Z",
+    "epoch": 3,
+    "outcome": "success",
+    "progress": "Nothing remains in scope.",
+    "summary": "Completed the bzip2 MTF/RLE2 Lean spec and corrected the decoder contract to distinguish malformed symbols from input ending before EOB; fixed upstream source citations. Committed as 20b28b8.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": {
-    "claimed_at": "2026-11-16T22:13:20Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:13:20Z",
-    "kind": "work",
-    "nonce": "016c553c317809e9",
-    "spec": "ba0d22867f59c6ed",
-    "spec_rev": "4109a30ffe7732b121afac1420347f501d01852c",
-    "worker": "imlvts/corey-codex"
-  },
-  "need": "work",
+  "lease": null,
+  "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/mtf-rle2/e1",
     "draft": false,
     "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
     "gh_user": "imlvts",
-    "head_sha": "efeee179fd3640c76e9878ecec7d0b7d77e0db35",
+    "head_sha": "20b28b855895d0eefac09f3b8676cf9ed8471a84",
     "number": 3,
     "repo": "autoformalize-everything/afe-oss",
     "spec": "ba0d22867f59c6ed",
