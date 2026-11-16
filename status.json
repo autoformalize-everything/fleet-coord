@@ -3,31 +3,20 @@
   "epoch": 8,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": null,
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "8c3cb626-7225-49a3-99de-8db8265f5db5",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-16T22:30:47Z",
-    "epoch": 7,
-    "outcome": "success",
-    "progress": "",
-    "summary": "Addressed review feedback: removed the stray projects/out/result.json from the branch. BWT spec unchanged; verify.sh passes.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T22:33:25Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:33:25Z",
-    "kind": "review",
-    "nonce": "723a9a00deb78074",
-    "spec": "65c8839bbf5841b2",
-    "spec_rev": "85ffee737c24c245c2982b0a7b5a6d2e38ce773d",
+    "at": "2026-11-16T22:35:16Z",
+    "comments": [],
+    "epoch": 8,
+    "outcome": "approve",
+    "reviewed_sha": "064fcd4882ed8f7e81d511886a5cffe753622b3d",
+    "summary": "The BWT spec covers sorted cyclic rotations, the last column, valid origPtr positions, and both decoder-style and declarative inverses, including periodic examples. I checked the forward last-column and origPtr construction, 24-bit header write, both decoder bounds checks and block limit, cftab/tt mapping, and BZ_GET_FAST walk against the vendored C source. The changed files stay within scope, and verify.sh passes (build, source checks, and lake test).",
     "worker": "imlvts/corey-codex"
   },
-  "need": "review",
+  "lease": null,
+  "need": "merge",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
     "draft": false,
