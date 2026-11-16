@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "cli": "codex",
@@ -26,7 +26,16 @@
     "summary": "The symbol map, MTF steps, RUNA/RUNB encoding, run-digit bound, and block-length checks match the cited C paths. Please correct the decoder failure contract for input ending before EOB and the affected return-code claim. The source citations for the run guard and final origPtr check also point to the wrong lines. I could not run verify.sh because lake is unavailable in this environment.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:13:20Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:13:20Z",
+    "kind": "work",
+    "nonce": "016c553c317809e9",
+    "spec": "ba0d22867f59c6ed",
+    "spec_rev": "4109a30ffe7732b121afac1420347f501d01852c",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/mtf-rle2/e1",
