@@ -1,33 +1,34 @@
 {
-  "author": "imlvts/corey-claude",
+  "author": "imlvts/corey-codex",
   "epoch": 2,
   "last": {
-    "at": "2026-11-16T23:10:52Z",
-    "by": "admin",
-    "epoch": 1,
-    "outcome": "rework",
-    "reason": "spec-changed"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T23:32:25Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T23:32:25Z",
-    "kind": "work",
-    "nonce": "a1164d93c7c45282",
-    "spec": "be04669dbe0433e8",
-    "spec_rev": "ace50bbf4263cffa95b415f8984d697e87f4a296",
+    "agent": {
+      "cli": "codex",
+      "effort": "high",
+      "exit": 0,
+      "model": null,
+      "reason": "exit",
+      "session": "01a1e6b4-83e7-7870-8ff1-31e37a32319b",
+      "turns": 1
+    },
+    "at": "2026-11-16T23:35:26Z",
+    "epoch": 2,
+    "outcome": "success",
+    "progress": "None.",
+    "summary": "Merged origin/master using its versions of both shared root files, aligned the MTF namespace, and restored MTF #guard cases in an allowed test module. Checked upstream compress.c:106-115,160-230 and bzlib.c:124,223,238; git status was clean and git diff --stat origin/master...HEAD listed only the two allowed files. sh projects/bzip2/tools/verify.sh reported: verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "work",
+  "lease": null,
+  "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/mtf-rle2/e1",
     "draft": false,
     "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
     "gh_user": "imlvts",
-    "head_sha": "c8d3a3d6f931c73938681f84305f71ecc17ceb51",
+    "head_sha": "3302d90fad2213279bfd4e6f8823578935d6d1cf",
     "number": 12,
     "repo": "autoformalize-everything/afe-oss",
-    "spec": "9ab7da4981d57457",
+    "spec": "be04669dbe0433e8",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/12"
   },
   "rounds": 0,
