@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 6,
+  "epoch": 7,
   "last": {
     "agent": {
       "cli": "codex",
@@ -21,7 +21,16 @@
     "summary": "The CRC definitions and examples match the vendored bzip2 source, the two-block vector reproduces with bzip2, and verify.sh passes. Please remove the committed task result file, which is outside the permitted scope.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:28:11Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:28:11Z",
+    "kind": "work",
+    "nonce": "b543597d22406ce6",
+    "spec": "b915ff51fbb09570",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
