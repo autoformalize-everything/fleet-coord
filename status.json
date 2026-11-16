@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 4,
+  "epoch": 5,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Resolved the merge of origin/master: the only conflict was projects/bzip2/spec/Bzip2/Spec.lean, which this task does not own, so I took origin/master's version (no imports, since Spec.lean now lists no modules and is not edited by tasks). Committed the merge (9591c98). Checked: `verify.sh && check-task.sh spec/huffman` gives 'verify: ok' and 'check-task: spec/huffman: ok' (exit 0); git status is clean; `git diff --stat origin/master...HEAD` shows only projects/bzip2/spec/Bzip2/Spec/Huffman.lean (200 insertions). No other work changed.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:39:39Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:39:39Z",
+    "kind": "review",
+    "nonce": "46b1e13a58e4b872",
+    "spec": "328a9106af1b9005",
+    "spec_rev": "2fc9fdfa1732935710296430695846965b8d9733",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/huffman/e2",
