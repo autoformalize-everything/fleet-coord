@@ -3,31 +3,20 @@
   "epoch": 4,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": null,
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "c9cea08a-2973-4be6-8cec-f7c2e05ef78e",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-16T22:19:51Z",
-    "epoch": 3,
-    "outcome": "success",
-    "progress": "",
-    "summary": "Fixed the two review comments in Bwt.lean module doc (no block doubling; mainSort overshoot copy + fallbackSort depth doubling; both origPtr checks cited). verify.sh passes.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T22:20:27Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:20:27Z",
-    "kind": "review",
-    "nonce": "f4ae0c029e069d42",
-    "spec": "65c8839bbf5841b2",
-    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "at": "2026-11-16T22:22:02Z",
+    "comments": [],
+    "epoch": 4,
+    "outcome": "approve",
+    "reviewed_sha": "f5b2ad60805cded1f91a638cd1fccf29e8370e50",
+    "summary": "The BWT spec covers sorted cyclic rotations, valid origin pointers, the decoder-style inverse, declarative inverse statements, and banana/periodic examples. I checked the pointer scan, 24-bit header field, sort fallback, decoder bounds, cftab construction, tt bit layout, and last-column extraction against the vendored C source. The proposed inverse also matched every valid pointer for all blocks of lengths 1\u20138 over a three-byte alphabet. The change stays within spec/, follows the import and proof-hole rules, and verify.sh passes.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "review",
+  "lease": null,
+  "need": "merge",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
     "draft": false,
