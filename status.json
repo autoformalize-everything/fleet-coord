@@ -1,19 +1,35 @@
 {
-  "author": null,
+  "author": "imlvts/corey-claude",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-16T22:15:04Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:15:04Z",
-    "kind": "work",
-    "nonce": "d3e6fa17a9551226",
-    "spec": "b915ff51fbb09570",
-    "spec_rev": "4109a30ffe7732b121afac1420347f501d01852c",
+  "last": {
+    "agent": {
+      "effort": null,
+      "exit": 0,
+      "model": "claude-sonnet-5-5",
+      "reason": "exit",
+      "session": "40a1bddc-11f1-44e4-839e-fdb8762cb7a5",
+      "turns": 1
+    },
+    "at": "2026-11-16T22:15:57Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "",
+    "summary": "Added spec/Bzip2/Spec/Crc.lean (BitVec 32; bitwise MSB-first CRC-32, blockCrc, combineCrc, streamCrc) and imported it from Bzip2/Spec.lean. Examples: crc32 \"123456789\"=0xFC891918, empty=0, and a real two-block bzip2 -1 stream (150000 bytes (7i+i/251)%256; block CRCs 0xfc70ec8f, 0xb88cb15b -> 0x406d6844, cross-checked in Python). verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/spec/crc/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "a0bd4c91d015a29e649ea5148e6ec2e7ce60c352",
+    "number": 6,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "b915ff51fbb09570",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/6"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/spec/crc",
