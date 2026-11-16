@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "cli": "codex",
@@ -36,7 +36,16 @@
     "summary": "The core assignment and decode-table formulas agree with the vendored C source on the cases checked: increasing-length/index assignment (`huffman.c:152-165`), perm/base/limit construction (`huffman.c:170-200`), the 1..20 length error (`decompress.c:323-334`), the 21-bit failure and 258-entry bound (`decompress.c:88-101`), MSB-first reads (`decompress.c:43-65`), and the 258-symbol limit (`decompress.c:274-284`, `bzlib_private.h:115`). The complete, incomplete and over-subscribed examples build. The current checkout's old verifier reports `verify: ok`; its `check-task.sh` is absent, although the `origin/master` Huffman check passes when run directly with Lean. Merge current `origin/master` and run its staged verifier and named task check after the fixes below.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:21:42Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:21:42Z",
+    "kind": "work",
+    "nonce": "d97d00f45a6fa668",
+    "spec": "328a9106af1b9005",
+    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/huffman/e2",
