@@ -3,31 +3,31 @@
   "epoch": 4,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "95d99262-b192-4770-97d7-7c4693eebf63",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-16T23:17:52Z",
-    "epoch": 3,
-    "outcome": "success",
-    "progress": "",
-    "summary": "Resolved the merge conflict in projects/bzip2/oracle/Bzip2/Oracle.lean by taking origin/master's version (the file is not owned by this task; it already imports Error/Decompress/Compress, and Crc is built by Lake as its own module). Committed the merge. Verify then failed style because the previous commit had put the CRC tests into tests/Bzip2/Tests.lean (outside the task's allowed files, and a 132-char line). I reverted Tests.lean to origin/master and moved the tests into tests/Bzip2/Test/Crc.lean as #guards (check value, empty, slices and clamping, table entries 0-3, 128, 252-255 read from upstream/crctable.c lines 35/67/98, combine per compress.c:607-608). Checked: `sh -c 'projects/bzip2/tools/verify.sh && projects/bzip2/tools/check-task.sh oracle/crc'` exits 0: 'verify: packages/sources/build/style/axioms/lint/test: ok', 'verify: ok', 'check-task: oracle/crc: ok'. git status is clean; git diff --stat origin/master...HEAD lists only oracle/Bzip2/Oracle/Crc.lean and tests/Bzip2/Test/Crc.lean.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T23:19:58Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T23:19:58Z",
-    "kind": "review",
-    "nonce": "f58d6b71e184cce9",
-    "spec": "02722e89e4b84ef8",
-    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "at": "2026-11-16T23:22:01Z",
+    "comments": [
+      {
+        "body": "This CRC/table and macro description cites `upstream/crctable.c` and `upstream/bzlib_private.h` with a prose line range, rather than the required `file:LINE` or `file:FROM-TO` form. Please cite the table definition and entries as `crctable.c:31-99` and the init/finalise/update macros as `bzlib_private.h:157-172` (or narrower supporting lines). The module doc must also state the slice edge cases this module settles, such as the empty CRC and clamping out-of-range stop indices, as STYLE.md requires.",
+        "line": 4,
+        "path": "projects/bzip2/oracle/Bzip2/Oracle/Crc.lean"
+      },
+      {
+        "body": "The asserted C table entries also need citations in the required form. Please replace the filename plus \u201cline 35/67/98\u201d prose with `crctable.c:35`, `crctable.c:67`, and `crctable.c:98`. The test module doc should also mention the empty-input and slice-boundary cases it checks, per STYLE.md.",
+        "line": 3,
+        "path": "projects/bzip2/tests/Bzip2/Test/Crc.lean"
+      }
+    ],
+    "epoch": 4,
+    "outcome": "changes",
+    "reviewed_sha": "8114d242fa15b8ec6f5c94a68f476cd06317e6bf",
+    "summary": "The CRC implementation, full generated table, slice behavior, and combined CRC match the vendored C source; the required task check passes. The remaining issues are module documentation required by STYLE.md: two C-source claims lack exact citations, and the module docs omit the edge cases they settle. Verification: verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok. check-task: oracle/crc: ok.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "review",
+  "lease": null,
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/crc/e1",
     "draft": false,
@@ -39,7 +39,7 @@
     "spec": "02722e89e4b84ef8",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/8"
   },
-  "rounds": 0,
+  "rounds": 1,
   "strikes": 0,
   "task": "bzip2/oracle/crc",
   "v": 1
