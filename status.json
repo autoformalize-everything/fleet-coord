@@ -3,46 +3,28 @@
   "epoch": 5,
   "last": {
     "agent": {
-      "cli": "codex",
       "effort": "high",
-      "model": null
+      "exit": 0,
+      "model": "claude-sonnet-5-5",
+      "reason": "exit",
+      "session": "2aa2bd05-0553-4ccd-a507-0ec1b1fff64e",
+      "turns": 1
     },
-    "at": "2026-11-16T23:22:01Z",
-    "comments": [
-      {
-        "body": "This CRC/table and macro description cites `upstream/crctable.c` and `upstream/bzlib_private.h` with a prose line range, rather than the required `file:LINE` or `file:FROM-TO` form. Please cite the table definition and entries as `crctable.c:31-99` and the init/finalise/update macros as `bzlib_private.h:157-172` (or narrower supporting lines). The module doc must also state the slice edge cases this module settles, such as the empty CRC and clamping out-of-range stop indices, as STYLE.md requires.",
-        "line": 4,
-        "path": "projects/bzip2/oracle/Bzip2/Oracle/Crc.lean"
-      },
-      {
-        "body": "The asserted C table entries also need citations in the required form. Please replace the filename plus \u201cline 35/67/98\u201d prose with `crctable.c:35`, `crctable.c:67`, and `crctable.c:98`. The test module doc should also mention the empty-input and slice-boundary cases it checks, per STYLE.md.",
-        "line": 3,
-        "path": "projects/bzip2/tests/Bzip2/Test/Crc.lean"
-      }
-    ],
-    "epoch": 4,
-    "outcome": "changes",
-    "reviewed_sha": "8114d242fa15b8ec6f5c94a68f476cd06317e6bf",
-    "summary": "The CRC implementation, full generated table, slice behavior, and combined CRC match the vendored C source; the required task check passes. The remaining issues are module documentation required by STYLE.md: two C-source claims lack exact citations, and the module docs omit the edge cases they settle. Verification: verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok. check-task: oracle/crc: ok.",
-    "worker": "imlvts/corey-codex"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T23:22:44Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T23:22:44Z",
-    "kind": "work",
-    "nonce": "bc73b7f6c59e47f9",
-    "spec": "02722e89e4b84ef8",
-    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "at": "2026-11-16T23:23:56Z",
+    "epoch": 5,
+    "outcome": "success",
+    "progress": "",
+    "summary": "Addressed review: Crc.lean module doc now cites crctable.c:31-99 and bzlib_private.h:157-172 (157-160, 162-165, 167-172), crctable.c:35, compress.c:607-608, bzlib.c:192 (all read before citing), and states the edge cases settled (empty input = 0, stop clamped to data.size, start >= stop gives empty slice). Test/Crc.lean doc cites crctable.c:35/67/98 and lists the empty-input and slice-boundary cases checked. Verified: `verify.sh && check-task.sh oracle/crc` gave 'verify: packages: ok; sources: ok; build: ok; style: ok; axioms: ok; lint: ok; test: ok; verify: ok' and 'check-task: oracle/crc: ok'. git status clean; git diff --stat origin/master...HEAD lists only oracle/Bzip2/Oracle/Crc.lean and tests/Bzip2/Test/Crc.lean.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "work",
+  "lease": null,
+  "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/crc/e1",
     "draft": false,
     "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
     "gh_user": "imlvts",
-    "head_sha": "8114d242fa15b8ec6f5c94a68f476cd06317e6bf",
+    "head_sha": "9817dd7eb28f551bd790aaea7dbb78118f761d10",
     "number": 8,
     "repo": "autoformalize-everything/afe-oss",
     "spec": "02722e89e4b84ef8",
