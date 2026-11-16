@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 5,
+  "epoch": 6,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Committed 5062e52: keyed the vendored bzip2 build cache to source contents, added checked upstream citations for error and block-boundary behavior, and fixed Lean style after the master merge. Regeneration reproduced the committed vectors with no vector diff. Checked git status (clean) and git diff --stat origin/master...HEAD (only the allowed tests/Bzip2/Tests.lean and tests/vectors/* paths). Full verify reported: 'verify: packages: ok', 'verify: sources: ok', 'verify: build: ok', 'verify: style: ok', 'verify: axioms: ok', 'verify: lint: ok', 'verify: test: ok', 'bzip2-tests: 0 passed, 53 skipped, 0 failed', 'verify: ok'.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:17:55Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:17:55Z",
+    "kind": "review",
+    "nonce": "151b62c20f622cb3",
+    "spec": "92b7c39200ad057b",
+    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/tests/golden/e1",
