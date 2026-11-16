@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 4,
+  "epoch": 5,
   "last": {
     "at": "2026-11-16T22:23:49Z",
     "by": "admin",
@@ -8,7 +8,16 @@
     "outcome": "rework",
     "reason": "merge conflict"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:24:34Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:24:34Z",
+    "kind": "work",
+    "nonce": "be44e41a148a3a32",
+    "spec": "b915ff51fbb09570",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
