@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 7,
+  "epoch": 8,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "Removed the out-of-scope projects/out/result.json from the PR per review; CRC spec, examples and Spec.lean import were already approved. verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:28:59Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:28:59Z",
+    "kind": "review",
+    "nonce": "ad72da281958f049",
+    "spec": "b915ff51fbb09570",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
