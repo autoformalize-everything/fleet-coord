@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Merged origin/master using its versions of both shared root files, aligned the MTF namespace, and restored MTF #guard cases in an allowed test module. Checked upstream compress.c:106-115,160-230 and bzlib.c:124,223,238; git status was clean and git diff --stat origin/master...HEAD listed only the two allowed files. sh projects/bzip2/tools/verify.sh reported: verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:35:48Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:35:48Z",
+    "kind": "review",
+    "nonce": "e4d4c2d3f344a3a6",
+    "spec": "be04669dbe0433e8",
+    "spec_rev": "ace50bbf4263cffa95b415f8984d697e87f4a296",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/mtf-rle2/e1",
