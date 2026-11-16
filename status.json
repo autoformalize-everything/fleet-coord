@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 2,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": null,
-      "model": null
-    },
-    "at": "2026-11-16T22:36:56Z",
-    "comments": [],
+    "at": "2026-11-16T23:10:53Z",
+    "by": "admin",
     "epoch": 2,
-    "outcome": "abstain",
-    "reviewed_sha": "df0b7da6f328d8a86cfa6cca7acafe1eb20799ab",
-    "summary": "review ended without a verdict (cancelled)",
-    "worker": "imlvts/corey-codex"
+    "outcome": "rework",
+    "reason": "spec-changed"
   },
   "lease": null,
-  "need": "review",
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/crc/e1",
     "draft": false,
