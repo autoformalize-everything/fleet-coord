@@ -2,20 +2,14 @@
   "author": "imlvts/corey-codex",
   "epoch": 4,
   "last": {
-    "agent": {
-      "effort": null,
-      "model": "claude-sonnet-5-5"
-    },
-    "at": "2026-11-16T22:16:48Z",
-    "comments": [],
+    "at": "2026-11-16T22:16:57Z",
+    "by": "admin",
     "epoch": 4,
-    "outcome": "approve",
-    "reviewed_sha": "20b28b855895d0eefac09f3b8676cf9ed8471a84",
-    "summary": "Adds spec/Bzip2/Spec/MtfRle2.lean and imports it from Spec.lean. Nothing else changes: upstream/, tools/ and oracle/ are untouched. verify.sh passes (rc=0). The module imports only Mathlib, and there is no sorry/admit/axiom. I spot-checked these claims against upstream: (1) nInUse=0 gives BZ_DATA_ERROR at decompress.c:283. (2) The run-digit check `N >= 2*1024*1024` is at line 396, and it runs before the digit is used. A 22nd digit has N=2^21, so the 'more than 21 digits' claim is right. (3) The per-byte nblockMAX checks for runs are at lines 410 and 417, which matches `length+run > limit`. (4) The MTF-symbol check `nblock >= nblockMAX` is at line 427. (5) The C reads the next symbol before it flushes a run, so running out of symbols gives needMoreInput (GET_BITS returns BZ_OK on empty input) and not a data error. The spec's decodeAux [] case has the same order. (6) runDigits matches the zPend loop in generateMTFValues (compress.c:~170-185). The module-doc citations for compress.c and decompress.c are accurate. The `getAndMoveToFrontDecode` name from the task does not exist in this upstream version, and the doc correctly points to the inlined code in BZ2_decompress. The examples cover runs of 1 to 6 zeros and 'banana' (three distinct bytes), and they pass via `decide +kernel`. I checked the banana MTF indices by hand. Minor, non-blocking: `decode` does not restrict `level` to 1..9. That is fine for a spec, and the range check belongs to the header/format module.",
-    "worker": "imlvts/corey-claude"
+    "merged_sha": "20b28b855895d0eefac09f3b8676cf9ed8471a84",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/spec/mtf-rle2/e1",
     "draft": false,
