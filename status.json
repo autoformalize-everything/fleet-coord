@@ -1,6 +1,6 @@
 {
   "author": null,
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "at": "2026-11-16T22:13:31Z",
     "debug": {
@@ -11,7 +11,16 @@
     "outcome": "failure",
     "summary": "worker restarted mid-attempt"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:23:56Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:23:56Z",
+    "kind": "work",
+    "nonce": "10f1d1cfbc9b9c60",
+    "spec": "1efabb05f5989b74",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/rle1/e1",
