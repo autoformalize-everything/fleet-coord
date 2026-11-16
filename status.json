@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "cli": "codex",
@@ -21,7 +21,16 @@
     "summary": "The vectors regenerate byte for byte and the checked upstream behaviors match the fixtures. Please fix compression-case accounting: an unimplemented oracle decompressor currently allows a compression case to pass without an oracle roundtrip.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:27:28Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:27:28Z",
+    "kind": "work",
+    "nonce": "a403c255b5b0eaeb",
+    "spec": "07dadc3d3572c08e",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/tests/golden/e1",
