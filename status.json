@@ -3,31 +3,26 @@
   "epoch": 5,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "028daa71-10b0-4ef7-8afa-d6a0e9f89fc2",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-16T23:35:12Z",
-    "epoch": 4,
-    "outcome": "success",
-    "progress": "",
-    "summary": "Addressed both review comments. (1) tests/Bzip2/Test/CompressHuffman.lean now uses #guard only: vectors are embedded with include_str and checked by pure Bool functions (agrees: nGroups, selectors, lengths and codes for 7 real blocks with 2..6 tables; mclAgrees: the BZ2_hbMakeCodeLengths calls in mcl.txt, incl. weight-scaling retries). I confirmed a deliberately broken guard fails the build. (2) Huffman.lean module doc and every def doc now cite line ranges I read in upstream: compress.c:273-277 (table count), 283-315 (initial partition), 322-451 (refinement), 399-405 (selector choice, first lowest cost), 447-451 (maxLen 17), 480-492 (codes); huffman.c:33-42, 44-59 (UPHEAP/DOWNHEAP), 63-148, 79-80, 91-110, 114-123, 142-146 (code lengths and retry), 152-166 (assign codes). Also documented that the C fast path (compress.c:359-386, 410-427) is equivalent to the slow path written. Checked: `sh projects/bzip2/tools/verify.sh` printed verify: packages: ok, sources: ok, build: ok, style: ok, axioms: ok, lint: ok, test: ok, then `verify: ok`. git status clean after commit; git diff --stat origin/master...HEAD touches only Huffman.lean, Test/CompressHuffman.lean and tests/vectors/compress-huffman/*.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T23:42:08Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T23:42:08Z",
-    "kind": "review",
-    "nonce": "a5ff409bf1d78259",
-    "spec": "0fb30a091183b2ad",
-    "spec_rev": "2fc9fdfa1732935710296430695846965b8d9733",
+    "at": "2026-11-16T23:44:14Z",
+    "comments": [
+      {
+        "body": "Please correct both citations in this description. `remF / nPart` is computed at `compress.c:287`, not `compress.c:292-300`; the odd-step symbol adjustment is at `compress.c:295-300`, not `compress.c:302-306` (which only prints the range). Point each claim to the lines that perform it, as STYLE.md requires.",
+        "line": 151,
+        "path": "projects/bzip2/oracle/Bzip2/Oracle/Compress/Huffman.lean"
+      }
+    ],
+    "epoch": 5,
+    "outcome": "changes",
+    "reviewed_sha": "4cc762ab2dc7d553fa9b512b9cde76b7340a82d6",
+    "summary": "The implementation and seven block guards agree with the inspected C loops; an out-of-tree driver also matched all 8 code-length vectors, including retry cases. The initial-partition documentation has two incorrect source citations that need correction. Verification: `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "review",
+  "lease": null,
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/huffman/e1",
     "draft": false,
@@ -39,7 +34,7 @@
     "spec": "0fb30a091183b2ad",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/13"
   },
-  "rounds": 1,
+  "rounds": 2,
   "strikes": 0,
   "task": "bzip2/oracle/compress/huffman",
   "v": 1
