@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "cli": "codex",
@@ -26,7 +26,16 @@
     "summary": "The BWT definitions, inverse walk, periodic examples, and source rules check out; verify.sh passes. Please correct two inaccurate descriptions of the vendored C implementation in the module documentation.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:19:14Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:19:14Z",
+    "kind": "work",
+    "nonce": "684909c9ce0caf58",
+    "spec": "65c8839bbf5841b2",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
