@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 6,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": "high",
-      "model": null
-    },
-    "at": "2026-11-16T23:28:48Z",
-    "comments": [],
+    "at": "2026-11-16T23:29:17Z",
+    "by": "admin",
     "epoch": 6,
-    "outcome": "approve",
-    "reviewed_sha": "9817dd7eb28f551bd790aaea7dbb78118f761d10",
-    "summary": "The CRC module meets the task: it generates all 256 table entries, computes the expected CRC over ByteArray slices, and rotates then xors the combined stream CRC. I checked the cited upstream lines for the table values, 32-bit CRC initialization, byte-update index and shift, final complement, block-byte updates, and combined CRC initialization and fold. An independent comparison matched all 256 C table entries and the 123456789 vector. Only allowed files changed; citations are readable and support the claims. Verification: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\"; \"check-task: oracle/crc: ok\".",
-    "worker": "imlvts/corey-codex"
+    "merged_sha": "9817dd7eb28f551bd790aaea7dbb78118f761d10",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/oracle/crc/e1",
     "draft": false,
