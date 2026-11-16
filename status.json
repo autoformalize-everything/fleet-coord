@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "Added spec/Bzip2/Spec/MtfRle2.lean (imported from Spec.lean): inUse/used/nInUse/alphaSize/eob, mtfIndices, runDigits (bijective base 2), encode following generateMTFValues, decode returning Option with failures (nInUse=0, run digit with N>=2^21, run or symbol beyond 100000*level) listed in the module doc with decompress.c line cites; examples for runs 1-6 and 'banana'. verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:11:58Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:11:58Z",
+    "kind": "review",
+    "nonce": "ad10b5bd5bba1235",
+    "spec": "ba0d22867f59c6ed",
+    "spec_rev": "4109a30ffe7732b121afac1420347f501d01852c",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/mtf-rle2/e1",
