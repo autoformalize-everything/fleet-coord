@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "at": "2026-11-16T23:10:48Z",
     "by": "admin",
@@ -8,7 +8,16 @@
     "outcome": "rework",
     "reason": "spec-changed"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:14:42Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:14:42Z",
+    "kind": "work",
+    "nonce": "2120e0ce140609cf",
+    "spec": "bcb5efb7a52b57db",
+    "spec_rev": "6058430c2204f9eec1ff940fed3d91cf398ef425",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/bitio/e1",
