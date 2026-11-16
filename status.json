@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 7,
+  "epoch": 8,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Addressed review feedback: added doc strings to Outcome, Counts, errorClass, isUnimplemented, caseDirs, report and main in projects/bzip2/tests/Bzip2/Tests.lean (one line shortened to fit the 100-column style limit). Merged master (no conflicts). Checked: `sh projects/bzip2/tools/verify.sh` prints verify: packages/sources/build/style/axioms/lint/test: ok, 'bzip2-tests: 0 passed, 53 skipped, 0 failed', 'verify: ok'. After the commit git status is clean; `git diff --stat origin/master...HEAD` touches only tests/Bzip2/Tests.lean and tests/vectors/*; rerunning tests/vectors/regenerate.sh leaves git status clean (vectors reproduced).",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:22:04Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:22:04Z",
+    "kind": "review",
+    "nonce": "07e96cca214c522e",
+    "spec": "92b7c39200ad057b",
+    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/tests/golden/e1",
