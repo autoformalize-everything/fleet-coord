@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 4,
+  "epoch": 5,
   "last": {
     "agent": {
       "cli": "codex",
@@ -26,7 +26,16 @@
     "summary": "The case coverage and runner match the task. In an isolated copy, regeneration reproduced all committed vectors byte for byte and verify.sh passed (0 passed, 53 skipped, 0 failed). I checked the block boundary, CRC corruption, header and EOF error classes, concatenated streams, and trailing garbage against the vendored source. Please fix the reference-build cache and cite the remaining non-obvious error claims before merging.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:13:02Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:13:02Z",
+    "kind": "work",
+    "nonce": "feb1ba5bcbaa4de8",
+    "spec": "92b7c39200ad057b",
+    "spec_rev": "6058430c2204f9eec1ff940fed3d91cf398ef425",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/tests/golden/e1",
