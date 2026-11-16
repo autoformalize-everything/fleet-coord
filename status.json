@@ -1,6 +1,6 @@
 {
   "author": null,
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "cli": "codex",
@@ -23,7 +23,16 @@
     "summary": "",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:25:12Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:25:12Z",
+    "kind": "work",
+    "nonce": "5cbe49530a5ba75d",
+    "spec": "8fdef9ef8db9fc51",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": null,
   "rounds": 0,
