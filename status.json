@@ -3,31 +3,20 @@
   "epoch": 8,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": null,
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "ee60b0ab-7228-4b2c-87f4-4f0cbbf247db",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-16T22:28:44Z",
-    "epoch": 7,
-    "outcome": "success",
-    "progress": "",
-    "summary": "Removed the out-of-scope projects/out/result.json from the PR per review; CRC spec, examples and Spec.lean import were already approved. verify.sh passes.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T22:28:59Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:28:59Z",
-    "kind": "review",
-    "nonce": "ad72da281958f049",
-    "spec": "b915ff51fbb09570",
-    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "at": "2026-11-16T22:30:32Z",
+    "comments": [],
+    "epoch": 8,
+    "outcome": "approve",
+    "reviewed_sha": "d171dad06f125f548023a8eeb87fc92d87c2c4dc",
+    "summary": "The CRC spec meets the task: it defines the MSB-first bitwise CRC, original-byte block CRC, and rotate/XOR stream CRC, imports the module, and checks the requested examples. I verified the polynomial, initialization and complement, byte update, block input coverage, and combination against the vendored C source; an out-of-tree build reproduced both CRCs and the trailer for the two-block example. The full bzip2 verify.sh passed. The diff stays within the allowed spec files, with no Lean holes or oracle API changes.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "review",
+  "lease": null,
+  "need": "merge",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
     "draft": false,
