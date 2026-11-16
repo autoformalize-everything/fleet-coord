@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "Fixed review comment: checkCompress now reports SKIP (not PASS) when the oracle decompress returns Error.unimplemented, after still running the vendored bzip2 -d check. lake test: 0 passed, 53 skipped, 0 failed; verify.sh ok.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:30:35Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:30:35Z",
+    "kind": "review",
+    "nonce": "a33ab8cdfc8e3f8c",
+    "spec": "07dadc3d3572c08e",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/tests/golden/e1",
