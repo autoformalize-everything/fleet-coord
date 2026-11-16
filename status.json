@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 2,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": "high",
-      "model": null
-    },
-    "at": "2026-11-16T23:58:07Z",
-    "comments": [],
+    "at": "2026-11-16T23:58:37Z",
+    "by": "admin",
     "epoch": 2,
-    "outcome": "approve",
-    "reviewed_sha": "141b3b74016197881b1d3f58c4015aff980bad02",
-    "summary": "The Huffman table builder and symbol decoder match the vendored C for the task\u2019s cases, including incomplete and over-subscribed lengths, the 20-bit limit, out-of-range perm indexes, and truncated input. The C-derived vectors cover real streams and these failures. All changes are within the allowed files. I checked the cited C lines for the 23/258 entry limits, length validation, bit extraction, table arithmetic, zn > 20, index bounds, and EOF handling. Verification: verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok.",
-    "worker": "imlvts/corey-codex"
+    "merged_sha": "141b3b74016197881b1d3f58c4015aff980bad02",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/oracle/decompress/huffman/e1",
     "draft": false,
