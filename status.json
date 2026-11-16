@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "Fixed the two review comments in Bwt.lean module doc (no block doubling; mainSort overshoot copy + fallbackSort depth doubling; both origPtr checks cited). verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:20:27Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:20:27Z",
+    "kind": "review",
+    "nonce": "f4ae0c029e069d42",
+    "spec": "65c8839bbf5841b2",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
