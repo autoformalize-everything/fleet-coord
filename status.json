@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 5,
+  "epoch": 6,
   "last": {
     "agent": {
       "effort": null,
@@ -17,7 +17,16 @@
     "summary": "",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:25:47Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:25:47Z",
+    "kind": "review",
+    "nonce": "655814e54166a0c2",
+    "spec": "b915ff51fbb09570",
+    "spec_rev": "722939379967817528443c68e512d60cfec17f3e",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
