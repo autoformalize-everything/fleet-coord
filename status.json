@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 5,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": "high",
-      "model": null
-    },
-    "at": "2026-11-16T23:27:21Z",
-    "comments": [],
+    "at": "2026-11-16T23:27:30Z",
+    "by": "admin",
     "epoch": 5,
-    "outcome": "approve",
-    "reviewed_sha": "7e087a4cd53147614176eb2b96fa0eb899e22bc3",
-    "summary": "The BitIO reader and writer meet the task: MSB-first reads and writes, cross-byte and 32-bit reads, EOF handling, zero-padded finish, and roundtrip tests are covered. I checked the cited GET_BITS, GET_BIT, bsNEEDW, bsW, bsPutUChar, and bsFinishWrite behavior in the vendored C; the standalone reader\u2019s EOF result is the task-specified abstraction. Only allowed files changed. verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok. check-task: oracle/bitio: ok.",
-    "worker": "imlvts/corey-codex"
+    "merged_sha": "7e087a4cd53147614176eb2b96fa0eb899e22bc3",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/oracle/bitio/e1",
     "draft": false,
