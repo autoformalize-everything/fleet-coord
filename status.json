@@ -3,30 +3,19 @@
   "epoch": 2,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": null,
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "821b871b-7a06-4039-a927-2dd9d69087d2",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-16T22:20:46Z",
-    "epoch": 1,
-    "outcome": "success",
-    "progress": "",
-    "summary": "Added oracle/Bzip2/Oracle/Crc.lean (generated 256-entry table, update/crc32 over ByteArray slices, combine = rotl 1 xor), imported from Oracle.lean; tests check 123456789 -> 0xFC891918, empty -> 0, slice, combine, and the full table against upstream/crctable.c. verify.sh passes.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T22:35:19Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:35:19Z",
-    "kind": "review",
-    "nonce": "87e29130f965ffcc",
-    "spec": "14dbfb76a4f6eadd",
-    "spec_rev": "85ffee737c24c245c2982b0a7b5a6d2e38ce773d",
+    "at": "2026-11-16T22:36:56Z",
+    "comments": [],
+    "epoch": 2,
+    "outcome": "abstain",
+    "reviewed_sha": "df0b7da6f328d8a86cfa6cca7acafe1eb20799ab",
+    "summary": "review ended without a verdict (cancelled)",
     "worker": "imlvts/corey-codex"
   },
+  "lease": null,
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/crc/e1",
