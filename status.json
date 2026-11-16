@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 8,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": null,
-      "model": null
-    },
-    "at": "2026-11-16T22:30:32Z",
-    "comments": [],
+    "at": "2026-11-16T22:31:02Z",
+    "by": "admin",
     "epoch": 8,
-    "outcome": "approve",
-    "reviewed_sha": "d171dad06f125f548023a8eeb87fc92d87c2c4dc",
-    "summary": "The CRC spec meets the task: it defines the MSB-first bitwise CRC, original-byte block CRC, and rotate/XOR stream CRC, imports the module, and checks the requested examples. I verified the polynomial, initialization and complement, byte update, block input coverage, and combination against the vendored C source; an out-of-tree build reproduced both CRCs and the trailer for the two-block example. The full bzip2 verify.sh passed. The diff stays within the allowed spec files, with no Lean holes or oracle API changes.",
-    "worker": "imlvts/corey-codex"
+    "merged_sha": "d171dad06f125f548023a8eeb87fc92d87c2c4dc",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
     "draft": false,
