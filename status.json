@@ -2,20 +2,14 @@
   "author": "imlvts/corey-codex",
   "epoch": 10,
   "last": {
-    "agent": {
-      "effort": "high",
-      "model": "claude-sonnet-5-5"
-    },
-    "at": "2026-11-16T23:14:39Z",
-    "comments": [],
+    "at": "2026-11-16T23:15:09Z",
+    "by": "admin",
     "epoch": 10,
-    "outcome": "approve",
-    "reviewed_sha": "cf094ac34cccbbe93d6df250ca93fb5d2973f11a",
-    "summary": "Approve. The change adds only projects/bzip2/spec/Bzip2/Spec/Bwt.lean, which is inside the task's Files. I ran `projects/bzip2/tools/verify.sh` myself: `verify: packages: ok`, `sources: ok`, `build: ok`, `style: ok`, `axioms: ok`, `lint: ok`, `test: ok`, `verify: ok`. `tools/check-task.sh spec/bwt` printed `check-task: spec/bwt: ok`.\n\nWhat the module provides: `bwt` and `sortedRotations` (rotations sorted lexicographically on unsigned bytes, last column); `IsOrigPtr`; `decodeBwt`, the decoder's inverse written as cftab/`slot`/`next`/`walk`; `ValidInput` (`p < L.length`); `IsInverse`/`IsBwtPair`, the declarative inverse; and `InverseUnique` and `InverseCorrect`, stated as `Prop`s with the proof deferred to proofs/bwt. The examples are banana (sorted rotations, `bwt`, `IsOrigPtr`, `decodeBwt`) and the periodic `abab` (both 0 and 1 are valid `origPtr`s and both decode to `abab`). All pass under `decide +kernel`.\n\nCitations I read against upstream/ and found correct:\n- `blocksort.c:1083-1088`: the scan for the first `ptr[i]==0` that sets `origPtr`.\n- `compress.c:650`: `bsW(s,24,s->origPtr)`.\n- `decompress.c:261-264`: `origPtr<0` and `origPtr > 10+100000*blockSize100k` give BZ_DATA_ERROR.\n- `decompress.c:497-498`: `origPtr<0 || origPtr>=nblock` gives BZ_DATA_ERROR. The doc's claim that the earlier bound is redundant is right.\n- `decompress.c:507-509`: cftab is built from the unzftab prefix sums, i.e. counts of bytes smaller than c.\n- `decompress.c:565-572`: `tt[cftab[uc]++] |= i<<8` and `tPos = tt[origPtr]>>8`.\n- `BZ_GET_FAST`: it outputs `tt[tPos]&0xff` and then sets `tPos = tt[tPos]>>8`, which is what `walk`/`next` do.\n- `blocksort.c:794-798`: the overshoot copy.\n- `blocksort.c:259-312`: the fallbackSort `H`-doubling loop.\n\nNot required, so no change requested:\n- The tie-breaking paragraph says fallbackSort is used 'when its work budget runs out' (the budget is mainSort's, `blocksort.c:1075-1079`). It could also say that blocks with `nblock < 10000` go straight to fallbackSort (`blocksort.c:1044-1045`). Neither affects any definition.\n- The doc string on `key` ('Lexicographic order on ... byte strings') describes the order rather than the map, and `private def s` has no doc string. Lint accepts both.\n- `decodeBwt`'s `next` defaults to 0 outside the valid range. The doc already restricts it to valid inputs, so this is fine.",
-    "worker": "imlvts/corey-claude"
+    "merged_sha": "cf094ac34cccbbe93d6df250ca93fb5d2973f11a",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
     "draft": false,
