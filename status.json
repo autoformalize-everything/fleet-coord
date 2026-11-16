@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 4,
+  "epoch": 5,
   "last": {
     "agent": {
       "cli": "codex",
@@ -26,7 +26,16 @@
     "summary": "The CRC implementation, full generated table, slice behavior, and combined CRC match the vendored C source; the required task check passes. The remaining issues are module documentation required by STYLE.md: two C-source claims lack exact citations, and the module docs omit the edge cases they settle. Verification: verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok. check-task: oracle/crc: ok.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:22:44Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:22:44Z",
+    "kind": "work",
+    "nonce": "bc73b7f6c59e47f9",
+    "spec": "02722e89e4b84ef8",
+    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/crc/e1",
