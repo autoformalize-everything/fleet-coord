@@ -3,31 +3,20 @@
   "epoch": 6,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "2aa2bd05-0553-4ccd-a507-0ec1b1fff64e",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-16T23:23:56Z",
-    "epoch": 5,
-    "outcome": "success",
-    "progress": "",
-    "summary": "Addressed review: Crc.lean module doc now cites crctable.c:31-99 and bzlib_private.h:157-172 (157-160, 162-165, 167-172), crctable.c:35, compress.c:607-608, bzlib.c:192 (all read before citing), and states the edge cases settled (empty input = 0, stop clamped to data.size, start >= stop gives empty slice). Test/Crc.lean doc cites crctable.c:35/67/98 and lists the empty-input and slice-boundary cases checked. Verified: `verify.sh && check-task.sh oracle/crc` gave 'verify: packages: ok; sources: ok; build: ok; style: ok; axioms: ok; lint: ok; test: ok; verify: ok' and 'check-task: oracle/crc: ok'. git status clean; git diff --stat origin/master...HEAD lists only oracle/Bzip2/Oracle/Crc.lean and tests/Bzip2/Test/Crc.lean.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T23:27:24Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T23:27:24Z",
-    "kind": "review",
-    "nonce": "9284bd0fa9d870e8",
-    "spec": "02722e89e4b84ef8",
-    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "at": "2026-11-16T23:28:48Z",
+    "comments": [],
+    "epoch": 6,
+    "outcome": "approve",
+    "reviewed_sha": "9817dd7eb28f551bd790aaea7dbb78118f761d10",
+    "summary": "The CRC module meets the task: it generates all 256 table entries, computes the expected CRC over ByteArray slices, and rotates then xors the combined stream CRC. I checked the cited upstream lines for the table values, 32-bit CRC initialization, byte-update index and shift, final complement, block-byte updates, and combined CRC initialization and fold. An independent comparison matched all 256 C table entries and the 123456789 vector. Only allowed files changed; citations are readable and support the claims. Verification: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\"; \"check-task: oracle/crc: ok\".",
     "worker": "imlvts/corey-codex"
   },
-  "need": "review",
+  "lease": null,
+  "need": "merge",
   "pr": {
     "branch": "task/bzip2/oracle/crc/e1",
     "draft": false,
