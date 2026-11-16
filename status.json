@@ -1,19 +1,35 @@
 {
-  "author": null,
+  "author": "imlvts/corey-claude",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-16T22:13:34Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T22:13:34Z",
-    "kind": "work",
-    "nonce": "597ba48d77812cc2",
-    "spec": "65c8839bbf5841b2",
-    "spec_rev": "4109a30ffe7732b121afac1420347f501d01852c",
+  "last": {
+    "agent": {
+      "effort": null,
+      "exit": 0,
+      "model": "claude-sonnet-5-5",
+      "reason": "exit",
+      "session": "df6f92fc-07a9-4941-aa98-79a0c93dc371",
+      "turns": 1
+    },
+    "at": "2026-11-16T22:15:01Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "Proofs of InverseCorrect/InverseUnique left to bzip2/proofs/bwt.",
+    "summary": "Added Bzip2.Spec.Bwt: sortedRotations, bwt, IsOrigPtr, decoder-style inverse (cftab/slot/next/walk/decodeBwt), ValidInput, declarative IsInverse/IsBwtPair, statements InverseCorrect and InverseUnique as Props (unproved), module doc on periodic-block ambiguity, kernel-checked examples (banana, abab). verify.sh passes.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/spec/bwt/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "682c60fedfe6ff21235802c3463c96824aab4a65",
+    "number": 5,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "65c8839bbf5841b2",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/5"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/spec/bwt",
