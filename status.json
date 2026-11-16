@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 10,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": "high",
-      "model": null
-    },
-    "at": "2026-11-16T23:30:41Z",
-    "comments": [],
+    "at": "2026-11-16T23:31:34Z",
+    "by": "admin",
     "epoch": 10,
-    "outcome": "approve",
-    "reviewed_sha": "aa4a20b1ca48f9fe43dd1e343fddff398688bc17",
-    "summary": "Approved. The runner covers all 53 checks (23 decompression cases and 15 compression inputs at two levels), reports 0 passed, 53 skipped, 0 failed with the current stubs, and exits successfully. Regenerating in a temporary copy reproduced all 61 committed vector files byte for byte; the level-1 boundary vectors were confirmed as one and two blocks by the vendored bzip2. Source checks confirmed the cited block limit, CRC error, truncated-input error, magic/level-0 check, and concatenated/trailing-garbage behavior. Required verification passed: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\".",
-    "worker": "imlvts/corey-codex"
+    "merged_sha": "aa4a20b1ca48f9fe43dd1e343fddff398688bc17",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/tests/golden/e1",
     "draft": false,
