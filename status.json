@@ -1,0 +1,21 @@
+{
+  "author": null,
+  "epoch": 1,
+  "last": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:49:41Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:49:41Z",
+    "kind": "work",
+    "nonce": "ed30aa0b1a98dc0b",
+    "spec": "c54cf300db4095cf",
+    "spec_rev": "2fc9fdfa1732935710296430695846965b8d9733",
+    "worker": "imlvts/corey-claude"
+  },
+  "need": "work",
+  "pr": null,
+  "rounds": 0,
+  "strikes": 0,
+  "task": "bzip2/oracle/decompress/huffman",
+  "v": 1
+}
