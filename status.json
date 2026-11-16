@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Merged origin/master (took origin/master's Oracle.lean and Oracle/Error.lean, as neither is owned by this task). The earlier work did not fit the new rules, so I also moved BitIO into namespace Bzip2.Oracle.BitIO (the names checks/oracle/bitio.lean opens), added doc strings and C citations (decompress.c:43-65, compress.c:73-78, compress.c:46-55, read before citing), moved the unit tests to tests/Bzip2/Test/BitIO.lean as #guards (byte-boundary reads, 32-bit reads, eof, write/read roundtrip of 3000 random widths), restored tests/Bzip2/Tests.lean to origin/master and removed a stray projects/out/result.json. Checked: `verify.sh && check-task.sh oracle/bitio` gives 'verify: packages/sources/build/style/axioms/lint/test: ok', 'verify: ok', 'check-task: oracle/bitio: ok'. `git diff --stat origin/master...HEAD` lists only oracle/Bzip2/Oracle/BitIO.lean and tests/Bzip2/Test/BitIO.lean; git status clean, nothing untracked.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:17:11Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:17:11Z",
+    "kind": "review",
+    "nonce": "2bffa70d973ab1b7",
+    "spec": "bcb5efb7a52b57db",
+    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/bitio/e1",
