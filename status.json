@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 4,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": null,
-      "model": null
-    },
-    "at": "2026-11-16T22:23:38Z",
-    "comments": [],
+    "at": "2026-11-16T22:23:49Z",
+    "by": "admin",
     "epoch": 4,
-    "outcome": "approve",
-    "reviewed_sha": "afd6a4754b8643fe40f5129cb3ebe3e4227324af",
-    "summary": "The CRC specification matches the vendored source: polynomial and MSB-first table update, initialization and final complement, CRC over original block bytes, and rotate-left/XOR stream combination. I reproduced the two-block example with the vendored compressor and confirmed its CRCs. The Lean examples compile, project verification passes, and the change stays within the allowed files.",
-    "worker": "imlvts/corey-codex"
+    "outcome": "rework",
+    "reason": "merge conflict"
   },
   "lease": null,
-  "need": "merge",
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/crc/e1",
     "draft": false,
