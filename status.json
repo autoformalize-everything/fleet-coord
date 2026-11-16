@@ -3,32 +3,19 @@
   "epoch": 3,
   "last": {
     "agent": {
-      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": null,
-      "reason": "exit",
-      "session": "01a1e6b4-83e7-7870-8ff1-31e37a32319b",
-      "turns": 1
+      "model": "claude-sonnet-5-5"
     },
-    "at": "2026-11-16T23:35:26Z",
-    "epoch": 2,
-    "outcome": "success",
-    "progress": "None.",
-    "summary": "Merged origin/master using its versions of both shared root files, aligned the MTF namespace, and restored MTF #guard cases in an allowed test module. Checked upstream compress.c:106-115,160-230 and bzlib.c:124,223,238; git status was clean and git diff --stat origin/master...HEAD listed only the two allowed files. sh projects/bzip2/tools/verify.sh reported: verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok.",
-    "worker": "imlvts/corey-codex"
-  },
-  "lease": {
-    "claimed_at": "2026-11-16T23:35:48Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T23:35:48Z",
-    "kind": "review",
-    "nonce": "e4d4c2d3f344a3a6",
-    "spec": "be04669dbe0433e8",
-    "spec_rev": "ace50bbf4263cffa95b415f8984d697e87f4a296",
+    "at": "2026-11-16T23:36:55Z",
+    "comments": [],
+    "epoch": 3,
+    "outcome": "approve",
+    "reviewed_sha": "3302d90fad2213279bfd4e6f8823578935d6d1cf",
+    "summary": "Approved. The change adds only the two allowed files (Compress/Mtf.lean and Test/CompressMtf.lean). `projects/bzip2/tools/verify.sh` passed when I ran it: verify: packages: ok; sources: ok; build: ok; style: ok; axioms: ok; lint: ok; test: ok; verify: ok. The task names no check-task script, and checks/ has no entry for it.\n\nBehaviour checked against the C code:\n- I built a C driver out of tree. It includes upstream/compress.c and calls generateMTFValues directly (ptr[i]=(i+1)%n, so the BWT column is the block itself). It reproduces the expected symbols, freqs and nInUse for banana, the 7-byte block {a,n,n,b,0,a,a}, abracadabra, 1000 zeros, 999 zeros + 1, six x then y, and six x alone. These are the same cases the #guards assert. The other run lengths (1-5) are consistent with the same flushRun logic and the tested boundaries.\n- generateMtf does what compress.c:160-230 does: makeMaps_e numbering (compress.c:106-115), yy initialisation (161), the zPend increment when yy[0] matches (170-171), and the flush before an MTF move (172-187). It also matches the final flush (212-226) and the EOB append (228) with mtfFreq sized nInUse+2. The RUNA/RUNB loop (zPend-1, bit 0 gives RUNA/RUNB, then (z-2)/2) is the same, as is the MTF symbol j+1.\n- The empty block gives [EOB=1] and freq [0,1]. This is safe in C and in Lean because yy is never read when the block is empty.\n- All the cited line ranges exist and say what the text claims. compress.c:106-115 is makeMaps_e, 120-231 is generateMTFValues, and 170-188 and 212-226 are the two zPend flushes. bzlib.c:124, 223 and 238 are the inUse reset and the two places inUse is set, including the state_in_len-4 count byte.\n\nTests cover what the task lists: runs of 1-6 (mid-block and as the whole block), 1000 zeros, and one-byte-value blocks.\n\nNotes, not required for approval:\n- The module doc says the caller does the ptr indirection, so the API takes the already-permuted BWT column. That is a reasonable reading of 'from the BWT output' and the doc states it.\n- Bytes missing from inUse silently map to symbol 0, as the doc comment notes; C would hit an AssertD there.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "review",
+  "lease": null,
+  "need": "merge",
   "pr": {
     "branch": "task/bzip2/oracle/compress/mtf-rle2/e1",
     "draft": false,
