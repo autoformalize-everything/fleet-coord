@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 4,
+  "epoch": 5,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Resolved the merge conflict in projects/bzip2/spec/Bzip2/Spec.lean by taking origin/master's version (it no longer imports parts; the old import of Bzip2.Spec.Rle1 was dropped as master's design says). Then fixed what verify.sh reported on Rle1.lean: three lines over 100 chars, defs declared in Bzip2.Spec instead of Bzip2.Spec.Rle1 (merged into one namespace Bzip2.Spec.Rle1, as checks/spec/rle1.lean expects), missing doc strings on structure fields. Also corrected a citation: the 255-run cut in ADD_CHAR_TO_BLOCK is bzlib.c:275-276 (was 274, which is a comment line); re-read the other cites (557, 560, 633-660, 216-257, decompress.c:497) against the source. Result: `sh -c 'projects/bzip2/tools/verify.sh && projects/bzip2/tools/check-task.sh spec/rle1'` exits 0 ('verify: ok', 'check-task: spec/rle1: ok'). git status clean; git diff --stat origin/master...HEAD shows only projects/bzip2/spec/Bzip2/Spec/Rle1.lean (165 insertions).",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:35:29Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:35:29Z",
+    "kind": "review",
+    "nonce": "acdd5b9488b7815d",
+    "spec": "8d9872aa8d6c1279",
+    "spec_rev": "ace50bbf4263cffa95b415f8984d697e87f4a296",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/rle1/e1",
