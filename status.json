@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 4,
+  "epoch": 5,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Addressed both review comments. (1) Removed the uncited 'C code never asks for more than 24 bits' parenthetical from the BitIO module doc. (2) Wrapped the test helpers and #guards in tests/Bzip2/Test/BitIO.lean in `namespace Bzip2.Test.BitIO`. Checked: `sh -c 'projects/bzip2/tools/verify.sh && projects/bzip2/tools/check-task.sh oracle/bitio'` gives verify: packages/sources/build/style/axioms/lint/test: ok, `verify: ok`, `check-task: oracle/bitio: ok`. git status is clean; `git diff --stat origin/master...HEAD` lists only oracle/Bzip2/Oracle/BitIO.lean and tests/Bzip2/Test/BitIO.lean. The C citations in the module doc (decompress.c:43-65, compress.c:73-78, compress.c:46-55) were verified by the previous reviewer and are unchanged; I did not re-read them this round.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:24:47Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:24:47Z",
+    "kind": "review",
+    "nonce": "97f47642516b09eb",
+    "spec": "bcb5efb7a52b57db",
+    "spec_rev": "0ad4175115cd738dea571e11b3475d3cb7361300",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/bitio/e1",
