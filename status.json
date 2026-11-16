@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 6,
+  "epoch": 7,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Addressed the review comment: corrected the initialLens doc citations in Huffman.lean. remF / nPart is compress.c:287 (was 292-300), range growth is compress.c:288-293, the odd-step give-back is compress.c:295-300 (was 302-306, a verbosity print), the len fill is compress.c:308-311, block is 283-316; the module header cites 283-316 too. I read compress.c:270-316 before citing. verify.sh: 'verify: packages: ok', 'verify: sources: ok', 'verify: build: ok', 'verify: style: ok', 'verify: axioms: ok', 'verify: lint: ok', 'verify: test: ok', 'verify: ok'. Merged origin/master had no conflicts. git status clean after commit; changed files are only the task's allowed paths (see git diff --stat origin/master...HEAD).",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:47:54Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:47:54Z",
+    "kind": "review",
+    "nonce": "274aa24ddf1575f8",
+    "spec": "0fb30a091183b2ad",
+    "spec_rev": "2fc9fdfa1732935710296430695846965b8d9733",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/huffman/e1",
