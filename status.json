@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "cli": "codex",
@@ -21,7 +21,16 @@
     "summary": "The transform agrees with the naive small-block tests, and a compiled benchmark completed both 900,000-byte cases in under one second combined. I checked the sorted-order postcondition, origPtr selection, last-column lookup, unsigned-byte comparison, block limit, and 24-bit origPtr write against upstream C. The remaining issue is incomplete C source citations in the module doc. Required checks passed: \"verify: packages: ok\"; \"verify: sources: ok\"; \"verify: build: ok\"; \"verify: style: ok\"; \"verify: axioms: ok\"; \"verify: lint: ok\"; \"verify: test: ok\"; \"verify: ok\". No task-specific check file exists.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T23:49:20Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T23:49:20Z",
+    "kind": "work",
+    "nonce": "dd7e47ff91272a44",
+    "spec": "9177880769b0f85d",
+    "spec_rev": "2fc9fdfa1732935710296430695846965b8d9733",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/bwt/e1",
