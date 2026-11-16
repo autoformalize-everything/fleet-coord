@@ -1,43 +1,31 @@
 {
-  "author": "imlvts/corey-claude",
+  "author": "imlvts/corey-codex",
   "epoch": 4,
   "last": {
     "agent": {
       "cli": "codex",
       "effort": "high",
-      "model": null
+      "exit": 0,
+      "model": null,
+      "reason": "exit",
+      "session": "01a1e6c3-ff31-7ac0-b961-615af4b3edb4",
+      "turns": 1
     },
-    "at": "2026-11-16T23:47:51Z",
-    "comments": [
-      {
-        "body": "Please correct the source citations for these C behavior claims. `blocksort.c:1031-1089` does not include the sorted-order postcondition at `blocksort.c:1025-1029`, and the last-column lookup is computed in `compress.c:163-167`, not in blocksort.c. Cite those locations beside the corresponding claims. The unsigned-byte comparison claim on line 11 also needs its source location (`blocksort.c:354-362`); the same claim in the test comment should cite it too.",
-        "line": 6,
-        "path": "projects/bzip2/oracle/Bzip2/Oracle/Compress/Bwt.lean"
-      }
-    ],
-    "epoch": 3,
-    "outcome": "changes",
-    "reviewed_sha": "38ab5795186deda3ffeca1cbc39f1fcceadcc225",
-    "summary": "The transform agrees with the naive small-block tests, and a compiled benchmark completed both 900,000-byte cases in under one second combined. I checked the sorted-order postcondition, origPtr selection, last-column lookup, unsigned-byte comparison, block limit, and 24-bit origPtr write against upstream C. The remaining issue is incomplete C source citations in the module doc. Required checks passed: \"verify: packages: ok\"; \"verify: sources: ok\"; \"verify: build: ok\"; \"verify: style: ok\"; \"verify: axioms: ok\"; \"verify: lint: ok\"; \"verify: test: ok\"; \"verify: ok\". No task-specific check file exists.",
+    "at": "2026-11-16T23:52:38Z",
+    "epoch": 4,
+    "outcome": "success",
+    "progress": "Followup: add an inverse round-trip test when oracle/decompress/block-output exists.",
+    "summary": "Corrected BWT C citations and the prefix-doubling description; checked the cited upstream lines, clean git status, and the two-file allowed-path diff. Full verification: \"verify: packages: ok\"; \"verify: sources: ok\"; \"verify: build: ok\"; \"verify: style: ok\"; \"verify: axioms: ok\"; \"verify: lint: ok\"; \"verify: test: ok\"; \"verify: ok\".",
     "worker": "imlvts/corey-codex"
   },
-  "lease": {
-    "claimed_at": "2026-11-16T23:49:20Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T23:49:20Z",
-    "kind": "work",
-    "nonce": "dd7e47ff91272a44",
-    "spec": "9177880769b0f85d",
-    "spec_rev": "2fc9fdfa1732935710296430695846965b8d9733",
-    "worker": "imlvts/corey-codex"
-  },
-  "need": "work",
+  "lease": null,
+  "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/bwt/e1",
     "draft": false,
     "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
     "gh_user": "imlvts",
-    "head_sha": "38ab5795186deda3ffeca1cbc39f1fcceadcc225",
+    "head_sha": "31e6555f12f572b5b84f4b7862caccf8154e7c5a",
     "number": 11,
     "repo": "autoformalize-everything/afe-oss",
     "spec": "9177880769b0f85d",
