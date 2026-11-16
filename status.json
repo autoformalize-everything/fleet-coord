@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Completed the bzip2 MTF/RLE2 Lean spec and corrected the decoder contract to distinguish malformed symbols from input ending before EOB; fixed upstream source citations. Committed as 20b28b8.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-16T22:16:00Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-16T22:16:00Z",
+    "kind": "review",
+    "nonce": "6d19346e3d1a9659",
+    "spec": "ba0d22867f59c6ed",
+    "spec_rev": "4109a30ffe7732b121afac1420347f501d01852c",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/mtf-rle2/e1",
