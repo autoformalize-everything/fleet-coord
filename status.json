@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 8,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": null,
-      "model": null
-    },
-    "at": "2026-11-16T22:35:16Z",
-    "comments": [],
+    "at": "2026-11-16T23:10:55Z",
+    "by": "admin",
     "epoch": 8,
-    "outcome": "approve",
-    "reviewed_sha": "064fcd4882ed8f7e81d511886a5cffe753622b3d",
-    "summary": "The BWT spec covers sorted cyclic rotations, the last column, valid origPtr positions, and both decoder-style and declarative inverses, including periodic examples. I checked the forward last-column and origPtr construction, 24-bit header write, both decoder bounds checks and block limit, cftab/tt mapping, and BZ_GET_FAST walk against the vendored C source. The changed files stay within scope, and verify.sh passes (build, source checks, and lake test).",
-    "worker": "imlvts/corey-codex"
+    "outcome": "rework",
+    "reason": "spec-changed"
   },
   "lease": null,
-  "need": "merge",
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/bwt/e1",
     "draft": false,
