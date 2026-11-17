@@ -1,46 +1,30 @@
 {
-  "author": null,
+  "author": "imlvts/corey-claude",
   "epoch": 2,
   "last": {
     "agent": {
-      "cli": "codex",
-      "effort": "xhigh",
-      "exit": -15,
-      "model": null,
-      "reason": "cancelled",
-      "session": "01a1e704-b838-7393-83cf-46a88208b82d",
-      "turns": 0
+      "effort": "max",
+      "exit": 0,
+      "model": "claude-sonnet-5-5",
+      "reason": "exit",
+      "session": "b6cbee4d-c48f-44f1-a6b7-e4444de41190",
+      "turns": 1
     },
-    "at": "2026-11-17T01:24:31Z",
-    "debug": {
-      "detail": null,
-      "kind": "task",
-      "verify_log": "verify: packages: ok\nverify: sources: ok\nverify: build: ok\nverify: style: ok\nverify: axioms: ok\nverify: lint: ok\nverify: test: ok\nSKIP compress/text/level1: compress unimplemented\nSKIP compress/text/level9: compress unimplemented\nbzip2-tests: 0 passed, 53 skipped, 0 failed\nverify: ok\nBzip2.Proofs.Crc.crc32_eq_spec : \u2200 (data : ByteArray),\n  (Bzip2.Oracle.Crc.crc32 data).toBitVec = Bzip2.Spec.Crc.crc32 (List.map UInt8.toBitVec data.toList)\nBzip2.Proofs.Crc.combine_eq_spec : \u2200 (combined blockCrc : UInt32),\n  (Bzip2.Oracle.Crc.combine combined blockCrc).toBitVec = Bzip2.Spec.Crc.combineCrc combined.toBitVec blockCrc.toBitVec\ncheck-task: proofs/crc: ok\n",
-      "verify_ok": true
-    },
-    "epoch": 1,
-    "outcome": "partial",
-    "progress": null,
-    "summary": "",
-    "worker": "imlvts/corey-codex"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T02:03:23Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:13:29Z",
-    "kind": "work",
-    "nonce": "5b7b83fa5fd00cfe",
-    "spec": "38abfb02899a90c4",
-    "spec_rev": "4c7c4a1a57a68bff721333692f9729907f069519",
+    "at": "2026-11-17T02:15:14Z",
+    "epoch": 2,
+    "outcome": "success",
+    "progress": "Nothing left for this task. Followups outside its scope: none.",
+    "summary": "Proved, in projects/bzip2/proofs/Bzip2/Proofs/Crc.lean (the only file changed), that the oracle's table-driven CRC and combined CRC equal the spec's, with no sorry. Public theorems, all resting on propext/Classical.choice/Quot.sound only:\n- crc32_eq_spec (data : ByteArray) : (Oracle.Crc.crc32 data).toBitVec = Spec.Crc.crc32 (data.toList.map UInt8.toBitVec)\n- combine_eq_spec (combined blockCrc : UInt32) : (Oracle.Crc.combine combined blockCrc).toBitVec = Spec.Crc.combineCrc combined.toBitVec blockCrc.toBitVec\n- beyond the two the task names: updateByte_eq_spec (one table lookup is the spec's eight bit steps); update_slice_eq_spec and crc32_slice_eq_spec (the oracle's update/crc32 over any slice data[start, stop), for every start and stop, as (data.toList.drop start).take (stop - start); the previous attempt covered only the default full-array range); streamCrc_eq_spec (foldl of Oracle.Crc.combine from 0 is Spec.Crc.streamCrc).\nProof: each of the 256 table entries equals the spec's byte step on state 0 (decide +kernel); the spec's byte step is xor-linear and splits at the top byte (crcUpdate c b = (c <<< 8) ^^^ crcUpdate 0 (top byte of c ^^^ b)); ByteArray.toList is related to data.data.toList by a short induction on the library's loop, replacing the previous attempt's longer one.\nThis continues the cancelled attempt's file (it already passed verify): I kept its algebra, simplified bit_linear to a single grind call, removed a redundant have, renamed gethigh to truncate_ushiftRight_append, added the slice theorems and bridge, added section comments, and rewrote the module doc (choices: UInt32/UInt8 related through toBitVec; slice and its clamping are the oracle's).\nChecked: (1) every C citation in the module doc read at the cited place: bzlib_private.h:157-160 (BZ_INITIALISE_CRC, 0xffffffffL), 162-165 (BZ_FINALISE_CRC, ~crcVar), 167-172 (BZ_UPDATE_CRC), compress.c:607-608 (combinedCRC rotate-left-1 then xor blockCRC, inside BZ2_compressBlock at compress.c:602), bzlib.c:192 (combinedCRC = 0 in BZ2_bzCompressInit, line 148), bzlib.c:515 (calculatedCombinedCRC = 0 in BZ2_bzDecompressInit, line 492), bzlib.c:832-835 (the decompressor's identical rotate and xor in BZ2_bzDecompress, line 808). I changed the old doc's compress.c:606-608 to 607-608 because line 606 is BZ_FINALISE_CRC of the block CRC, not the combination. (2) Sanity run outside the repo: for a 13-byte array, Oracle.Crc.crc32 d a b equals Spec.Crc.crc32 of (d.toList.drop a).take (b - a) for all a in 0..15, b in 0..17, covering clamped stops and empty slices. (3) git status is clean, nothing untracked; git diff --stat origin/master...HEAD: ' projects/bzip2/proofs/Bzip2/Proofs/Crc.lean | 288 +++ , 1 file changed, 288 insertions(+)'. origin/master was already merged into the branch; verify ran on top of that merge.\nFinal run of `sh -c 'projects/bzip2/tools/verify.sh && projects/bzip2/tools/check-task.sh proofs/crc'` printed: verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok; check-task: proofs/crc: ok (bzip2-tests: 0 passed, 53 skipped, 0 failed: the golden vectors are skipped because compress is not implemented yet, which is not this task's).",
     "worker": "imlvts/corey-claude"
   },
-  "need": "work",
+  "lease": null,
+  "need": "review",
   "pr": {
     "branch": "task/bzip2/proofs/crc/e1",
-    "draft": true,
+    "draft": false,
     "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
     "gh_user": "imlvts",
-    "head_sha": "ac793d39b110a4a957ba57e1913471e13f2774e6",
+    "head_sha": "68c7605552af268e2207bb96f15c001330167967",
     "number": 19,
     "repo": "autoformalize-everything/afe-oss",
     "spec": "38abfb02899a90c4",
