@@ -1,0 +1,21 @@
+{
+  "author": null,
+  "epoch": 1,
+  "last": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:35:00Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:35:00Z",
+    "kind": "work",
+    "nonce": "f350e6457b3f0815",
+    "spec": "10748f154df4ed58",
+    "spec_rev": "9a200c36776a663fca0ecccc3c51779bbf6096ea",
+    "worker": "imlvts/corey-opus"
+  },
+  "need": "work",
+  "pr": null,
+  "rounds": 0,
+  "strikes": 0,
+  "task": "bzip2/fuzz/decompress-diff",
+  "v": 1
+}
