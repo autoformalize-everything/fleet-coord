@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-opus",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "at": "2026-11-17T03:17:33Z",
     "by": "admin",
@@ -8,7 +8,16 @@
     "outcome": "rework",
     "reason": "spec-changed"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T03:17:33Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T03:17:33Z",
+    "kind": "work",
+    "nonce": "16005456ccb2dafd",
+    "spec": "b6dc28567ac42694",
+    "spec_rev": "052e66fb9253673ca03e6bc7504d826276ba55ac",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/fuzz/decompress-diff/e1",
