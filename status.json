@@ -1,19 +1,41 @@
 {
   "author": null,
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T02:04:58Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T03:00:08Z",
-    "kind": "work",
-    "nonce": "23cd023b2d9610eb",
-    "spec": "3b79d80bc5e1eb6d",
-    "spec_rev": "4c7c4a1a57a68bff721333692f9729907f069519",
+  "last": {
+    "agent": {
+      "effort": "max",
+      "exit": 143,
+      "model": "claude-sonnet-5-5",
+      "reason": "cancelled",
+      "session": "d9a775d5-a5c3-4a7a-a7e6-3d60c1b0daac",
+      "turns": 0
+    },
+    "at": "2026-11-17T03:03:30Z",
+    "debug": {
+      "detail": "",
+      "kind": "task",
+      "verify_log": "verify: packages: ok\nverify: sources: ok\nverify: build: ok\nverify: style: ok\nverify: axioms: ok\nverify: lint: ok\nverify: test: ok\nSKIP compress/text/level1: compress unimplemented\nSKIP compress/text/level9: compress unimplemented\nbzip2-tests: 0 passed, 53 skipped, 0 failed\nverify: ok\nBzip2.Proofs.Huffman.decode_eq_spec : \u2200 (length : Array UInt8),\n  0 < length.size \u2192\n    length.size \u2264 258 \u2192\n      (\u2200 (l : UInt8), l \u2208 length \u2192 1 \u2264 l.toNat \u2227 l.toNat \u2264 20) \u2192\n        \u2200 (r : Bzip2.Oracle.BitIO.BitReader),\n          Bzip2.Proofs.Huffman.Decode.Matches r\n            (Bzip2.Spec.Huffman.decodeSym (Bzip2.Proofs.Huffman.DecodeTables.lensOf length)\n              (Bzip2.Proofs.Huffman.Bits.bits r))\n            (Bzip2.Oracle.Decompress.Huffman.decodeSym (Bzip2.Proofs.Huffman.DecodeTables.tablesOf length) r)\ncheck-task: proofs/huffman: ok\n",
+      "verify_ok": true
+    },
+    "epoch": 1,
+    "outcome": "partial",
+    "progress": "Not yet proved: the compressor's code lengths (makeCodeLengths / choose) are in 1..17 and not over-subscribed. This needs a verification of the oracle's heap (upHeap/downHeap), the merge loop, the depth bound for flattened weights and termination of the reweighting loop.",
+    "summary": "PRELIMINARY (work in progress). Proved and committed: Bzip2.Proofs.Huffman.decode_eq_spec (the oracle's decoding tables decode exactly as Spec.Huffman.decodeSym on every stream table: 1..258 lengths in 1..20, complete or not; incl. Error.data/Error.eof correspondence and the proof that staleEntry never occurs); the spec's DecodeAssigned for every table (Canonical.decodeAssigned, decodeSym_codeword for any legal Kraft<=1 table, sequence round trip decodeSyms_encodeSyms); Codes.assignCodes_eq_spec (the compressor's assignCodes computes the spec's code). verify.sh and check-task.sh proofs/huffman pass at this commit.",
     "worker": "imlvts/corey-sonnet2"
   },
+  "lease": null,
   "need": "work",
-  "pr": null,
+  "pr": {
+    "branch": "task/bzip2/proofs/huffman/e1",
+    "draft": true,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "1c69a727face2ad7843eb913fb65a88caf4ab899",
+    "number": 27,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "3b79d80bc5e1eb6d",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/27"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/proofs/huffman",
