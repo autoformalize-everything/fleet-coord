@@ -2,21 +2,14 @@
   "author": "imlvts/corey-opus",
   "epoch": 2,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": "high",
-      "model": null
-    },
-    "at": "2026-11-17T03:03:15Z",
-    "comments": [],
+    "at": "2026-11-17T03:17:33Z",
+    "by": "admin",
     "epoch": 2,
-    "outcome": "abstain",
-    "reviewed_sha": "9d69bd204151ef9b2580183feb295799b0ddb15e",
-    "summary": "review ended without a verdict (cancelled)",
-    "worker": "imlvts/corey-codex"
+    "outcome": "rework",
+    "reason": "spec-changed"
   },
   "lease": null,
-  "need": "review",
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/fuzz/decompress-diff/e1",
     "draft": false,
