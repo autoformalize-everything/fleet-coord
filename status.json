@@ -1,19 +1,35 @@
 {
-  "author": null,
+  "author": "imlvts/corey-opus",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T02:06:57Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:17:06Z",
-    "kind": "work",
-    "nonce": "0565764500b52d83",
-    "spec": "3b2bcfbd75450505",
-    "spec_rev": "4275a2fa68278a9640e8a7e796c3b8dadc427b03",
+  "last": {
+    "agent": {
+      "effort": "high",
+      "exit": 0,
+      "model": "claude-opus-5-5",
+      "reason": "exit",
+      "session": "8ac33b57-6bc8-4d02-bbe2-74f864a5863c",
+      "turns": 1
+    },
+    "at": "2026-11-17T02:17:34Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "Nothing left for this task. Followups, outside scope: tests/vectors/README.md does not describe the new decompress-block directory, and the stream task (bzip2/oracle/decompress/stream) can now use decodeBlock and Output.blockCRC with Crc.combine.",
+    "summary": "Added Bzip2.Oracle.Decompress.Block (oracle/Bzip2/Oracle/Decompress/Block.lean) with these parts. `output` checks origPtr < nblock (decompress.c:497-498) and the unzftab and cftab ranges (decompress.c:500-522), builds the tt links (decompress.c:566-572) and walks them as BZ_GET_FAST does. It undoes randomisation and RLE1 in one loop that follows unRLE_obuf_to_output_FAST's randomised branch (bzlib.c:542-587). Counts up to 255 are accepted, giving runs of up to 259. Four equal bytes at the block end are Error.data, as at bzlib.c:560-561 and 633-634. A block CRC mismatch is Error.data (bzlib.c:824-831). `decodeBlock` runs Header.parse, then Symbols.decode, then output, and returns Output {bytes, blockCRC} and the reader after EOB. Block/Rand.lean holds BZ2_rNums (randtable.c:26-79) and BZ_RAND_INIT_MASK, BZ_RAND_UPD_MASK and BZ_RAND_MASK (bzlib_private.h:137-149). Tests are in tests/Bzip2/Test/DecompressBlock.lean, as #guards over tests/vectors/decompress-block. real.txt has 12 one-block streams made by the vendored bzip2: text, runs of 4, 5, 255, 256 and 1000, all 256 byte values, a periodic block and random bytes. blocks.txt has 18 hand-made blocks from generate.py's encoder. They include three randomised blocks (3 kB, 8 kB, and 618 bytes where only the last byte is flipped) and count bytes 251 to 255. They also include a run of four cut off at the block end (data), a flipped block CRC (data), origPtr == nblock and nblock+1000 (data), and a wrong origPtr below nblock that C accepts when the CRC matches the rotation it writes. All expected results come from the vendored libbz2 through tests/vectors/classify.c; generate.py asserts each one. Clearing the randomised flag on the hand-made blocks makes C report data, so the flag does matter. Direct #guards on `output` cover banana, a rotation, the empty block, a wrong CRC and an unzftab entry over nblock. As a scratch check outside the repo, the interpreted decodeBlock decodes upstream sample1.bz2 (98696 bytes) and sample3.bz2 (120244 bytes) to their .ref bytes. regenerate.sh rewrites the vectors with no diff. I merged origin/master (066a7a4). Final `sh projects/bzip2/tools/verify.sh` output: `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`. `git status` is clean, and `git diff --stat origin/master...HEAD` lists only Block.lean, Block/Rand.lean, tests/Bzip2/Test/DecompressBlock.lean and tests/vectors/decompress-block/{blocks.txt,real.txt,generate.py,regenerate.sh}.",
     "worker": "imlvts/corey-opus"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/oracle/decompress/block-output/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "796c5a4b17db0daa24a9cac096978319e1df1e61",
+    "number": 22,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "3b2bcfbd75450505",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/22"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/oracle/decompress/block-output",
