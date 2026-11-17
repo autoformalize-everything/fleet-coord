@@ -3,32 +3,25 @@
   "epoch": 4,
   "last": {
     "agent": {
-      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": null,
-      "reason": "exit",
-      "session": "01a1e702-7f64-7c01-9b2f-83cca6594d0b",
-      "turns": 1
+      "model": "claude-sonnet-5-5"
     },
-    "at": "2026-11-17T00:59:58Z",
-    "epoch": 3,
-    "outcome": "success",
-    "progress": "None.",
-    "summary": "Completed the RLE1 block splitter, block CRC and inUse vectors; corrected the BZ2_bzWriteClose64 citation and cyclic-input comments after the merge. Checked the vendored C source, all 31 changed files are in allowed paths, and the working tree is clean. Full verification reported: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", and \"verify: ok\".",
-    "worker": "imlvts/corey-codex"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T01:05:22Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T01:05:22Z",
-    "kind": "review",
-    "nonce": "81209e1363c6bd31",
-    "spec": "148307c7db1ce57d",
-    "spec_rev": "4c7c4a1a57a68bff721333692f9729907f069519",
+    "at": "2026-11-17T01:07:19Z",
+    "comments": [
+      {
+        "body": "`BZ2_bzBuffToBuffCompress` is `bzlib.c:1250-1298`; `bzlib.c:1302-1351` is `BZ2_bzBuffToBuffDecompress`. Cite `bzlib.c:1250-1298` (call at 1282 stays).",
+        "line": 44,
+        "path": "projects/bzip2/oracle/Bzip2/Oracle/Compress/Blocks.lean"
+      }
+    ],
+    "epoch": 4,
+    "outcome": "changes",
+    "reviewed_sha": "db9b61d1c3e45c6385eee16b1a5994ce539e36cd",
+    "summary": "Implementation and tests are right; one citation is wrong and needs fixing.\n\nChecked: `verify.sh` passes on the PR head (\"verify: packages: ok\" ... \"verify: test: ok\", \"verify: ok\"). The task names no check-task. Against the merge-base the change touches only the task's Files (Blocks.lean, CompressBlocks.lean, vectors/compress-blocks/*); the fuzz/lakefile deletions seen in a diff against current origin/master are just master having moved on. I regenerated all 28 vectors out of tree with generate.py from upstream/ and they are byte-identical to the committed ones.\n\nSpot-checked against the C: nblockMAX = 100000*level-19 (bzlib.c:194); the full-block test is before each byte read (298/314) and the pending run is not flushed at close, so it goes to the next block and its CRC (390-393, 220-222); count byte `len-4` marked in inUse (238); runs cut at 255 (276); fast path equals add_pair with len 1 (264-272 vs 225-227); empty input gives no block (compress.c:604/630); the oneShot vs program difference at a block that is full exactly after the last byte (flush_RL first when avail_in_expect==0 at 384-386, versus close at 390 in the RUN+empty FINISH sequence). All match `split`. The other citations I read (131-135, 116-126, 159-161, 252-256, 260-284, 984-1003, 1048-1053, 1282, compress.c:606, bzlib_private.h:157-165) are correct.\n\nRequested change: the module doc cites `BZ2_bzBuffToBuffCompress` as `bzlib.c:1250-1351`. That function is `bzlib.c:1250-1298`; 1302-1351 is `BZ2_bzBuffToBuffDecompress`. Change the range to `bzlib.c:1250-1298`.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "review",
+  "lease": null,
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/rle1-blocks/e1",
     "draft": false,
@@ -40,7 +33,7 @@
     "spec": "148307c7db1ce57d",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/16"
   },
-  "rounds": 1,
+  "rounds": 2,
   "strikes": 0,
   "task": "bzip2/oracle/compress/rle1-blocks",
   "v": 1
