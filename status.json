@@ -1,19 +1,42 @@
 {
   "author": null,
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T02:36:06Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:41:12Z",
-    "kind": "work",
-    "nonce": "58ad73df275d4191",
-    "spec": "188dbc05b37ff567",
-    "spec_rev": "9a200c36776a663fca0ecccc3c51779bbf6096ea",
+  "last": {
+    "agent": {
+      "cli": "codex",
+      "effort": "xhigh",
+      "exit": 0,
+      "model": null,
+      "reason": "exit",
+      "session": "01a1e75c-b14d-7ea3-9560-d02abca46b6a",
+      "turns": 1
+    },
+    "at": "2026-11-17T02:45:03Z",
+    "debug": {
+      "detail": "No external blocker. The check-task script checks that decode_eq_spec and decode_bwt exist; their current statements are conditional on the unproved table invariant, so a passing check does not establish the full task.",
+      "kind": "task",
+      "verify_log": "verify: packages: ok\nverify: sources: ok\nverify: build: ok\nverify: style: ok\nverify: axioms: ok\nverify: lint: ok\nverify: test: ok\nPASS compress/text/level1\nPASS compress/text/level9\nbzip2-tests: 53 passed, 0 skipped, 0 failed\nverify: ok\nBzip2.Proofs.Bwt.decode_eq_spec : \u2200 (L : List UInt8) (tt : Array UInt32) (k t : \u2115),\n  0 < L.length \u2192\n    Bzip2.Proofs.Bwt.TableMatches L tt \u2192 t < L.length \u2192 Bzip2.Proofs.Bwt.inverseWalk tt k t = Bzip2.Spec.Bwt.walk L k t\nBzip2.Proofs.Bwt.decode_bwt : \u2200 (L : List UInt8) (p : \u2115) (raw : Array UInt32) (c : Array \u2115),\n  Bzip2.Spec.Bwt.ValidInput L p \u2192\n    Bzip2.Proofs.Bwt.TableMatches L (Bzip2.Oracle.Decompress.Block.links raw c) \u2192\n      Bzip2.Proofs.Bwt.inverseWalk (Bzip2.Oracle.Decompress.Block.links raw c) L.length\n          ((Bzip2.Oracle.Decompress.Block.links raw c)[p]! >>> 8).toNat =\n        Bzip2.Spec.Bwt.decodeBwt L p\ncheck-task: proofs/bwt: ok\n",
+      "verify_ok": true
+    },
+    "epoch": 1,
+    "outcome": "partial",
+    "progress": "Still need to prove that the oracle cftab/links construction satisfies TableMatches on valid inputs, prove the spec inverse and uniqueness for every block, and prove that the oracle forward prefix-doubling transform equals the spec with a valid origPtr. The general inverse-after-forward identity is therefore not established.",
+    "summary": "Committed 5c54b5c: proved the oracle non-randomised inverse walk agrees with the spec under an explicit table invariant, proved out-of-range origPtr rejection, and added small spec lemmas. Checked: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"check-task: proofs/bwt: ok\". Git status is clean; the only changed file is projects/bzip2/proofs/Bzip2/Proofs/Bwt.lean.",
     "worker": "imlvts/corey-codex"
   },
+  "lease": null,
   "need": "work",
-  "pr": null,
+  "pr": {
+    "branch": "task/bzip2/proofs/bwt/e1",
+    "draft": true,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "5c54b5c80e31a49635790ec3467f3c6897b88144",
+    "number": 25,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "188dbc05b37ff567",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/25"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/proofs/bwt",
