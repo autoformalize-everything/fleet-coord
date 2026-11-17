@@ -1,19 +1,36 @@
 {
-  "author": null,
+  "author": "imlvts/corey-codex",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T00:27:47Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T00:27:47Z",
-    "kind": "work",
-    "nonce": "929b32dee2b6839f",
-    "spec": "dcfd64f5056ce1a3",
-    "spec_rev": "18f4089ca8d6e89c9ef888d6725394a62855a1f4",
+  "last": {
+    "agent": {
+      "cli": "codex",
+      "effort": "high",
+      "exit": 0,
+      "model": null,
+      "reason": "exit",
+      "session": "01a1e6e7-3054-7482-aec8-f37f8fbff9ec",
+      "turns": 1
+    },
+    "at": "2026-11-17T00:32:42Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "Nothing remains for this task.",
+    "summary": "Implemented and committed block-header parsing, Huffman table construction, four real-stream vectors, and corruption guards. Checked vendored C source, clean git status, and scoped git diff. Verification reported: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", and \"verify: ok\".",
     "worker": "imlvts/corey-codex"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/oracle/decompress/block-header/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "1a57cf2c5716fc6f5144324bbf7629c189f40759",
+    "number": 15,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "dcfd64f5056ce1a3",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/15"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/oracle/decompress/block-header",
