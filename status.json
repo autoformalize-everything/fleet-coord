@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Committed the differential decompression harness, runner, seeds, and documentation; corrected failure messages to stable AFE-FUZZ lines. Checked the vendored C return codes and edge cases. Required command passed: \"verify: ok\" and \"Done 20 runs in 0 second(s)\" (19 seed files); git status is clean and all changed files are under projects/bzip2/fuzz/.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T03:21:18Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T03:21:18Z",
+    "kind": "review",
+    "nonce": "56cfbf1bf4d2f343",
+    "spec": "b6dc28567ac42694",
+    "spec_rev": "052e66fb9253673ca03e6bc7504d826276ba55ac",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/fuzz/decompress-diff/e1",
