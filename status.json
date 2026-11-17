@@ -1,19 +1,42 @@
 {
   "author": null,
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T01:00:01Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T01:20:08Z",
-    "kind": "work",
-    "nonce": "c6df836150f0490d",
-    "spec": "38abfb02899a90c4",
-    "spec_rev": "4c7c4a1a57a68bff721333692f9729907f069519",
+  "last": {
+    "agent": {
+      "cli": "codex",
+      "effort": "xhigh",
+      "exit": -15,
+      "model": null,
+      "reason": "cancelled",
+      "session": "01a1e704-b838-7393-83cf-46a88208b82d",
+      "turns": 0
+    },
+    "at": "2026-11-17T01:24:31Z",
+    "debug": {
+      "detail": null,
+      "kind": "task",
+      "verify_log": "verify: packages: ok\nverify: sources: ok\nverify: build: ok\nverify: style: ok\nverify: axioms: ok\nverify: lint: ok\nverify: test: ok\nSKIP compress/text/level1: compress unimplemented\nSKIP compress/text/level9: compress unimplemented\nbzip2-tests: 0 passed, 53 skipped, 0 failed\nverify: ok\nBzip2.Proofs.Crc.crc32_eq_spec : \u2200 (data : ByteArray),\n  (Bzip2.Oracle.Crc.crc32 data).toBitVec = Bzip2.Spec.Crc.crc32 (List.map UInt8.toBitVec data.toList)\nBzip2.Proofs.Crc.combine_eq_spec : \u2200 (combined blockCrc : UInt32),\n  (Bzip2.Oracle.Crc.combine combined blockCrc).toBitVec = Bzip2.Spec.Crc.combineCrc combined.toBitVec blockCrc.toBitVec\ncheck-task: proofs/crc: ok\n",
+      "verify_ok": true
+    },
+    "epoch": 1,
+    "outcome": "partial",
+    "progress": null,
+    "summary": "",
     "worker": "imlvts/corey-codex"
   },
+  "lease": null,
   "need": "work",
-  "pr": null,
+  "pr": {
+    "branch": "task/bzip2/proofs/crc/e1",
+    "draft": true,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "ac793d39b110a4a957ba57e1913471e13f2774e6",
+    "number": 19,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "38abfb02899a90c4",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/19"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/proofs/crc",
