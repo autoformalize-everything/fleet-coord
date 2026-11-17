@@ -1,19 +1,36 @@
 {
-  "author": null,
+  "author": "imlvts/corey-codex",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T02:12:59Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:12:59Z",
-    "kind": "work",
-    "nonce": "c4865d530e978a0b",
-    "spec": "89d179a247e40741",
-    "spec_rev": "97130994e89ec18bd5caa7b62e205f118048ed67",
+  "last": {
+    "agent": {
+      "cli": "codex",
+      "effort": "high",
+      "exit": 0,
+      "model": null,
+      "reason": "exit",
+      "session": "01a1e747-847b-7c40-8412-c4c74ad89a22",
+      "turns": 1
+    },
+    "at": "2026-11-17T02:17:28Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "Followup outside this task: oracle decompression remains unimplemented, so lake test skipped 53 cases, including oracle -d round trips; the vendored bzip2 -d round trips passed.",
+    "summary": "Implemented and committed the bzip2 oracle stream compressor (98ca9a6), including headers, block fields, symbol map, selectors, code lengths, codes, CRC trailer and padding; added exact-byte guards. Checked 36 compiled-oracle outputs at levels 1 and 9 against the vendored bzip2 -d, covering all golden compression inputs and upstream samples. Required check reported: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"check-task: oracle/compress/stream: ok\". Git status was clean; git diff --stat origin/master...HEAD listed only the three allowed files.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/oracle/compress/stream/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "98ca9a6d16ff2f5321d8d44717117a52acc9f11e",
+    "number": 21,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "89d179a247e40741",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/21"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/oracle/compress/stream",
