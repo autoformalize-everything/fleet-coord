@@ -3,32 +3,25 @@
   "epoch": 2,
   "last": {
     "agent": {
-      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": null,
-      "reason": "exit",
-      "session": "01a1e741-c0f6-7ab0-80d1-25b284e2d502",
-      "turns": 1
+      "model": "claude-sonnet-5-5"
     },
-    "at": "2026-11-17T02:12:56Z",
-    "epoch": 1,
-    "outcome": "success",
-    "progress": "No task work remains. Followup outside scope: existing golden test stage reports 0 passed, 53 skipped (compress unimplemented).",
-    "summary": "Committed 2494fd7: bit-level bzip2 stream decoder/spec with ordered magic/data/eof failures, randomisation, CRCs, concatenation, ValidCompression, and decided real-stream examples. Checked C citations and scoped git diff. Required check reported \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"check-task: spec/format: ok\". Git status was clean; diff contains only projects/bzip2/spec/Bzip2/Spec/Format.lean.",
-    "worker": "imlvts/corey-codex"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T02:15:17Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:15:17Z",
-    "kind": "review",
-    "nonce": "a7317c341dcd2f04",
-    "spec": "7d4f5a36342ee71f",
-    "spec_rev": "97130994e89ec18bd5caa7b62e205f118048ed67",
+    "at": "2026-11-17T02:17:31Z",
+    "comments": [
+      {
+        "body": "`| 0, _ => throw .eof` fires before the `1 \u2264 curr \u2264 20` check. C checks `curr` first (decompress.c:326-327) and only then reads a bit (decompress.c:328), so with no bits left after a 5-bit `curr` of 0 or >20 the C library returns BZ_DATA_ERROR, not an EOF. Verified by running the vendored bzip2 on a stream that ends right after such a `curr`: it reports a data integrity error while `decode` returns `.error .eof`. Do the `require` before the fuel/EOF case.",
+        "line": 109,
+        "path": "projects/bzip2/spec/Bzip2/Spec/Format.lean"
+      }
+    ],
+    "epoch": 2,
+    "outcome": "changes",
+    "reviewed_sha": "2494fd728f970fef6a04995f99e52550e639af21",
+    "summary": "verify.sh passes (`verify: build: ok`, `style: ok`, `axioms: ok`, `lint: ok`, `test: ok`, final `verify: ok`) and `tools/check-task.sh spec/format` prints `check-task: spec/format: ok`. Only Format.lean is touched. I read the cited lines (decompress.c 43-68, 74-102, 197-209, 222-334, 358, 495-498, 587-609; bzlib.c 823-848, 1202-1212; bzip2.c 435-543; bzlib_private.h 137-149) and they say what the module doc says. I also checked: the 512-entry `randomNumbers` table equals `BZ2_rNums` exactly; `derandomise` follows `BZ_RAND_UPD_MASK` (rNToGo/rTPos); the 18002 selector cap; the origPtr bound `10 + 100000*level` is checked before the symbol map; the block CRC is checked after the RLE1 decode; the combined CRC is `rotl 1 ^ blk`; and trailing garbage is ignored only after a complete stream, with a magic error and `streamNo > 1`.\n\nOne behavioural mismatch with the C code needs fixing. The error class reported for a truncated code-length table is wrong when the field read is already out of range.\n\n`readDelta` (Format.lean:108-109) returns `.eof` when its fuel (the number of remaining bits) is 0, before the `1 \u2264 curr \u2264 20` check. In C (decompress.c:326-327) the check `if (curr < 1 || curr > 20) RETURN(BZ_DATA_ERROR)` comes before `GET_BIT`, so when the input ends right after the 5-bit initial `curr` (decompress.c:322) and `curr` is 0 or above 20, C reports a data error. `readLengths` (line 117) reaches that case because `curr \u2190 readNat 5` leaves 0 bits. I built the vendored upstream out of tree and ran `bzip2 -dc` on a stream: `BZh9`, block magic, zero CRC, randomised 0, origPtr 0, one used byte, nGroups 2, nSelectors 8 (eight '0' bits), then `00000` as the first `curr`, ending exactly on a byte boundary. C prints \"Data integrity error when decompressing\" (exit 2). `Format.decode` on the same 25 bytes gives `.error .eof`. The task asks for \"which one the C library reports first\", and the module doc itself says the checks run in C's order, so this is wrong by the task's terms.\n\nFix: make the range check come first, so the fuel exhaustion error is raised only where `readBit` would raise it. For example, drop the `| 0, _ => throw .eof` arm and use fuel only as the termination argument, with an `fuel = 0` case that does `require (1 \u2264 curr && curr \u2264 20)` and then `throw .eof`. Alternatively recurse without fuel and `readBit` itself will throw `.eof`. Please add an `example` (or a `decode` check) for this input, expecting `.error .data`, so the order stays pinned.\n\nNot required: `readSymbols` re-runs `MtfRle2.decode` on the whole symbol prefix after every symbol, which is quadratic. That is fine for a spec, but it makes `decide` on larger streams impractical.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "review",
+  "lease": null,
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/format/e1",
     "draft": false,
@@ -40,7 +33,7 @@
     "spec": "7d4f5a36342ee71f",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/20"
   },
-  "rounds": 0,
+  "rounds": 1,
   "strikes": 0,
   "task": "bzip2/spec/format",
   "v": 1
