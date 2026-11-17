@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Completed the RLE1 block splitter, block CRC and inUse vectors; corrected the BZ2_bzWriteClose64 citation and cyclic-input comments after the merge. Checked the vendored C source, all 31 changed files are in allowed paths, and the working tree is clean. Full verification reported: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", and \"verify: ok\".",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T01:05:22Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T01:05:22Z",
+    "kind": "review",
+    "nonce": "81209e1363c6bd31",
+    "spec": "148307c7db1ce57d",
+    "spec_rev": "4c7c4a1a57a68bff721333692f9729907f069519",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/rle1-blocks/e1",
