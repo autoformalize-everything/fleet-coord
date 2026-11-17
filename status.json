@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Addressed the review: ByteExact.lean now has #guards (run in every build) that generate in Lean the under/over-10000-byte periodic inputs (ab*4999, ab*5500, a*9999, a*11000, the 1000-byte LCG pattern *9 and *11) and compare compress output at levels 1, 5 and 9 by length and bzip2 CRC32 against the vendored C bzip2's vectors in tests/vectors/byte-exact (values computed from those files). Module doc updated to no longer defer to check.py. Confirmed a wrong CRC makes the build fail (ByteExact.lean:145 guard error), then restored it. The merged origin/master (decompress) still passes. verify.sh: 'verify: packages: ok', 'sources: ok', 'build: ok', 'style: ok', 'axioms: ok', 'lint: ok', 'test: ok', 'verify: ok' (lake test: 53 passed, 0 skipped, 0 failed). git status clean; the diff vs origin/master touches only Compress/*, tests/Bzip2/Test/ByteExact.lean and tests/vectors/byte-exact/*. fuzz/compress_diff.c does not exist on this branch, so the fuzz item does not apply.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:55:44Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:55:44Z",
+    "kind": "review",
+    "nonce": "299cfc1b3fd83aa9",
+    "spec": "137ca25c0ff48007",
+    "spec_rev": "5205d6c86af9bb63a2ba090a6251bc4c893ca41e",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/byte-exact/e1",
