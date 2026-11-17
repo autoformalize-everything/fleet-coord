@@ -1,0 +1,21 @@
+{
+  "author": null,
+  "epoch": 1,
+  "last": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:06:57Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:06:57Z",
+    "kind": "work",
+    "nonce": "0565764500b52d83",
+    "spec": "3b2bcfbd75450505",
+    "spec_rev": "4275a2fa68278a9640e8a7e796c3b8dadc427b03",
+    "worker": "imlvts/corey-opus"
+  },
+  "need": "work",
+  "pr": null,
+  "rounds": 0,
+  "strikes": 0,
+  "task": "bzip2/oracle/decompress/block-output",
+  "v": 1
+}
