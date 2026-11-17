@@ -1,19 +1,35 @@
 {
-  "author": null,
+  "author": "imlvts/corey-claude",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T00:42:09Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T00:47:15Z",
-    "kind": "work",
-    "nonce": "0d659f793fca07da",
-    "spec": "148307c7db1ce57d",
-    "spec_rev": "f78fa7d9d5d9babc2e2991099dedb18e3d8c9923",
+  "last": {
+    "agent": {
+      "effort": "high",
+      "exit": 0,
+      "model": "claude-sonnet-5-5",
+      "reason": "exit",
+      "session": "8b96badb-52e7-4417-909f-0ddd6bb28c03",
+      "turns": 1
+    },
+    "at": "2026-11-17T00:51:57Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "",
+    "summary": "Added Bzip2.Oracle.Compress.Blocks (oracle/Bzip2/Oracle/Compress/Blocks.lean): `split level input (oneShot := false) : Array Block` with Block = {data (post-RLE1 bytes), crc (finalised block CRC), inUse}, following ADD_CHAR_TO_BLOCK/add_pair_to_block/flush_RL/copy_input_until_stop (bzlib.c). Blocks close when nblock >= 100000*level-19 is seen before reading the next byte; the pending run (and its CRC contribution) goes to the next block; runs cut at 255; the count byte is marked in inUse; empty input gives no blocks. Found from the C that block boundaries differ in one case depending on the driver: when the last input byte leaves nblock >= nblockMAX, bzip2 (BZ_RUN chunks + empty BZ_FINISH) puts the pending run in an extra block, while BZ2_bzBuffToBuffCompress (one BZ_FINISH) flushes it into the full block; `oneShot` selects (default = bzip2 program). Tests: tests/Bzip2/Test/CompressBlocks.lean (hand-computed RLE1/255-cut/empty/CRC guards + 28 `include_str` vectors in tests/vectors/compress-blocks/*.txt, level 1 and 9, around the limit, long runs across the boundary, both drivers), dumped from an out-of-tree libbz2 build with a debug print in BZ2_compressBlock (generate.py there reproduces them). Checked: `sh projects/bzip2/tools/verify.sh` ends with 'verify: packages: ok / sources: ok / build: ok / style: ok / axioms: ok / lint: ok / test: ok / verify: ok'; git status clean, `git diff --stat origin/master...HEAD` lists only Blocks.lean, Test/CompressBlocks.lean and tests/vectors/compress-blocks/* (31 files); all bzlib.c/compress.c line citations re-read against the source.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/oracle/compress/rle1-blocks/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "faea97c6a80f669fb2c2beb53777e15337b496d3",
+    "number": 16,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "148307c7db1ce57d",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/16"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/oracle/compress/rle1-blocks",
