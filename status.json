@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 6,
+  "epoch": 7,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Corrected RLE1 block-boundary documentation to match bzlib.c and expanded C line citations; committed as fd43b94. Checked upstream source lines, clean git status, and allowed-file diff. Required check reported: 'verify: packages: ok', 'verify: sources: ok', 'verify: build: ok', 'verify: style: ok', 'verify: axioms: ok', 'verify: lint: ok', 'verify: test: ok', 'verify: ok', and 'check-task: spec/rle1: ok'.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:25:56Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:25:56Z",
+    "kind": "review",
+    "nonce": "c06bc018ce4fd76f",
+    "spec": "8d9872aa8d6c1279",
+    "spec_rev": "18f4089ca8d6e89c9ef888d6725394a62855a1f4",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/rle1/e1",
