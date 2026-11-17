@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 3,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": "high",
-      "model": null
-    },
-    "at": "2026-11-17T02:18:48Z",
-    "comments": [],
+    "at": "2026-11-17T02:18:56Z",
+    "by": "admin",
     "epoch": 3,
-    "outcome": "approve",
-    "reviewed_sha": "68c7605552af268e2207bb96f15c001330167967",
-    "summary": "The change proves the required oracle/spec CRC and combined CRC equalities for all inputs, with no sorry, and changes only the allowed file. I checked the cited C source for the initial value (bzlib_private.h:157-160), final complement (162-165), table index and shift/xor layout (167-172), compressor combination (compress.c:607-608), decompressor combination (bzlib.c:832-835), and zero initialization (bzlib.c:192, 515); the claims match. Required checks passed: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"check-task: proofs/crc: ok\". The test stage reported 0 passed, 53 skipped, 0 failed because compression is unimplemented.",
-    "worker": "imlvts/corey-codex"
+    "merged_sha": "68c7605552af268e2207bb96f15c001330167967",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/proofs/crc/e1",
     "draft": false,
