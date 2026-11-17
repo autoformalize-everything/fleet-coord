@@ -1,48 +1,31 @@
 {
-  "author": "imlvts/corey-claude",
+  "author": "imlvts/corey-codex",
   "epoch": 6,
   "last": {
     "agent": {
       "cli": "codex",
       "effort": "high",
-      "model": null
+      "exit": 0,
+      "model": null,
+      "reason": "exit",
+      "session": "01a1e6cd-8b70-7b42-87cb-3c02014826f5",
+      "turns": 1
     },
-    "at": "2026-11-16T23:39:36Z",
-    "comments": [
-      {
-        "body": "The full-block path in `bzlib.c:390-392` calls `BZ2_compressBlock` without `flush_RL`; `prepare_new_block` in `bzlib.c:117-126` leaves `state_in_ch` and `state_in_len` intact. `flush_RL` is called for flush/finish at `bzlib.c:384-386`. Please correct the claim that the compressor flushes the pending run when a block fills: it carries that run into the next block, where it is written wholly within that block. Cite the corrected source claim in the required `file.c:LINE` form.",
-        "line": 11,
-        "path": "projects/bzip2/spec/Bzip2/Spec/Rle1.lean"
-      },
-      {
-        "body": "STYLE.md requires C citations in the exact `file.c:LINE` or `file.c:FROM-TO` form. The bare line references `584`, `754`, and `799` here and on line 32, and `633`/`730`/`779` and `637`/`727`/`776` later in the module doc, are shorthand C citations. Please give each its `bzlib.c:` prefix.",
-        "line": 24,
-        "path": "projects/bzip2/spec/Bzip2/Spec/Rle1.lean"
-      }
-    ],
-    "epoch": 5,
-    "outcome": "changes",
-    "reviewed_sha": "c00ea1316989654ef47f154b3fa0a342f5c157ca",
-    "summary": "The RLE1 definitions and examples match the checked count-byte and 255-byte run behavior, and only the allowed file changed. Checks passed: `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`, and `check-task: spec/rle1: ok`. Two source-documentation fixes are required: the block-full path does not flush the pending run, and several C line references do not use STYLE.md's required citation form.",
+    "at": "2026-11-17T00:02:17Z",
+    "epoch": 6,
+    "outcome": "success",
+    "progress": "Nothing left for this task.",
+    "summary": "Corrected RLE1 block-boundary documentation to match bzlib.c and expanded C line citations; committed as fd43b94. Checked upstream source lines, clean git status, and allowed-file diff. Required check reported: 'verify: packages: ok', 'verify: sources: ok', 'verify: build: ok', 'verify: style: ok', 'verify: axioms: ok', 'verify: lint: ok', 'verify: test: ok', 'verify: ok', and 'check-task: spec/rle1: ok'.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": {
-    "claimed_at": "2026-11-16T23:59:46Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-16T23:59:46Z",
-    "kind": "work",
-    "nonce": "7405934db77ff70e",
-    "spec": "8d9872aa8d6c1279",
-    "spec_rev": "9f62b95bfe8090e6d8b85c26119ff87830fa64e1",
-    "worker": "imlvts/corey-codex"
-  },
-  "need": "work",
+  "lease": null,
+  "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/rle1/e1",
     "draft": false,
     "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
     "gh_user": "imlvts",
-    "head_sha": "c00ea1316989654ef47f154b3fa0a342f5c157ca",
+    "head_sha": "fd43b94bdf650c54923e620845263206c4f2847f",
     "number": 4,
     "repo": "autoformalize-everything/afe-oss",
     "spec": "8d9872aa8d6c1279",
