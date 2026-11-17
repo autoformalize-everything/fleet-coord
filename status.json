@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-opus",
-  "epoch": 4,
+  "epoch": 5,
   "last": {
     "agent": {
       "effort": "high",
@@ -20,7 +20,16 @@
     "summary": "The change is a thorough and mostly accurate spec. `projects/bzip2/tools/verify.sh` passes (verify: packages/sources/build/style/axioms/lint/test: ok, final `verify: ok`) and `tools/check-task.sh spec/format` prints `check-task: spec/format: ok`. Only `spec/Bzip2/Spec/Format.lean` is touched.\n\nWhat I checked against the C source (not memory):\n- Header: 'B','Z','h' and the level byte 0x31..0x39 all give BZ_DATA_ERROR_MAGIC, read byte by byte so a short header is EOF (decompress.c:197-209). Matches `readStream`.\n- `origPtr > 10 + 100000*level` is checked right after the 24 bits, before the symbol map (decompress.c:261-264), and `origPtr >= nblock` after EOB (decompress.c:495-498). Matches `readBlock`.\n- Map, nGroups 2..6, nSelectors>=1, selector unary index >= nGroups, and the 18002 clamp (decompress.c:299-306). Matches.\n- The code-length range check precedes each bit read (decompress.c:327). `readDelta` does the same, and the two EOF/data examples exercise it.\n- The group-selector check (`groupNo >= nSelectors`) precedes the first bit of the next group (decompress.c:76-79). Matches `readSymbols`, with examples.\n- RLE1 output ending right after 4 equal bytes is a data error (nblock_used > save_nblock+1, bzlib.c:560-561) and the randomisation mask is applied to every pre-RLE1 byte (bzlib_private.h:137-149). Matches `derandomise`/`readBlock`. I diffed the 512 `randomNumbers` against randtable.c: identical.\n- Block CRC and combined CRC are checked in BZ2_bzDecompress (bzlib.c:823-848); the mismatch is BZ_DATA_ERROR.\n- uncompressStream: a magic error on stream 1 fails, on a later stream is ignored as trailing garbage; EOF/data in a later stream remain errors (bzip2.c:435-479, 531-543). Matches `decodeAll`.\n- Differential test: I ran `decode` against `bzip2 -dc` on 253 inputs made of truncations, one-bit flips, concatenations and trailing garbage of small real streams; the class (magic/data/eof) and output matched every time. (Later cases were not checked: the interpreted spec is far too slow on a mutated block that decodes to ~1300 bytes, because of the Bwt/Crc spec modules, not this change.)\n\nRequested change (one doc claim that does not match the C code, and a missing citation for a rule the task names):\n- `readSelectors`' doc string says it reads \"all selectors, including those past the 18002 that the C decoder stores\". The C decoder does not store them: it reads them but stores only `i < BZ_MAX_SELECTORS` and then clamps `nSelectors` (decompress.c:299-306). Please reword (e.g. \"reads all nSelectors selectors but keeps only the first 18002, as decompress.c:299-306\") and cite that range, there or in the module doc. The task lists this rule explicitly, and the module doc currently only covers it under the broad `decompress.c:266-334`.\n\nNotes, not requests:\n- `ValidCompression` is as the task words it (decoder size limit `100000*level`, header level, decodes to the input). It also accepts a randomised block, which the compressor never writes (compress.c:643-651) and the compressor's own limit is `100000*level - 19` (bzlib.c nblockMAX); both are looser than what the compressor does, which the task allows.\n- `readSymbols` re-decodes the whole symbol prefix after every symbol, so it is quadratic; fine for a spec but it is why only tiny examples are practical to `decide`.\n- `bzip2 -f` (trycat, bzip2.c:506-517) copying a non-bzip2 input is not modelled; consistent with the module doc.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:31:20Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:31:20Z",
+    "kind": "work",
+    "nonce": "2acc996977732dbf",
+    "spec": "7d4f5a36342ee71f",
+    "spec_rev": "cc755cb0d6ad8bfef037ed09292c48ac7098c928",
+    "worker": "imlvts/corey-opus"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/format/e1",
