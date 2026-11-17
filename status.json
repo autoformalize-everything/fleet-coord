@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-opus",
-  "epoch": 3,
+  "epoch": 4,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Fixed the review finding in projects/bzip2/spec/Bzip2/Spec/Format.lean. readDelta now does the `1 <= curr <= 20` check before anything else (decompress.c:326-328: range check, then GET_BIT). Fuel is only a termination bound, used after the bit reads; it can run out only after readBit has already failed. readSymbols had the same flaw: it reported EOF before the selector check (decompress.c:76-79 checks groupNo >= nSelectors before GET_BITS). It now looks up the selector first and uses fuel only for recursion. Added four `decide +kernel` examples. (1) The reviewer's 25-byte stream ending right after a 5-bit curr of 0 gives `.error .data`, and its 24-byte prefix gives `.error .eof`. (2) A 35-byte stream with one selector and 50 one-bit symbols ending on the group boundary gives `.error .data`, and its 34-byte prefix gives `.error .eof`. I built the vendored upstream out of tree (/tmp) and ran `bzip2 -dc` on all four inputs: 'Data integrity error when decompressing' for both full streams and 'Compressed file ends unexpectedly' for both prefixes, all exit 2. Checks: `sh -c 'projects/bzip2/tools/verify.sh && projects/bzip2/tools/check-task.sh spec/format'` printed `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`, `check-task: spec/format: ok`. `git status` is clean, and `git diff --stat origin/master...HEAD` shows only projects/bzip2/spec/Bzip2/Spec/Format.lean.",
     "worker": "imlvts/corey-opus"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:23:11Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:23:11Z",
+    "kind": "review",
+    "nonce": "32596c33cbfc5571",
+    "spec": "7d4f5a36342ee71f",
+    "spec_rev": "cc755cb0d6ad8bfef037ed09292c48ac7098c928",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/format/e1",
