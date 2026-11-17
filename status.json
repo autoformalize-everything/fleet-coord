@@ -2,20 +2,14 @@
   "author": "imlvts/corey-codex",
   "epoch": 8,
   "last": {
-    "agent": {
-      "effort": "high",
-      "model": "claude-sonnet-5-5"
-    },
-    "at": "2026-11-17T00:40:37Z",
-    "comments": [],
+    "at": "2026-11-17T00:41:09Z",
+    "by": "admin",
     "epoch": 8,
-    "outcome": "approve",
-    "reviewed_sha": "78295eecdf00ace04e1fe53c9b2e8a0df7bda173",
-    "summary": "Approved. The change adds only `oracle/Bzip2/Oracle/Compress/Bwt.lean` and `tests/Bzip2/Test/CompressBwt.lean`, both in the task's Files list.\n\nChecks run:\n- `projects/bzip2/tools/verify.sh` passes every stage:\n  verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok.\n- The task names no `check-task.sh` check, so I ran none.\n\nCitations read against upstream:\n- `blocksort.c:1025-1029` is the post-condition comment (`arr1 holds sorted order`).\n- `blocksort.c:1083-1088` is the `origPtr` search: the first row `i` with `ptr[i] == 0`, so the row of rotation 0.\n- `compress.c:163-167` reads `block[ptr[i]-1]`, wrapping to `nblock-1`, which is the last column the module returns.\n- `blocksort.c:354-362` compares `UChar` bytes unsigned in `mainGtU`.\n\nBehaviour checks I ran in the interpreter:\n- 900 000 bytes of one repeated byte: about 0.16 s, `origPtr` 0.\n- A 900 000-byte random block: about 3.7 s, and it inverts back to the block.\n- Fibonacci-word block: inverts back to the block.\n- A 900-times-repeated 1000-byte random root: about 0.2 s, and it inverts back.\n- `bwt` equals the naive rotation sort, including `origPtr` as the first row equal to rotation 0, on my own cases: lengths 1-39, alphabets 1, 2, 3, 5 and 256, three seeds each, both plain and 3x-repeated periodic blocks. 0 mismatches.\n- The tie-breaking stated in the module doc matches the behaviour: `origPtr` is the first row of the group equal to rotation 0, computed as `c[0] * reps`, which is what the tests pin on `abab` and `baba`.\n\nNotes, none of which needs a change:\n- `oracle/decompress/block-output` does not exist yet, so the tests invert with their own last-to-first walk. That is what the task allows (\"once it exists\").\n- The module doc says the interpreter handles 900 000-byte blocks \"in a few seconds (the tests)\". That holds for the tested blocks, but a non-periodic block with one odd byte at the end (899 999 x 'a' then 'b') took about 20 s in the interpreter, because it needs about 20 doubling rounds. It is still O(n log n) and meets the task's required cases. A later task may want a faster path.",
-    "worker": "imlvts/corey-claude"
+    "merged_sha": "78295eecdf00ace04e1fe53c9b2e8a0df7bda173",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/oracle/compress/bwt/e1",
     "draft": false,
