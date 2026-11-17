@@ -1,6 +1,6 @@
 {
   "author": null,
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "cli": "codex",
@@ -24,7 +24,16 @@
     "summary": "Committed 136cc64: proved decoder link construction preserves the raw table size and low bytes, reduced inverse-walk agreement to the remaining high-link premise, proved the inverse walk's output length, and proved every nonempty block has an original row in the spec's sorted rotations. Checked: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"check-task: proofs/bwt: ok\". Git status is clean; git diff --stat origin/master...HEAD lists only projects/bzip2/proofs/Bzip2/Proofs/Bwt.lean.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:58:46Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:58:46Z",
+    "kind": "work",
+    "nonce": "0e4ffeaed37a052d",
+    "spec": "188dbc05b37ff567",
+    "spec_rev": "5205d6c86af9bb63a2ba090a6251bc4c893ca41e",
+    "worker": "imlvts/corey-opus"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/proofs/bwt/e1",
