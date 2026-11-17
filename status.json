@@ -2,21 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 2,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": "high",
-      "model": null
-    },
-    "at": "2026-11-17T02:04:59Z",
-    "comments": [],
+    "at": "2026-11-17T02:05:18Z",
+    "by": "admin",
     "epoch": 2,
-    "outcome": "approve",
-    "reviewed_sha": "c63d5142dce967dc1d0f649f4a47929bce5982f7",
-    "summary": "The symbol decoder and tests satisfy the task. I checked the C source for the 50-symbol selector boundary, selector exhaustion, RUNA/RUNB length and 2^21 overflow check, the 100000 \u00d7 level block limit, EOB, MTF output, and EOF mapping; the cited lines support the claims. Real-stream and limit vectors exercise the requested behavior, and all changed files are allowed. Required verification passed: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\". The task names no check-task.sh target.",
-    "worker": "imlvts/corey-codex"
+    "merged_sha": "c63d5142dce967dc1d0f649f4a47929bce5982f7",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/oracle/decompress/block-data/e1",
     "draft": false,
