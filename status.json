@@ -1,21 +1,33 @@
 {
   "author": null,
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T02:48:25Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:58:31Z",
-    "kind": "work",
-    "nonce": "142c40f8de50c201",
-    "spec": "56d7aced77149be9",
-    "spec_rev": "5205d6c86af9bb63a2ba090a6251bc4c893ca41e",
+  "failed_at": "2026-11-17T03:03:30Z",
+  "last": {
+    "agent": {
+      "effort": "max",
+      "exit": 143,
+      "model": "claude-sonnet-5-5",
+      "reason": "cancelled",
+      "session": "6a935733-830d-4c66-81ff-7b997a2f1046",
+      "turns": 0
+    },
+    "at": "2026-11-17T03:03:30Z",
+    "debug": {
+      "detail": "agent ended: cancelled",
+      "kind": "infra",
+      "transcript_tail": "racle (`projects/bzip2/oracle/Bzip2/Oracle/Compress/Blocks.lean`): `Blocks.split level input\\n  oneShot : Array Block` (read its module doc fully: block closing at `nblock \u2265 nblockMAX` BEFORE the\\n  next input byte, the pending run belonging to the next block, the `oneShot` flag), with\\n  `State`, `addPairToBlock`, `addCharToBlock`, `State.toBlock`, `State.next`. Its CRC is\\n  `Oracle.Crc` (`projects/bzip2/oracle/Bzip2/Oracle/Crc.lean`); `Bzip2.Proofs.Crc` (proved\\n  already, `projects/bzip2/proofs/Bzip2/Proofs/Crc.lean`) relates it to the spec CRC\\n  (`updateByte_eq_spec`, ...). C reference: `bzlib.c:216-329` (`add_pair_to_block`, `flush_RL`,\\n  `ADD_CHAR_TO_BLOCK`, `copy_input_until_stop`); read them before citing.\\n\\n## What to prove (names are suggestions; keep the statements' meaning)\\nAll in `namespace Bzip2.Proofs.Rle.Split`, with `open Bzip2.Spec Bzip2.Oracle.Compress.Blocks`.\\n\\n1. Spec level (no oracle):\\n```lean\\ntheorem decodeRle1_encodeRle1 (x : List UInt8) :\\n    Rle1.decodeRle1 (Rle1.encodeRle1 x) = x\\ntheorem rle1_roundtrip : Rle1.Rle1Roundtrip := decodeRle1_encodeRle1\\ntheorem not_truncated_encodeRle1 (x : List UInt8) : \u00ac Rle1.Truncated (Rle1.encodeRle1 x)\\n```\\n2. The oracle's block splitting, every level and flag (add `1 \u2264 level` ONLY if it is really needed):\\n```lean\\ntheorem split_decode (level : Nat) (input : ByteArray) (oneShot : Bool) :\\n    ((split level input oneShot).toList.map fun b => Rle1.decodeRle1 b.data.toList).flatten\\n      = input.toList\\n```\\n   i.e. decoding each block with the SPEC's `decodeRle1` and concatenating gives the input back.\\n3. Facts about each block, for `1 \u2264 level` (these are what the compress proof needs later):\\n   for every `b \u2208 split level input oneShot`:\\n   * `\u00ac Rle1.Truncated b.data.toList`  (suggested name `not_truncated_of_mem_split`)\\n   * its CRC is that of the decoded bytes:\\n     `b.crc = Oracle.Crc.finalise ((Rle1.decodeRle1 b.data.toList).foldl Oracle.Crc.updateByte\\n        Oracle.Crc.init)` (`crc_eq_of_mem_split`) and in spec terms\\n     `b.crc.toBitVec = Spec.Crc.blockCrc ((Rle1.decodeRle1 b.data.toList).map UInt8.toBitVec)`\\n     (`crc_toBitVec_of_mem_split`; use `Bzip2.Proofs.Crc.updateByte_eq_spec`)\\n   * `inUse` is exactly the set of bytes of the block:\\n     `\u2200 x : UInt8, b.inUse[x.toNat]! = true \u2194 x \u2208 b.data.toList` (`inUse_of_mem_split`)\\n   * `0 < b.data.size` (`size_pos_of_mem_split`) and `b.data.size \u2264 100000 * level`\\n     (`size_le_of_mem_split`). (Block size: a block is closed once `size \u2265 nblockMax`, checked\\n     before the next byte; the run written last adds \u2264 5 bytes; with `oneShot = true` the final\\n     flush may add one more pair to a full block. Check the arithmetic: `nblockMax = 100000*level-19`.)\\n\\n## Proof strategy hints (not binding)\\n* Core lemma: decoding `B ++ pair c n` equals decoding `B` followed by `replicate n c` provided the\\n  decoder state after `B` is compatible: `(decState B).run` is `none`, or `some (c', m)` with `m < 4`\\n  and `c' \u2260 c`. The encoder maintains: after a pair with length `n < 255` the next run's byte\\n  differs; a run of 255 ends with a count byte (decoder state reset).\\n* For the oracle, prove an invariant of the `for b in input` loop's state (blocks so far, current\\n  `State`): decoded blocks ++ decode of the current block ++ pending run `replicate s.len ch` =\\n  the input prefix read so far; the current block's decoder state is compatible with the pending\\n  run; `s.crc` is the CRC fold of the bytes written to the block; `inUse` marks the block's bytes.\\n  The `for` loops over `[0:n]` in `addPairToBlock` and over the `ByteArray` in `split` need their\\n  lemmas; see the common brief. Use `ByteArray` \u2194 list lemmas.\\n* The spec statement 1 may be proved first via the same core lemma, then reused.\\n\\nDeliver the whole of 1 and 2; do 3 if at all possible (it is needed downstream). If you cannot do\\nall of 3, deliver the parts you can and say which are missing.\\n\",\"structuredPatch\":[],\"originalFile\":null}}\n"
+    },
+    "epoch": 1,
+    "outcome": "failure",
+    "progress": null,
+    "summary": "",
     "worker": "imlvts/corey-claude"
   },
+  "lease": null,
   "need": "work",
   "pr": null,
   "rounds": 0,
-  "strikes": 0,
+  "strikes": 1,
   "task": "bzip2/proofs/rle",
   "v": 1
 }
