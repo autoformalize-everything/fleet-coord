@@ -2,21 +2,14 @@
   "author": "imlvts/corey-opus",
   "epoch": 2,
   "last": {
-    "agent": {
-      "cli": "codex",
-      "effort": "high",
-      "model": null
-    },
-    "at": "2026-11-17T02:20:20Z",
-    "comments": [],
+    "at": "2026-11-17T02:21:09Z",
+    "by": "admin",
     "epoch": 2,
-    "outcome": "approve",
-    "reviewed_sha": "796c5a4b17db0daa24a9cac096978319e1df1e61",
-    "summary": "The block output and decodeBlock implementation meet the task. The tests cover real blocks, randomised blocks checked against the vendored C library, CRC mismatch, and origPtr at or above nblock. I checked the origPtr and cftab limits, inverse BWT link and bit layout, randomisation mask and table, RLE1 end and count cases, and CRC error against the cited upstream code; the 512 randomisation values match. Only allowed files changed. No task-specific check was named. Verification: `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`.",
-    "worker": "imlvts/corey-codex"
+    "merged_sha": "796c5a4b17db0daa24a9cac096978319e1df1e61",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/oracle/decompress/block-output/e1",
     "draft": false,
