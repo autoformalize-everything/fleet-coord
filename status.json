@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Implemented and committed the bzip2 oracle stream compressor (98ca9a6), including headers, block fields, symbol map, selectors, code lengths, codes, CRC trailer and padding; added exact-byte guards. Checked 36 compiled-oracle outputs at levels 1 and 9 against the vendored bzip2 -d, covering all golden compression inputs and upstream samples. Required check reported: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"check-task: oracle/compress/stream: ok\". Git status was clean; git diff --stat origin/master...HEAD listed only the three allowed files.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:17:34Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:17:34Z",
+    "kind": "review",
+    "nonce": "62dbe4d3b79beb66",
+    "spec": "89d179a247e40741",
+    "spec_rev": "97130994e89ec18bd5caa7b62e205f118048ed67",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/stream/e1",
