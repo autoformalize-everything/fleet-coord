@@ -1,0 +1,21 @@
+{
+  "author": null,
+  "epoch": 1,
+  "last": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:27:47Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:27:47Z",
+    "kind": "work",
+    "nonce": "929b32dee2b6839f",
+    "spec": "dcfd64f5056ce1a3",
+    "spec_rev": "18f4089ca8d6e89c9ef888d6725394a62855a1f4",
+    "worker": "imlvts/corey-codex"
+  },
+  "need": "work",
+  "pr": null,
+  "rounds": 0,
+  "strikes": 0,
+  "task": "bzip2/oracle/decompress/block-header",
+  "v": 1
+}
