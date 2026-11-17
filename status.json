@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 8,
+  "epoch": 9,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Addressed the review comment: edge case 1 in the Rle1.lean module doc no longer claims the non-randomised FAST branch sets state_out_len to 1; it now says a run of 1 is written via `goto s_state_out_len_eq_one` (bzlib.c:643, 646), state_out_len is set to 2/3 at bzlib.c:648/653, and the other branches set 1,2,3 (bzlib.c:563-580, 733-750, 782-796). Also cited the three end-of-block checks precisely (bzlib.c:645, 650, 655) in edge case 5, and unified the flush_RL range to bzlib.c:252-256. Re-read cited lines in bzlib.c and decompress.c:497 (origPtr >= nblock). After merging origin/master: `verify: packages/sources/build/style/axioms/lint/test: ok`, `verify: ok`, `check-task: spec/rle1: ok`. git status clean; only projects/bzip2/spec/Bzip2/Spec/Rle1.lean changed vs origin/master.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:03:23Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:03:23Z",
+    "kind": "review",
+    "nonce": "b36d9661a730ad4a",
+    "spec": "8d9872aa8d6c1279",
+    "spec_rev": "4c7c4a1a57a68bff721333692f9729907f069519",
+    "worker": "imlvts/corey-sonnet2"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/rle1/e1",
