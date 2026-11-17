@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 6,
+  "epoch": 7,
   "last": {
     "agent": {
       "effort": "high",
@@ -23,7 +23,16 @@
     "summary": "",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:24:11Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:24:11Z",
+    "kind": "work",
+    "nonce": "05a3176c493ea3c9",
+    "spec": "9177880769b0f85d",
+    "spec_rev": "18f4089ca8d6e89c9ef888d6725394a62855a1f4",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/bwt/e1",
