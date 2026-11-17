@@ -3,32 +3,25 @@
   "epoch": 7,
   "last": {
     "agent": {
-      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": null,
-      "reason": "exit",
-      "session": "01a1e6c7-10ec-7342-abd5-3395875af6e8",
-      "turns": 1
+      "model": "claude-sonnet-5-5"
     },
-    "at": "2026-11-16T23:56:03Z",
-    "epoch": 6,
-    "outcome": "success",
-    "progress": "Nothing remains for this task.",
-    "summary": "Corrected Huffman spec citations against the vendored C source and clarified that codeword is a low-bit representation, while bsW does not mask over-subscribed codes. Checked the C source locations, git diff --check, git status (clean), and git diff --stat origin/master...HEAD (only the allowed Huffman.lean file). Ran the required combined check after the master merge: 'verify: packages: ok', 'verify: sources: ok', 'verify: build: ok', 'verify: style: ok', 'verify: axioms: ok', 'verify: lint: ok', 'verify: test: ok', 'verify: ok', and 'check-task: spec/huffman: ok'. Committed as 0519c2d.",
-    "worker": "imlvts/corey-codex"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T00:24:10Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T00:24:10Z",
-    "kind": "review",
-    "nonce": "bd799caeb4baf64d",
-    "spec": "328a9106af1b9005",
-    "spec_rev": "18f4089ca8d6e89c9ef888d6725394a62855a1f4",
+    "at": "2026-11-17T00:25:53Z",
+    "comments": [
+      {
+        "body": "`DecodeAssigned` is false for some tables it quantifies over, so `bzip2/proofs/huffman` could not prove it. `decodeSym` (like `GET_MTF_VAL`, decompress.c:98-100) returns `dataError` when `zvec - base[zn] >= BZ_MAX_ALPHA_SIZE = 258`. But `Legal lens` and `Complete lens` do not bound `lens.length`. Counterexample, which I ran: `lens = List.replicate 512 9` is Legal and Complete (512 * 2^11 = 2^20), and `decodeSym lens (codeword lens 300) = .dataError`, not `.sym 300 []`. Symbol 100 does decode (`.sym 100 []`). Fix: add the alphabet bound the format imposes (`lens.length \u2264 258`, `BZ_MAX_ALPHA_SIZE`) as a hypothesis, e.g. `Legal lens \u2192 lens.length \u2264 258 \u2192 Complete lens \u2192 ...`, or fold it into `Legal`/a separate named predicate, and say so in the module doc. An `example` for the 512-symbol table would also document the case.",
+        "line": 166,
+        "path": "projects/bzip2/spec/Bzip2/Spec/Huffman.lean"
+      }
+    ],
+    "epoch": 7,
+    "outcome": "changes",
+    "reviewed_sha": "0519c2d27aba35dd958060fba81821c6fdd96275",
+    "summary": "Checked: `verify.sh` passes (all stages ok, `verify: ok`) and `check-task.sh spec/huffman` prints `check-task: spec/huffman: ok`; only `projects/bzip2/spec/Bzip2/Spec/Huffman.lean` is changed relative to the merge-base. I read the cited C lines (decompress.c:43-65, 74-102, 282-284, 323-344; huffman.c:152-200; compress.c:73-77, 562-566, 583-587; bzlib_private.h:115) and they support the claims. I re-derived against the C: `code`/`startAt` vs `BZ2_hbAssignCodes` (vec doubling between lengths); `limit`/`vecAt` vs `BZ2_hbCreateDecodeTables` (limit is 0 outside minLen..maxLen); `base` (count of lengths < n, then the fix-up `2*(limit[n-1]+1) - base[n]` using the pre-fix-up base); the `zn > 20` check at the top of the loop, so `dataError` only after the 21st bit and `needMoreInput` if the input ends at 20 bits; the index claim for `zn > maxLen` (base = alphaSize, zvec = 0 gives negative index) and that this is unreachable because zvec only grows and `limit[minLen] >= 0`; MSB-first bit order (decompress.c:48-49); and that `bsW` does not mask `v` so over-subscribed codes spill into earlier bits (compress.c:75). All match. One defect: `DecodeAssigned`, the statement left for `bzip2/proofs/huffman`, is false as stated (see the comment on line 166). It needs a `lens.length \u2264 258` hypothesis; the task says to prove or state the property, and a false statement cannot be proved. Not blocking: the doc says `Int32` for the table values citing decompress.c:130-137, which declares only the locals (zn, zvec, zj, gMinlen); the limit/base arrays are declared elsewhere. Say so if you touch the doc.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "review",
+  "lease": null,
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/huffman/e2",
     "draft": false,
@@ -40,7 +33,7 @@
     "spec": "328a9106af1b9005",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/10"
   },
-  "rounds": 2,
+  "rounds": 3,
   "strikes": 1,
   "task": "bzip2/spec/huffman",
   "v": 1
