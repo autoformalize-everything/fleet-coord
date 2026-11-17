@@ -3,30 +3,19 @@
   "epoch": 2,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": "claude-opus-5-5",
-      "reason": "exit",
-      "session": "266b4fbf-e7fb-492f-b564-56444225ece2",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-17T02:58:43Z",
-    "epoch": 1,
-    "outcome": "success",
-    "progress": "Nothing left for this task.",
-    "summary": "Added projects/bzip2/fuzz/decompress_diff.c, a libFuzzer harness. It decompresses the input with BZ2_bzBuffToBuffDecompress (small 0, 16 MiB output; BZ_OUTBUFF_FULL is skipped) and with the oracle's decompressStream through the FFI. It aborts unless both give the same verdict (ok/magic/data/eof) and, on ok, the same bytes and the same consumed count. BZ2_bzBuffToBuffDecompress does not report consumed input, so on ok the harness repeats its calls (bzlib.c:1319-1330) on its own bz_stream and reads avail_in. It also checks that this second run ends the stream with the same output length. A custom mutator rewrites the first block's CRC and the combined CRC half the time, so mutated blocks decode to ok and their bytes get compared. In a scratch check, 2938 of 4576 single-bit flips of the randomised seed decoded ok after the rewrite, and none disagreed. Added run.sh TARGET SECONDS [libFuzzer options]: it rebuilds when a source is newer than the binary, runs on corpus/TARGET seeded from corpus/seed, writes crashes to build/artifacts/TARGET/, and exits non-zero on a find. Added make_seeds.py and 19 seeds: the three upstream samples; compressor-made streams (empty, level 1 and 9, runs, concatenated, trailing garbage, truncated); a randomised-flag block with fixed CRCs; and hand-made blocks no compressor writes (a run of 259, four equal bytes at the block end with and without the count byte, 18010 selectors, origPtr off the cycle, nblock 100000 and 100001 at level 1, two blocks). The vendored classify gave each seed its intended verdict, and regenerating leaves git status clean. build.sh now builds decompress_diff and links every program -no-pie: clang 14's ASan segfaults before main in about 1 of 4 runs of a PIE binary on this kernel. ffi_smoke failed 2 of 6 runs before the change and 0 of 10 after; a bare ASan main failed 4 of 20 as PIE and 0 of 20 non-PIE. fuzz/README.md documents the harness, longer campaigns (-fork, -max_len, -merge), reproducing and minimising a crash (-minimize_crash, classify, bzip2-oracle -d) and the seeds. Merged origin/master (spec/Format.lean only). Checked: `sh -c 'projects/bzip2/tools/verify.sh && projects/bzip2/fuzz/run.sh decompress 120'` from a fresh corpus printed `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`, then `Done 13568 runs in 121 second(s)` with no crash and no artifact. Outside verify, three parallel fork-mode campaigns ran about 940k inputs (189436 + 394066 + 357308) with oom/timeout/crash 0/0/0 each. No disagreement between libbz2 and the oracle was found, so no oracle fix or golden case was needed. git diff --stat origin/master...HEAD shows only projects/bzip2/fuzz/* files (24 files), and git status is clean.",
-    "worker": "imlvts/corey-opus"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T02:59:10Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:59:10Z",
-    "kind": "review",
-    "nonce": "86661ca3f260f75a",
-    "spec": "10748f154df4ed58",
-    "spec_rev": "5205d6c86af9bb63a2ba090a6251bc4c893ca41e",
+    "at": "2026-11-17T03:03:15Z",
+    "comments": [],
+    "epoch": 2,
+    "outcome": "abstain",
+    "reviewed_sha": "9d69bd204151ef9b2580183feb295799b0ddb15e",
+    "summary": "review ended without a verdict (cancelled)",
     "worker": "imlvts/corey-codex"
   },
+  "lease": null,
   "need": "review",
   "pr": {
     "branch": "task/bzip2/fuzz/decompress-diff/e1",
