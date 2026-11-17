@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-opus",
-  "epoch": 5,
+  "epoch": 6,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Addressed the review's one request on projects/bzip2/spec/Bzip2/Spec/Format.lean: readSelectors' doc string now says it reads all nSelectors selectors but keeps only the first 18002, because the C decoder reads the rest without storing them (`if (i < BZ_MAX_SELECTORS)`) and then clamps nSelectors (decompress.c:299-306, read; BZ_MAX_SELECTORS = 2 + 900000/50 at bzlib_private.h:125). The same citation is added to the module doc next to the selector rule. The code (`codes.take 18002`) was already correct, so only the doc changed. Checked after the merge of origin/master: `projects/bzip2/tools/verify.sh && projects/bzip2/tools/check-task.sh spec/format` exits 0 with `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`, `check-task: spec/format: ok`. `git status` is clean and `git diff --stat origin/master...HEAD` lists only projects/bzip2/spec/Bzip2/Spec/Format.lean.",
     "worker": "imlvts/corey-opus"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:33:45Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:33:45Z",
+    "kind": "review",
+    "nonce": "d43cfb0f921fdaa1",
+    "spec": "7d4f5a36342ee71f",
+    "spec_rev": "cc755cb0d6ad8bfef037ed09292c48ac7098c928",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/format/e1",
