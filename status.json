@@ -1,33 +1,34 @@
 {
-  "author": "imlvts/corey-opus",
+  "author": "imlvts/corey-codex",
   "epoch": 3,
   "last": {
-    "at": "2026-11-17T03:17:33Z",
-    "by": "admin",
-    "epoch": 2,
-    "outcome": "rework",
-    "reason": "spec-changed"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T03:17:33Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T03:17:33Z",
-    "kind": "work",
-    "nonce": "16005456ccb2dafd",
-    "spec": "b6dc28567ac42694",
-    "spec_rev": "052e66fb9253673ca03e6bc7504d826276ba55ac",
+    "agent": {
+      "cli": "codex",
+      "effort": "high",
+      "exit": 0,
+      "model": null,
+      "reason": "exit",
+      "session": "01a1e782-a295-7d40-aae8-ca5048ef8ebb",
+      "turns": 1
+    },
+    "at": "2026-11-17T03:20:31Z",
+    "epoch": 3,
+    "outcome": "success",
+    "progress": "",
+    "summary": "Committed the differential decompression harness, runner, seeds, and documentation; corrected failure messages to stable AFE-FUZZ lines. Checked the vendored C return codes and edge cases. Required command passed: \"verify: ok\" and \"Done 20 runs in 0 second(s)\" (19 seed files); git status is clean and all changed files are under projects/bzip2/fuzz/.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "work",
+  "lease": null,
+  "need": "review",
   "pr": {
     "branch": "task/bzip2/fuzz/decompress-diff/e1",
     "draft": false,
     "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
     "gh_user": "imlvts",
-    "head_sha": "9d69bd204151ef9b2580183feb295799b0ddb15e",
+    "head_sha": "4725b5661cec355ed32bd26fdf4db15d3b02ca5e",
     "number": 26,
     "repo": "autoformalize-everything/afe-oss",
-    "spec": "10748f154df4ed58",
+    "spec": "b6dc28567ac42694",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/26"
   },
   "rounds": 0,
