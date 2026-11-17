@@ -1,19 +1,36 @@
 {
-  "author": null,
+  "author": "imlvts/corey-codex",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T02:20:55Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:36:01Z",
-    "kind": "work",
-    "nonce": "e6374a06a5aae799",
-    "spec": "137ca25c0ff48007",
-    "spec_rev": "d48f87b0287c8f54906ae3f4ff218a0ecb1380bd",
+  "last": {
+    "agent": {
+      "cli": "codex",
+      "effort": "high",
+      "exit": 0,
+      "model": null,
+      "reason": "exit",
+      "session": "01a1e74e-cbef-7a83-b138-f089245d3adf",
+      "turns": 1
+    },
+    "at": "2026-11-17T02:36:03Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "No remaining task work. The optional 10-minute fuzz run was inapplicable because fuzz/compress_diff.c does not exist.",
+    "summary": "Committed 4ca9719: reproduced upstream fallback and main block-sort tie order for periodic BWT pointers, connected it to compression, and added fixed byte-exact vectors at levels 1, 5, and 9. Checked `byte-exact: 24 passed, 0 failed`; 120 short random differential cases and 15 targeted periodic/block-boundary cases passed. Full verifier reported `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, and `verify: ok`. Git status was clean and every changed file was within the allowed paths.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/oracle/compress/byte-exact/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "4ca97199422f9a6d9c5910c9f3a0be2e5a9a9ede",
+    "number": 24,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "137ca25c0ff48007",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/24"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/oracle/compress/byte-exact",
