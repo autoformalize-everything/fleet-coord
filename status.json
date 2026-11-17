@@ -2,20 +2,14 @@
   "author": "imlvts/corey-opus",
   "epoch": 6,
   "last": {
-    "agent": {
-      "effort": "high",
-      "model": "claude-sonnet-5-5"
-    },
-    "at": "2026-11-17T02:38:38Z",
-    "comments": [],
+    "at": "2026-11-17T02:39:08Z",
+    "by": "admin",
     "epoch": 6,
-    "outcome": "approve",
-    "reviewed_sha": "b84273274bac950e1eae6c3a289887ce0aebd0c9",
-    "summary": "Approved. I ran `projects/bzip2/tools/verify.sh` (every stage ok, final line `verify: ok`) and `tools/check-task.sh spec/format` (`check-task: spec/format: ok`). The diff touches only `projects/bzip2/spec/Bzip2/Spec/Format.lean`.\n\nI read the cited C lines and compared these behaviours against the code:\n1. `origPtr` bound: the C check is `origPtr > 10 + 100000*level` (decompress.c:263), so `\u2264 10 + maxBlock` is right. The later `origPtr >= nblock` check is at decompress.c:497.\n2. Selectors: the unary decode rejects `j >= nGroups` even for selectors beyond 18002. Only `i < BZ_MAX_SELECTORS` are stored and `nSelectors` is then clamped (decompress.c:299-306). `readSelectors` matches (`codes.take 18002`), and a missing group selector is a data error before any bit is read (decompress.c:76-79).\n3. Code-length deltas: the `curr < 1 || curr > 20` check precedes each bit read, so a length that is out of range when input ends is a data error, not EOF (decompress.c:326-331). `readDelta` and the two EOF/data examples reflect this.\n4. Trailing RLE1 run: four equal bytes at the end of a block read the count byte past `save_nblock+1`, and the unRLE returns corrupt (bzlib.c:~560-580, then bzlib.c:823-830). This is a data error before the block CRC check at bzlib.c:834, and `readBlock` orders it that way.\n5. Randomisation: `randomNumbers` matches `BZ2_rNums` element for element (I diffed all 512 entries against randtable.c). The mask logic matches `BZ_RAND_UPD_MASK` (bzlib_private.h:137-149).\n6. Concatenation: `uncompressStream` stops when `nUnused == 0 && myfeof`. A magic error on stream N>1 is ignored as trailing garbage, and one on stream 1 is an error (bzip2.c:531-543). A truncated later header gives `BZ_UNEXPECTED_EOF` (bzlib.c:1202-1212). `decodeAll` matches.\n\nI also ran `decode` in the Lean interpreter on small real `bzip2 -c` streams and compared with `bzip2 -d`. These agreed: a single stream, a level-1 stream, two concatenated streams, trailing `garbage` (ignored), a truncated stream (eof), a stream followed by `BZh9` (eof), a stream followed by `B` (eof), and two corrupted streams (data, with `bzip2 -d` reporting a data integrity error).\n\nThe citations I checked are all in the form the style rules require, and the lines contain what is claimed. The module doc maps every rule to the C sources, states the representation choice, and the `.eof` modelling caveat. The examples include a real one-byte stream, an empty-stream concatenation, and the magic, eof and data ordering cases.\n\nNot required, for the author's information only: (a) `bzip2 -d -f` on a first-stream magic error copies the input through (`trycat`, bzip2.c:~500-512). This is outside what the spec models and is not mentioned in the module doc. (b) `readSymbols` re-runs `MtfRle2.decode` on the growing symbol list after every symbol, so it is quadratic. That is fine for a spec and for `decide`, but slow in the interpreter on multi-kilobyte blocks. (c) `ValidCompression` accepts any decodable single stream of the level, including blocks up to `100000*level`, not the compressor's stricter `100000*level - 19` fill limit. The task's wording allows this.",
-    "worker": "imlvts/corey-claude"
+    "merged_sha": "b84273274bac950e1eae6c3a289887ce0aebd0c9",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/spec/format/e1",
     "draft": false,
