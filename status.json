@@ -4,30 +4,18 @@
   "last": {
     "agent": {
       "effort": "high",
-      "exit": 0,
-      "model": "claude-opus-5-5",
-      "reason": "exit",
-      "session": "f63d9a8c-6d68-49db-a1a7-617e89078ea9",
-      "turns": 1
+      "model": "claude-sonnet-5-5"
     },
-    "at": "2026-11-17T02:29:38Z",
-    "epoch": 1,
-    "outcome": "success",
-    "progress": "Nothing left for this task. Followups (outside scope): fuzz/README.md still says the oracle stream APIs are stubs and ffi_smoke.c accepts the unimplemented status; both can now expect real results.",
-    "summary": "Implemented the stream layer of the oracle. New module Bzip2.Oracle.Decompress.Stream (oracle/Bzip2/Oracle/Decompress/Stream.lean): readHeader (BZh + level; a wrong byte is magic, a short input eof, checked byte by byte as decompress.c:197-208), blocks (first byte 0x17 or 0x31, else data, decompress.c:222-225; the other five magic bytes checked one at a time, decompress.c:226-235 and decompress.c:590-599; each block is Block.decodeBlock, folded into the combined CRC as bzlib.c:832-835; stored combined CRC compared once all 32 bits are read, bzlib.c:847-848), and decode, which starts at a byte offset and returns the bytes used: the bits read rounded up to whole bytes, as GET_BITS does (decompress.c:46-61), so the padding is never examined. Decompress.lean: decompressStream = Stream.decode; decompress loops as uncompressStream does (bzip2.c:454-482). A bad header in a later stream ends the input with the output so far (bzip2.c:465, bzip2.c:533-543). Any other error in a later stream is an error (bzip2.c:527-532). The module doc lists every difference from one BZ2_bzBuffToBuffDecompress call: concatenation, trailing garbage, no partial output on error, no BZ_OUTBUFF_FULL (with the exact-fill/eof case, bzlib.c:1340), and bzip2 -f / I/O / MEM_ERROR / small mode not modelled. Tests: tests/Bzip2/Test/DecompressStream.lean has #guards on streams made by the vendored bzip2. Their expected results were checked against the vendored libbz2 through tests/vectors/classify.c: header cases (\"\", B, BZ, BZh, BZh9 -> eof; BX, BZhA, BZh0 -> magic; BZh9\\x00 -> data), every proper prefix -> eof, bit flips in block magic, block CRC, end magic and combined CRC -> data, padding bits ignored, concatenation of streams at levels 9 and 1, trailing data after a stream (x, garbage, BZh0, \\0 -> ok; B, BZ, BZh, BZh9, BZh9\\x17, BZh91AY&SY -> eof; BZh9\\x00 -> data), and a two-block stream spliced from two one-block streams (correct output, wrong-order combined CRC -> data, all prefixes -> eof). Checked: `bzip2-oracle -d` on upstream/sample1.bz2, sample2.bz2 and sample3.bz2 exits 0, and cmp shows the output identical to each .ref file. Ran `sh -c 'projects/bzip2/tools/verify.sh && projects/bzip2/tools/check-task.sh oracle/decompress/stream'` on the final commit: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\" (\"bzip2-tests: 53 passed, 0 skipped, 0 failed\", the 23 decompress golden vectors included), \"verify: ok\", \"check-task: oracle/decompress/stream: ok\". git status is clean, and git diff --stat origin/master...HEAD lists only Decompress.lean, Decompress/Stream.lean and tests/Bzip2/Test/DecompressStream.lean. The branch is not behind origin/master.",
-    "worker": "imlvts/corey-opus"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T02:31:22Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:31:22Z",
-    "kind": "review",
-    "nonce": "a8a63c41f906897a",
-    "spec": "60dab13956104158",
-    "spec_rev": "cc755cb0d6ad8bfef037ed09292c48ac7098c928",
+    "at": "2026-11-17T02:33:42Z",
+    "comments": [],
+    "epoch": 2,
+    "outcome": "approve",
+    "reviewed_sha": "04d4525502b3cbe09f5bb63eb989414c89430bba",
+    "summary": "Approve. verify.sh (run cleanly, alone): verify: packages/sources/build/style/axioms/lint/test: ok, `verify: ok`; `check-task.sh oracle/decompress/stream`: ok. `bzip2-oracle -d` reproduces sample1/2/3.ref byte for byte. Only the three allowed files changed (Decompress.lean, Decompress/Stream.lean, tests/.../DecompressStream.lean).\n\nBehaviour spot-checks against upstream:\n1. Header (decompress.c:197-208): bytes are read one at a time, each wrong one is magic, the level byte outside '1'..'9' is magic, and input ending first is eof. So BX is magic, BZ is eof. Matches readHeader.\n2. First block/end byte (decompress.c:222-225): 0x17 starts the end magic, 0x31 a block magic, any other byte is BZ_DATA_ERROR. Matches `blocks`, and the following magic bytes are data errors (decompress.c:226-235, 590-599).\n3. Combined CRC (bzlib.c:832-835, 847-848, 515): rotate-left-1 xor, start 0, compared only after all four stored bytes are read, so a truncated CRC is eof, not data. Matches.\n4. Consumed byte count: GET_BITS (decompress.c:46-61) fetches a byte only when it needs bits, so the count is the bits read rounded up. `bytePos` is (pos+7)/8, and bzlib.c:1239 reports avail_in. Padding is not examined (the test flips padding bits and gets ok).\n5. Concatenation and trailing data (bzip2.c:454-481, 527-543): magic at a later stream is ignored, any other error in a later stream is the error, and the loop stops when nUnused == 0 and EOF. All of that matches decompressFrom. The `-f` trycat path (bzip2.c:465, 506-517) is rewind-and-copy at any stream, and the module doc correctly lists it as not modelled.\n6. BZ2_bzBuffToBuffDecompress (bzlib.c:1330-1345): OUTBUFF_FULL versus eof for a cut-off stream that fills the buffer exactly. The doc's claim is right.\nAll the line citations in both module docs point at the lines they claim.\n\nDifferential test: I built the vendored libbz2 with tests/vectors/classify.c, which runs uncompressStream's logic, and compared it with `bzip2-oracle -d` on 400 mutated or spliced streams (bit flips, truncations, appended garbage, concatenations, prefixes). The class (ok/magic/data/eof) and the output matched in all 400.\n\nThe module doc lists every difference from a single BZ2_bzBuffToBuffDecompress call: concatenation, trailing garbage, errors dropping the output, no output limit, and the `-f`/IO/MEM/small items that are not modelled. The tests cover the cases the task names: truncation is eof, bad header is magic, bad CRC is data.\n\nNon-blocking notes: the `fuel = 0 => .ok out` arm of decompressFrom is unreachable by the fuel argument, which is fine as written; the Stream error strings are free text, as Error.data allows.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "review",
+  "lease": null,
+  "need": "merge",
   "pr": {
     "branch": "task/bzip2/oracle/decompress/stream/e1",
     "draft": false,
