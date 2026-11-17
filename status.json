@@ -2,20 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 9,
   "last": {
-    "agent": {
-      "effort": "high",
-      "model": "claude-sonnet-5-5"
-    },
-    "at": "2026-11-17T02:04:54Z",
-    "comments": [],
+    "at": "2026-11-17T02:05:22Z",
+    "by": "admin",
     "epoch": 9,
-    "outcome": "approve",
-    "reviewed_sha": "5c3272393b3d10fbe3966c3791a4b8e0f4538996",
-    "summary": "Approve. verify.sh: packages/sources/build/style ok, test ok, 'verify: ok'; check-task.sh spec/rle1: ok. Only Spec/Rle1.lean is changed (within Files). I read the cited bzlib.c lines and checked: (1) the FAST non-randomised branch has no end-of-block check before the count read (bzlib.c:643-659), so 'a a a a' fetches the count and k0 past the block, reaches nblock_used = save_nblock+2, writes the run, then returns True (630-633) and BZ2_bzDecompress returns BZ_DATA_ERROR (823); (2) a block ending right after the count is fine (nblock_used == save_nblock+1 -> False, 637-638); (3) count byte is a UChar and state_out_len = k1+4 with no range check (659), so 252..255 are accepted; (4) after the count k0 is re-read (660) so a fresh run starts, matching decStep's run := none; (5) ADD_CHAR_TO_BLOCK cuts at state_in_len == 255 (275-276) and add_pair_to_block writes len-4 as the count (237-245), matching encStep/pair; flush_RL 252-256; origPtr >= nblock rejected at decompress.c:497. All other line citations I spot-checked (563-580, 584, 754, 799, 557, 727, 776, 390-392, 298) point at what is claimed. A scratch random roundtrip check (100 cases, runs up to ~300) gave true. The examples cover runs of 3/4/5/255/256 and count >251, and decodeRle1 on a truncated block (returns the 4 bytes, documented, with Truncated for the C error) is a documented modelling choice. Roundtrip is stated as Rle1Roundtrip and left to proofs/rle, which the task allows. Non-blocking note: decStep matches the C logic but the mid-run mismatch cases (run of 2 or 3 ended by a different byte) have no example; not required.",
-    "worker": "imlvts/corey-sonnet2"
+    "merged_sha": "5c3272393b3d10fbe3966c3791a4b8e0f4538996",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/spec/rle1/e1",
     "draft": false,
