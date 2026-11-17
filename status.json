@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 5,
+  "epoch": 6,
   "last": {
     "agent": {
       "effort": "high",
@@ -25,7 +25,16 @@
     "summary": "Verification: `projects/bzip2/tools/verify.sh` passes here (packages, sources, build, style, axioms, lint, test: ok; \"verify: ok\"). There is no `checks/oracle/compress/bwt.lean`, so there is no `check-task.sh` check to run. Only the two allowed files are touched. The C citations I read are right: blocksort.c:1025-1029 (post-condition: arr1 holds the sorted order), 1083-1088 (origPtr is the row with ptr[i]==0), compress.c:163-167 (the preceding byte is read via ptr[i]-1 wrapping to nblock, then block[j]), and blocksort.c:354-362 (mainGtU's unsigned byte comparison; the comparison itself is at 360-361, the range just starts a little early). The algorithm is correct and the module doc's tie-breaking statement matches the code: origPtr is the first row whose rotation equals rotation 0, and equal rotations yield the same output column. Small blocks are checked against a naive rotation sort, and the guards cover banana, unsigned bytes, and periodic abab/baba.\n\nOne thing is missing by the task's own terms. \"Done when\" asks for tests that a 900 000-byte block of one repeated byte and one of random bytes each finish within a few seconds. The test module has no 900 000-byte block at all. It uses 20 000 bytes and only checks `.1.size` and (for the run) `.2 == 0`. The comment says 20 000 is \"small enough for the interpreter\", so the required scale was dropped without being measured. I ran the scale myself. Compiled (`lean -c` plus `leanc -O3`), the run takes 0.8 s and random bytes 0.23 s, so the algorithm is fine. Under the interpreter that `#guard` uses, the 900 000-byte run of one byte takes about 48 s (about 20 doubling rounds at about 2.4 s each) and random bytes about 7.6 s. So the requirement is not met under the only test mechanism STYLE.md allows (`#guard`), and the PR neither tests it nor reports it.\n\nRequested change (all of it, in `projects/bzip2/tests/Bzip2/Test/CompressBwt.lean` and, if needed, `Bwt.lean`):\n1. Add `#guard`s for the 900 000-byte block of one repeated byte and for a 900 000-byte block of random bytes. Each should check the output size and `origPtr` (0 for the run), and for the random block also that the result is a permutation of the input (equal byte counts) or that the adjacent rows are in order. Do not stop at the size.\n2. Make those guards finish within a few seconds under the interpreter. If they cannot, make the oracle cheaper to interpret so they can. Candidates are fewer passes per round (for example, build the next order and classes in fewer loops), avoiding `Array.modify` and `set!` copies, and using `ByteArray`/`UInt32` or `Array` storage that the interpreter handles faster. The module doc should still state the complexity.\nIf you cannot reach a few seconds interpreted, say in the module doc and the test comment exactly what you measured (interpreted and compiled times) rather than silently shrinking the size.\n\nNot required, for the summary only: the inverse round trip against `oracle/decompress/block-output` is correctly deferred, as the task says \"once it exists\". Block-output does not exist on this base, so this stays a followup. `bwt` returns `ByteArray \u00d7 Nat`; naming the second component `origPtr` in the doc string would help the side-by-side reading with C, but STYLE.md does not demand it.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:01:05Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:01:05Z",
+    "kind": "work",
+    "nonce": "f63851710170c25b",
+    "spec": "9177880769b0f85d",
+    "spec_rev": "9f62b95bfe8090e6d8b85c26119ff87830fa64e1",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/bwt/e1",
