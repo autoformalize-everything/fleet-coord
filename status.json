@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 7,
+  "epoch": 8,
   "last": {
     "agent": {
       "effort": "high",
@@ -20,7 +20,16 @@
     "summary": "Checked: `verify.sh` passes (all stages ok, `verify: ok`) and `check-task.sh spec/huffman` prints `check-task: spec/huffman: ok`; only `projects/bzip2/spec/Bzip2/Spec/Huffman.lean` is changed relative to the merge-base. I read the cited C lines (decompress.c:43-65, 74-102, 282-284, 323-344; huffman.c:152-200; compress.c:73-77, 562-566, 583-587; bzlib_private.h:115) and they support the claims. I re-derived against the C: `code`/`startAt` vs `BZ2_hbAssignCodes` (vec doubling between lengths); `limit`/`vecAt` vs `BZ2_hbCreateDecodeTables` (limit is 0 outside minLen..maxLen); `base` (count of lengths < n, then the fix-up `2*(limit[n-1]+1) - base[n]` using the pre-fix-up base); the `zn > 20` check at the top of the loop, so `dataError` only after the 21st bit and `needMoreInput` if the input ends at 20 bits; the index claim for `zn > maxLen` (base = alphaSize, zvec = 0 gives negative index) and that this is unreachable because zvec only grows and `limit[minLen] >= 0`; MSB-first bit order (decompress.c:48-49); and that `bsW` does not mask `v` so over-subscribed codes spill into earlier bits (compress.c:75). All match. One defect: `DecodeAssigned`, the statement left for `bzip2/proofs/huffman`, is false as stated (see the comment on line 166). It needs a `lens.length \u2264 258` hypothesis; the task says to prove or state the property, and a false statement cannot be proved. Not blocking: the doc says `Int32` for the table values citing decompress.c:130-137, which declares only the locals (zn, zvec, zj, gMinlen); the limit/base arrays are declared elsewhere. Say so if you touch the doc.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:36:23Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:36:23Z",
+    "kind": "work",
+    "nonce": "9c9f7c45a4ea6246",
+    "spec": "328a9106af1b9005",
+    "spec_rev": "18f4089ca8d6e89c9ef888d6725394a62855a1f4",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/huffman/e2",
