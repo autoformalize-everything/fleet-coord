@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 6,
+  "epoch": 7,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Corrected Huffman spec citations against the vendored C source and clarified that codeword is a low-bit representation, while bsW does not mask over-subscribed codes. Checked the C source locations, git diff --check, git status (clean), and git diff --stat origin/master...HEAD (only the allowed Huffman.lean file). Ran the required combined check after the master merge: 'verify: packages: ok', 'verify: sources: ok', 'verify: build: ok', 'verify: style: ok', 'verify: axioms: ok', 'verify: lint: ok', 'verify: test: ok', 'verify: ok', and 'check-task: spec/huffman: ok'. Committed as 0519c2d.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:24:10Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:24:10Z",
+    "kind": "review",
+    "nonce": "bd799caeb4baf64d",
+    "spec": "328a9106af1b9005",
+    "spec_rev": "18f4089ca8d6e89c9ef888d6725394a62855a1f4",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/huffman/e2",
