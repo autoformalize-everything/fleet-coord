@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "cli": "codex",
@@ -21,7 +21,16 @@
     "summary": "The implementation matches the checked C behavior for RLE1 encoding, 255-byte run cuts, block limits, pending runs, CRCs, inUse, and empty input. All 28 vectors regenerate identically from the vendored C source. Verification passed: verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok. One required C citation is missing for the program-mode boundary explanation. Non-blocking: the test comment at line 89 calls the cyclic 0..255 sequence \u201cdistinct bytes\u201d; it means successive bytes differ.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:57:35Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:57:35Z",
+    "kind": "work",
+    "nonce": "6fc74ab8f3b07faf",
+    "spec": "148307c7db1ce57d",
+    "spec_rev": "ac4d2f594ac1668836f3d93f44c70b2758817721",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/rle1-blocks/e1",
