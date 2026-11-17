@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 8,
+  "epoch": 9,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Bound DecodeAssigned by the 258-symbol alphabet limit and corrected the C citation for Int32 decoder tables. Committed as 7aef0e6. Checked the cited C paths, git status (clean), and git diff --stat origin/master...HEAD (only Huffman.lean). Required check returned: 'verify: packages: ok', 'verify: sources: ok', 'verify: build: ok', 'verify: style: ok', 'verify: axioms: ok', 'verify: lint: ok', 'verify: test: ok', 'verify: ok', and 'check-task: spec/huffman: ok'.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:52:01Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:52:01Z",
+    "kind": "review",
+    "nonce": "702400984e02ddc6",
+    "spec": "328a9106af1b9005",
+    "spec_rev": "69ccb35a565aa0eb665a90e820c20ed3cfdfd219",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/huffman/e2",
