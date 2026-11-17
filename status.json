@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-opus",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Implemented the stream layer of the oracle. New module Bzip2.Oracle.Decompress.Stream (oracle/Bzip2/Oracle/Decompress/Stream.lean): readHeader (BZh + level; a wrong byte is magic, a short input eof, checked byte by byte as decompress.c:197-208), blocks (first byte 0x17 or 0x31, else data, decompress.c:222-225; the other five magic bytes checked one at a time, decompress.c:226-235 and decompress.c:590-599; each block is Block.decodeBlock, folded into the combined CRC as bzlib.c:832-835; stored combined CRC compared once all 32 bits are read, bzlib.c:847-848), and decode, which starts at a byte offset and returns the bytes used: the bits read rounded up to whole bytes, as GET_BITS does (decompress.c:46-61), so the padding is never examined. Decompress.lean: decompressStream = Stream.decode; decompress loops as uncompressStream does (bzip2.c:454-482). A bad header in a later stream ends the input with the output so far (bzip2.c:465, bzip2.c:533-543). Any other error in a later stream is an error (bzip2.c:527-532). The module doc lists every difference from one BZ2_bzBuffToBuffDecompress call: concatenation, trailing garbage, no partial output on error, no BZ_OUTBUFF_FULL (with the exact-fill/eof case, bzlib.c:1340), and bzip2 -f / I/O / MEM_ERROR / small mode not modelled. Tests: tests/Bzip2/Test/DecompressStream.lean has #guards on streams made by the vendored bzip2. Their expected results were checked against the vendored libbz2 through tests/vectors/classify.c: header cases (\"\", B, BZ, BZh, BZh9 -> eof; BX, BZhA, BZh0 -> magic; BZh9\\x00 -> data), every proper prefix -> eof, bit flips in block magic, block CRC, end magic and combined CRC -> data, padding bits ignored, concatenation of streams at levels 9 and 1, trailing data after a stream (x, garbage, BZh0, \\0 -> ok; B, BZ, BZh, BZh9, BZh9\\x17, BZh91AY&SY -> eof; BZh9\\x00 -> data), and a two-block stream spliced from two one-block streams (correct output, wrong-order combined CRC -> data, all prefixes -> eof). Checked: `bzip2-oracle -d` on upstream/sample1.bz2, sample2.bz2 and sample3.bz2 exits 0, and cmp shows the output identical to each .ref file. Ran `sh -c 'projects/bzip2/tools/verify.sh && projects/bzip2/tools/check-task.sh oracle/decompress/stream'` on the final commit: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\" (\"bzip2-tests: 53 passed, 0 skipped, 0 failed\", the 23 decompress golden vectors included), \"verify: ok\", \"check-task: oracle/decompress/stream: ok\". git status is clean, and git diff --stat origin/master...HEAD lists only Decompress.lean, Decompress/Stream.lean and tests/Bzip2/Test/DecompressStream.lean. The branch is not behind origin/master.",
     "worker": "imlvts/corey-opus"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:31:22Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:31:22Z",
+    "kind": "review",
+    "nonce": "a8a63c41f906897a",
+    "spec": "60dab13956104158",
+    "spec_rev": "cc755cb0d6ad8bfef037ed09292c48ac7098c928",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/decompress/stream/e1",
