@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Committed 4ca9719: reproduced upstream fallback and main block-sort tie order for periodic BWT pointers, connected it to compression, and added fixed byte-exact vectors at levels 1, 5, and 9. Checked `byte-exact: 24 passed, 0 failed`; 120 short random differential cases and 15 targeted periodic/block-boundary cases passed. Full verifier reported `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, and `verify: ok`. Git status was clean and every changed file was within the allowed paths.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:38:42Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:38:42Z",
+    "kind": "review",
+    "nonce": "3077af929f8431a7",
+    "spec": "137ca25c0ff48007",
+    "spec_rev": "9a200c36776a663fca0ecccc3c51779bbf6096ea",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/byte-exact/e1",
