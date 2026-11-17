@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Committed f976589: added the Lean static FFI library, C API with one-time Lean initialization and oracle error mapping, sanitized copied libbz2 build, and smoke test. Checked the exact reviewer command: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"ffi_smoke: ok\". Checked git status is clean and git diff --stat origin/master...HEAD contains only allowed paths.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:55:42Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:55:42Z",
+    "kind": "review",
+    "nonce": "fbb73270a12a303b",
+    "spec": "b12f6ddedbad9e1d",
+    "spec_rev": "ac4d2f594ac1668836f3d93f44c70b2758817721",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/fuzz/ffi/e1",
