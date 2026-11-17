@@ -3,32 +3,25 @@
   "epoch": 2,
   "last": {
     "agent": {
-      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": null,
-      "reason": "exit",
-      "session": "01a1e74e-cbef-7a83-b138-f089245d3adf",
-      "turns": 1
+      "model": "claude-sonnet-5-5"
     },
-    "at": "2026-11-17T02:36:03Z",
-    "epoch": 1,
-    "outcome": "success",
-    "progress": "No remaining task work. The optional 10-minute fuzz run was inapplicable because fuzz/compress_diff.c does not exist.",
-    "summary": "Committed 4ca9719: reproduced upstream fallback and main block-sort tie order for periodic BWT pointers, connected it to compression, and added fixed byte-exact vectors at levels 1, 5, and 9. Checked `byte-exact: 24 passed, 0 failed`; 120 short random differential cases and 15 targeted periodic/block-boundary cases passed. Full verifier reported `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, and `verify: ok`. Git status was clean and every changed file was within the allowed paths.",
-    "worker": "imlvts/corey-codex"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T02:38:42Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:43:46Z",
-    "kind": "review",
-    "nonce": "3077af929f8431a7",
-    "spec": "137ca25c0ff48007",
-    "spec_rev": "9a200c36776a663fca0ecccc3c51779bbf6096ea",
+    "at": "2026-11-17T02:43:59Z",
+    "comments": [
+      {
+        "body": "The under/over-10 000 and 1000-byte-pattern cases at levels 1, 5 and 9 are only in tests/vectors/byte-exact/check.py, which neither verify.sh nor lake test runs. Add them here (an `#eval` that reads the vectors and throws on mismatch, or `#guard`s on Lean-generated inputs against the expected bytes or length plus CRC32), and update the module doc.",
+        "line": 1,
+        "path": "projects/bzip2/tests/Bzip2/Test/ByteExact.lean"
+      }
+    ],
+    "epoch": 2,
+    "outcome": "changes",
+    "reviewed_sha": "4ca97199422f9a6d9c5910c9f3a0be2e5a9a9ede",
+    "summary": "The algorithmic work is correct. The test coverage the task asks for is not in the checks that verify.sh runs, so I am requesting one change.\n\nWhat I checked\n- `verify.sh` passes: `verify: packages/sources/build/style/axioms/lint: ok`, `verify: ok`. `lake test` reports 0 passed, 53 skipped, because decompress is not on this branch. It does not look at the new vectors.\n- I built the vendored C bzip2 out of tree with `tests/vectors/build-bzip2.sh` and diffed it against the compiled `bzip2-oracle`. Every case matched byte for byte:\n  - `tests/vectors/byte-exact/check.py`: 24/24.\n  - About 380 random small and mid-size inputs (periodic, repeated, runs, near-periodic; 2 to 30000 bytes; levels 1, 5 and 9).\n  - About 36 inputs of 10k to 250k bytes (periodic with 0 to 500 mutations, pattern lengths 1 to 20000), which exercise both the mainSort path and the budget-exhausted fallback.\n  - Three 900 kB level-9 inputs (periodic with one mutation, `ab`*450000, random), about 1 s each.\n- Citations I read against `upstream/blocksort.c` all land on what they claim: 36-59, 92-181, 208-329, 231-245, 347-469, 479-482, 484-555, 581-592, 620-717, 758-1017, 1039-1081, 1083-1088. In particular, `nblock < 10000` selects fallbackSort, `budgetInit = nblock*((wfact-1)/3)` is 9n at workFactor 30, a negative budget triggers fallbackSort, and origPtr is the first i with ptr[i]==0.\n- The compression-side files changed are only under the task's paths (`Compress/*`, `ByteExact.lean`, `vectors/byte-exact/*`). `fuzz/compress_diff.c` does not exist on this branch, so the fuzz item is not applicable.\n\nRequested change\n- The task's \"Done when\" says golden tests compare compressed output byte for byte at levels 1, 5 and 9 and pass, including periodic inputs under and over 10 000 bytes. The ground rules say unit tests are `#guard`s in the named test module.\n  - The `#guard`s in `ByteExact.lean` only cover `a`, `abab` and `aaaa`. They never reach the fallback-versus-mainSort distinction, which is the point of the task.\n  - The under/over-10 000 cases and the 1000-byte pattern are checked only by `tests/vectors/byte-exact/check.py`. Nothing runs that script: not `verify.sh`, not `lake test` (`Tests.lean` belongs to another task), and not the build.\n  - A regression in the sorts' tie order would therefore pass `verify.sh`.\n  - Fix, within the allowed files: make the over/under cases and all three levels run in `ByteExact.lean`. Either read `tests/vectors/byte-exact/*/input` and `level{1,5,9}.bz2` in an `#eval` (IO) that throws on mismatch, or generate the inputs in Lean (`ab`*4999, `ab`*5500, `a`*9999, `a`*11000, the 1000-byte pattern *9 and *11) and `#guard` against the expected bytes or a length plus CRC32.\n  - I measured the interpreter at about 5 s including import for an 11 000-byte `compress`, so this is affordable. The doc comment in `ByteExact.lean` should then no longer defer these to the script.\n\nNotes (not requested)\n- The branch is based on 48772a0, and `origin/master` has since gained #22 and #23 (decompress). STYLE.md says to merge it when behind; there should be no conflicts.\n- `ExactBwt.bwt` runs a second sort only for non-primitive blocks and keeps `Bwt.bwt`'s pointer otherwise. That is sound and matches C in all my runs.\n",
     "worker": "imlvts/corey-claude"
   },
-  "need": "review",
+  "lease": null,
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/byte-exact/e1",
     "draft": false,
@@ -40,7 +33,7 @@
     "spec": "137ca25c0ff48007",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/24"
   },
-  "rounds": 0,
+  "rounds": 1,
   "strikes": 0,
   "task": "bzip2/oracle/compress/byte-exact",
   "v": 1
