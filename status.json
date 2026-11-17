@@ -3,32 +3,19 @@
   "epoch": 4,
   "last": {
     "agent": {
-      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": null,
-      "reason": "exit",
-      "session": "01a1e782-a295-7d40-aae8-ca5048ef8ebb",
-      "turns": 1
+      "model": "claude-sonnet-5-5"
     },
-    "at": "2026-11-17T03:20:31Z",
-    "epoch": 3,
-    "outcome": "success",
-    "progress": "",
-    "summary": "Committed the differential decompression harness, runner, seeds, and documentation; corrected failure messages to stable AFE-FUZZ lines. Checked the vendored C return codes and edge cases. Required command passed: \"verify: ok\" and \"Done 20 runs in 0 second(s)\" (19 seed files); git status is clean and all changed files are under projects/bzip2/fuzz/.",
-    "worker": "imlvts/corey-codex"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T03:21:18Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T03:21:18Z",
-    "kind": "review",
-    "nonce": "56cfbf1bf4d2f343",
-    "spec": "b6dc28567ac42694",
-    "spec_rev": "052e66fb9253673ca03e6bc7504d826276ba55ac",
+    "at": "2026-11-17T03:24:09Z",
+    "comments": [],
+    "epoch": 4,
+    "outcome": "approve",
+    "reviewed_sha": "4725b5661cec355ed32bd26fdf4db15d3b02ca5e",
+    "summary": "Approved. The change does what the task asks and touches only files under projects/bzip2/fuzz/*.\n\nRan:\n- `projects/bzip2/tools/verify.sh`: all stages ok, ending `bzip2-tests: 53 passed, 0 skipped, 0 failed` and `verify: ok`.\n- `projects/bzip2/fuzz/run.sh decompress 60 -runs=0`: exit 0, 20 runs, no disagreement on the 19 seeds.\n- A 25 s mutating run (`-max_len=2000`): about 10k execs, no crash.\n- `make_seeds.py` regenerated against `tests/vectors/build-bzip2.sh`: `git status` stayed clean, so the committed seeds are reproducible.\n\nSpot-checked against upstream:\n- bzlib.c:1302-1351: `BZ_OK` with `avail_out > 0` is `BZ_UNEXPECTED_EOF`, and with `avail_out == 0` is `BZ_OUTBUFF_FULL`, which the harness skips. `BZ_STREAM_END` is `BZ_OK`.\n- bzlib.c:824-835: a block CRC mismatch returns after the block's bytes are written, so the mutator's CRC rewrite from the decoded output is sound. The combined CRC of a one-block stream equals the block CRC.\n- decompress.c:197-208: bad header bytes and level outside '1'-'9' give `BZ_DATA_ERROR_MAGIC`.\n- compress.c:624-637: the block magic is followed by the CRC at bytes 10-13.\n- decompress.c:299-306: selectors past 18002 are ignored.\n- bzlib.c:633-634 and 658-660: the `make_seeds.py` citations for the count byte read past the end of a block and for the run of 259 match the code.\n\nThe harness prints exactly the five required `AFE-FUZZ:` lines, with no input-dependent values. The `consumed` check recomputes the input consumed by repeating the `BZ2_bzBuffToBuffDecompress` calls on its own `bz_stream`, since the API does not report it. The README covers a manual campaign, minimising a crash, and the standing campaign (`tasks/bzip2/fuzz.toml`, `afe-fleet fuzz run`).\n\nNot required, so only for your information:\n- run.sh's staleness check does not watch `fuzz/ffi/*.c` outside the listed paths. It does watch `fuzz/ffi` as a directory via find, so this is fine.\n- The task names no `check-task.sh` check, and `checks/` has no matching file, so none was run.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "review",
+  "lease": null,
+  "need": "merge",
   "pr": {
     "branch": "task/bzip2/fuzz/decompress-diff/e1",
     "draft": false,
