@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Implemented and committed block-header parsing, Huffman table construction, four real-stream vectors, and corruption guards. Checked vendored C source, clean git status, and scoped git diff. Verification reported: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", and \"verify: ok\".",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:40:40Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:40:40Z",
+    "kind": "review",
+    "nonce": "e50ae9ac2b88cdad",
+    "spec": "dcfd64f5056ce1a3",
+    "spec_rev": "18f4089ca8d6e89c9ef888d6725394a62855a1f4",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/decompress/block-header/e1",
