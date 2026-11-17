@@ -1,19 +1,35 @@
 {
-  "author": null,
+  "author": "imlvts/corey-claude",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T00:58:16Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T01:03:21Z",
-    "kind": "work",
-    "nonce": "77fdf97ce4ae529f",
-    "spec": "6f7a904bf783b125",
-    "spec_rev": "ac4d2f594ac1668836f3d93f44c70b2758817721",
+  "last": {
+    "agent": {
+      "effort": "high",
+      "exit": 0,
+      "model": "claude-sonnet-5-5",
+      "reason": "exit",
+      "session": "d7969737-e3f4-4081-b55b-656149992c14",
+      "turns": 1
+    },
+    "at": "2026-11-17T01:05:18Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "Nothing left for this task.",
+    "summary": "Added Bzip2.Oracle.Decompress.Symbols (oracle/Bzip2/Oracle/Decompress/Symbols.lean): `decode level header reader` decodes a block's symbols 50 per selector until EOB (RUNA/RUNB runs, in-place MTF on a 256-byte ByteArray, Array UInt32 tt and unzftab) and returns `Block {tt, unzftab}` plus the reader after EOB. Errors: Error.data for N>=2^21 run (decompress.c:396), block over 100000*level (decompress.c:410/417/427, exactly at the limit is fine), out of selectors (decompress.c:78-79); Error.eof when input ends before EOB (a run over the limit followed by end of input is eof, as in C, because the next symbol is read first); Error.param for a level outside 1..9. Tests: tests/Bzip2/Test/DecompressSymbols.lean (#guards) against vectors in tests/vectors/decompress-symbols/{real,symbols,limits}.txt, which are what the vendored libbz2 left in its DState (tt low bytes, unzftab, nblock, bit position) via the driver symbols.c, built out of tree by regenerate.sh/generate.py (generate.py asserts each intended result; regenerating twice gave identical files). 7 real-stream blocks (made by the vendored bzip2) and 4 synthetic ones are also checked against a List-based slow reference in the test (blocks up to 4096 bytes; larger ones by C's hash); 21 limit cases (run too long, 100000/100001 at levels 1 and 2, 99999+symbol, selector exhaustion 49/50 and 99/100 symbols, EOB missing incl. mid-code) fail with the C class. Checked: `sh projects/bzip2/tools/verify.sh` -> 'verify: packages: ok', 'sources: ok', 'build: ok', 'style: ok', 'axioms: ok', 'lint: ok', 'test: ok', 'verify: ok'. git status clean after commit; `git diff --stat origin/master...HEAD` lists only 8 files, all under Symbols.lean, tests/Bzip2/Test/DecompressSymbols.lean and tests/vectors/decompress-symbols/. Re-read every decompress.c line citation in the module (305-306 selector cap, 362 unzftab init, 357 EOB, 396 run check, 497-523 post-EOB checks, 427-487 MTF, etc.) against the source.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/oracle/decompress/block-data/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "c63d5142dce967dc1d0f649f4a47929bce5982f7",
+    "number": 18,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "6f7a904bf783b125",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/18"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/oracle/decompress/block-data",
