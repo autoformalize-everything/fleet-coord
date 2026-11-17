@@ -2,20 +2,14 @@
   "author": "imlvts/corey-claude",
   "epoch": 6,
   "last": {
-    "agent": {
-      "effort": "high",
-      "model": "claude-opus-5-5"
-    },
-    "at": "2026-11-17T02:06:54Z",
-    "comments": [],
+    "at": "2026-11-17T02:07:21Z",
+    "by": "admin",
     "epoch": 6,
-    "outcome": "approve",
-    "reviewed_sha": "9d0277ca9bdd69126f3c806e93c070399b2889e9",
-    "summary": "The change does what the task asks, and I found nothing that needs changing.\n\nScope: `git diff --name-only origin/master...HEAD` lists only `oracle/Bzip2/Oracle/Compress/Blocks.lean`, `tests/Bzip2/Test/CompressBlocks.lean` and `tests/vectors/compress-blocks/*` (28 vectors plus generate.py). All of these are in the task's Files.\n\nVerify: I ran `projects/bzip2/tools/verify.sh` myself and every stage passed: `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`. The build produced `Bzip2/Test/CompressBlocks.olean`, so the `#guard`s ran. That includes the 900 kB level-9 vectors, which also shows `split` is not quadratic. The task names no `check-task.sh` check, and `checks/` has no file for it.\n\nCitations: I read every citation in the module doc and the doc strings against `upstream/`. All of them point at the code they describe:\n- `bzlib.c:194` is nblockMAX = 100000*level-19.\n- `bzlib.c:216-247` is add_pair_to_block: 220-222 are the CRC loop over all len bytes, 224-246 the switch, and 238 is `inUse[len-4]`.\n- `bzlib.c:252-256` is flush_RL, and `bzlib.c:131-135` is init_RL (state_in_ch = 256).\n- `bzlib.c:260-284` is ADD_CHAR_TO_BLOCK, with the fast path at 264-272 and the cut at 255 on line 276.\n- `bzlib.c:298` and `bzlib.c:314` are the 'block full?' checks made before each byte is read.\n- `bzlib.c:384-393` is the FINISH branch, which runs flush_RL before the nblock >= nblockMAX branch.\n- `compress.c:604/606/630` are the nblock > 0 guard and BZ_FINALISE_CRC.\n- `bzlib_private.h:157-165` are the CRC init and finalise macros.\n- `bzip2.c:355-362`, `bzlib.c:984-1003` and `bzlib.c:1048-1053` are the RUN-then-FINISH driving, and `bzlib.c:1250-1298` with the call at 1282 is the one-shot FINISH.\n\nBehaviour checks I ran:\n1. RLE1 and the run cut. `addCharToBlock`'s test `ch == b && len != 255` is the negation of the C test `zchh != ch || len == 255`. The fast path matches add_pair_to_block with len 1, as the doc says.\n2. Pending run kept across a block close. prepare_new_block (`bzlib.c:116-126`) leaves state_in_ch/len alone, and lines 390-393 close the block without flush_RL. This matches `State.next` and `split`.\n3. Last byte filling a block. I argued through the state machine that oneShot and program mode differ only when the block is full right after the last input byte. In FINISH, flush_RL runs first. In RUN, the nblock check at line 390 runs before the avail_in == 0 break.\n4. Vectors against the C library. I re-ran generate.py out of tree, against an unmodified copy of `upstream/` plus its debug print. All 28 regenerated vectors are byte-identical to the committed ones.\n5. Program mode against the real program. I built the real `bzip2.c` out of tree with a debug print in BZ2_compressBlock. `bzip2 -1` on `seq 99982` gives blocks 99981/e49508f3 and 1/e9362676. On `seq 99981 run 9 600 seq 7` it gives 99981/e49508f3 and 22/bdbcfcf4. Both match the vectors' `program` sections, which confirms the module doc's claim about the default mode and that the 5000-byte RUN driver in generate.py is faithful.\n6. Empty input. It gives no blocks in both modes, because of the nblock > 0 guard at `compress.c:604`/`630`. The empty-l1 and empty-l9 vectors confirm this.\n\nTests cover what 'Done when' asks for:\n- block boundaries at levels 1 and 9 around the limit (seq 99980-99983, seq 199964, seq 899981/899982);\n- long runs across a boundary (a 600-byte run after 99974 to 99983 cyclic bytes, runs of 255/256, runs of four bytes up to the limit, and seq 899977 + run 600 at level 9);\n- the empty input.\n\nOptional notes, not required by the task or STYLE.md:\n- The generate.py docstring cites `compress.c:601-607`. Line 601 is the separator comment, and 602-607 is the code meant.\n- `split` silently computes nblockMAX = 0 for level 0 (Nat truncation). The doc says the caller checks the level, which is fine.",
-    "worker": "imlvts/corey-opus"
+    "merged_sha": "9d0277ca9bdd69126f3c806e93c070399b2889e9",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/oracle/compress/rle1-blocks/e1",
     "draft": false,
