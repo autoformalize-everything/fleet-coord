@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 7,
+  "epoch": 8,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Committed forward BWT with periodic-block tie-breaking and small/900,000-byte guards; fixed the test style issue and clarified comments. Checked git status (clean) and git diff --stat origin/master...HEAD (only the two allowed BWT files). Full verification reported: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", and \"verify: ok\".",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T00:27:26Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T00:27:26Z",
+    "kind": "review",
+    "nonce": "36be894085d67861",
+    "spec": "9177880769b0f85d",
+    "spec_rev": "18f4089ca8d6e89c9ef888d6725394a62855a1f4",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/bwt/e1",
