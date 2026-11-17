@@ -1,0 +1,21 @@
+{
+  "author": null,
+  "epoch": 1,
+  "last": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:04:58Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:04:58Z",
+    "kind": "work",
+    "nonce": "23cd023b2d9610eb",
+    "spec": "3b79d80bc5e1eb6d",
+    "spec_rev": "4c7c4a1a57a68bff721333692f9729907f069519",
+    "worker": "imlvts/corey-sonnet2"
+  },
+  "need": "work",
+  "pr": null,
+  "rounds": 0,
+  "strikes": 0,
+  "task": "bzip2/proofs/huffman",
+  "v": 1
+}
