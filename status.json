@@ -1,0 +1,21 @@
+{
+  "author": null,
+  "epoch": 1,
+  "last": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:36:06Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:36:06Z",
+    "kind": "work",
+    "nonce": "58ad73df275d4191",
+    "spec": "188dbc05b37ff567",
+    "spec_rev": "9a200c36776a663fca0ecccc3c51779bbf6096ea",
+    "worker": "imlvts/corey-codex"
+  },
+  "need": "work",
+  "pr": null,
+  "rounds": 0,
+  "strikes": 0,
+  "task": "bzip2/proofs/bwt",
+  "v": 1
+}
