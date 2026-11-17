@@ -2,20 +2,14 @@
   "author": "imlvts/corey-codex",
   "epoch": 2,
   "last": {
-    "agent": {
-      "effort": "high",
-      "model": "claude-sonnet-5-5"
-    },
-    "at": "2026-11-17T02:19:28Z",
-    "comments": [],
+    "at": "2026-11-17T02:20:02Z",
+    "by": "admin",
     "epoch": 2,
-    "outcome": "approve",
-    "reviewed_sha": "98ca9a6d16ff2f5321d8d44717117a52acc9f11e",
-    "summary": "Approve. I ran `projects/bzip2/tools/verify.sh` and got `verify: packages/sources/build/style/axioms/lint/test: ok` and `verify: ok`. `tools/check-task.sh oracle/compress/stream` printed `check-task: oracle/compress/stream: ok`. The diff touches only the three allowed files (Compress.lean, Compress/Stream.lean, tests/Bzip2/Test/CompressStream.lean). I compared the stream layout with the C and spot-checked six points:\n1. Header and trailer: `BZh` plus `'0'+level`, then magic 0x314159265359, block CRC, randomised bit 0 and a 24-bit origPtr (`compress.c:622-653`). The trailer is 0x177245385090 plus the combined CRC (`compress.c:657-665`), and `finish` zero-pads only once.\n2. The combined CRC is `rotl1(combined) ^ blockCRC` per nonempty block (`compress.c:607-608`), which matches `Crc.combine`. Empty input writes no block and gives the 14-byte stream.\n3. Selector MTF is unary, a j-fold move-to-front followed by a 0 bit, with 3-bit nGroups and 15-bit nSelectors (`compress.c:462-477`, `compress.c:519-524`). `writeSelectors` matches.\n4. Code lengths: a 5-bit start, then `10` per increment, `11` per decrement and `0` per symbol (`compress.c:531-539`). `writeLengths` matches.\n5. The symbol map is 16 group flags, then 16 flags for each used group (`compress.c:495-515`), and symbols are written with the selector of group `i/50` (`compress.c:548-595`). Both match; the C's 6-table fast path writes the same bits as the slow path.\n6. Level range: levels outside 1..9 are rejected as `BZ2_bzCompressInit` does (`bzlib.c:157-161`), returning `Error.param`.\n\nI built the vendored bzip2 out of tree and ran the compiled oracle at levels 1 and 9 on all 15 golden compress inputs and the upstream sample .ref files. Every output decompressed to the original with the vendored `bzip2 -d`. All but two inputs were byte-identical to `bzip2 -c`, including empty, run255/256, block-at-limit and block-over-limit. Two inputs differ in `origPtr` only: golden `run3` (\"aaa\") and `text`. That comes from `Bwt.bwt` on periodic blocks, which its module doc explicitly leaves to `oracle/compress/byte-exact`, so it is not this task's. Multi-block streams also round-trip: 59 KB and 441 KB inputs at levels 1 and 9 matched the C's output size exactly.\n\nNot required, so left as notes: the citations for `writeMap` (497-517) and `writeSymbols` (551-597) are slightly wider than the lines that do the work (495-515 and 548-595). `lake test` skips the oracle `-d` round trips because oracle decompression is not implemented yet, so only the vendored `bzip2 -d` round trips were exercised.",
-    "worker": "imlvts/corey-claude"
+    "merged_sha": "98ca9a6d16ff2f5321d8d44717117a52acc9f11e",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/oracle/compress/stream/e1",
     "draft": false,
