@@ -1,6 +1,6 @@
 {
   "author": null,
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "cli": "codex",
@@ -24,7 +24,16 @@
     "summary": "Committed 5c54b5c: proved the oracle non-randomised inverse walk agrees with the spec under an explicit table invariant, proved out-of-range origPtr rejection, and added small spec lemmas. Checked: \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"check-task: proofs/bwt: ok\". Git status is clean; the only changed file is projects/bzip2/proofs/Bzip2/Proofs/Bwt.lean.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:45:08Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:45:08Z",
+    "kind": "work",
+    "nonce": "3e0122f31d05fca4",
+    "spec": "188dbc05b37ff567",
+    "spec_rev": "5205d6c86af9bb63a2ba090a6251bc4c893ca41e",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "work",
   "pr": {
     "branch": "task/bzip2/proofs/bwt/e1",
