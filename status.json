@@ -2,20 +2,14 @@
   "author": "imlvts/corey-opus",
   "epoch": 2,
   "last": {
-    "agent": {
-      "effort": "high",
-      "model": "claude-sonnet-5-5"
-    },
-    "at": "2026-11-17T02:33:42Z",
-    "comments": [],
+    "at": "2026-11-17T02:34:18Z",
+    "by": "admin",
     "epoch": 2,
-    "outcome": "approve",
-    "reviewed_sha": "04d4525502b3cbe09f5bb63eb989414c89430bba",
-    "summary": "Approve. verify.sh (run cleanly, alone): verify: packages/sources/build/style/axioms/lint/test: ok, `verify: ok`; `check-task.sh oracle/decompress/stream`: ok. `bzip2-oracle -d` reproduces sample1/2/3.ref byte for byte. Only the three allowed files changed (Decompress.lean, Decompress/Stream.lean, tests/.../DecompressStream.lean).\n\nBehaviour spot-checks against upstream:\n1. Header (decompress.c:197-208): bytes are read one at a time, each wrong one is magic, the level byte outside '1'..'9' is magic, and input ending first is eof. So BX is magic, BZ is eof. Matches readHeader.\n2. First block/end byte (decompress.c:222-225): 0x17 starts the end magic, 0x31 a block magic, any other byte is BZ_DATA_ERROR. Matches `blocks`, and the following magic bytes are data errors (decompress.c:226-235, 590-599).\n3. Combined CRC (bzlib.c:832-835, 847-848, 515): rotate-left-1 xor, start 0, compared only after all four stored bytes are read, so a truncated CRC is eof, not data. Matches.\n4. Consumed byte count: GET_BITS (decompress.c:46-61) fetches a byte only when it needs bits, so the count is the bits read rounded up. `bytePos` is (pos+7)/8, and bzlib.c:1239 reports avail_in. Padding is not examined (the test flips padding bits and gets ok).\n5. Concatenation and trailing data (bzip2.c:454-481, 527-543): magic at a later stream is ignored, any other error in a later stream is the error, and the loop stops when nUnused == 0 and EOF. All of that matches decompressFrom. The `-f` trycat path (bzip2.c:465, 506-517) is rewind-and-copy at any stream, and the module doc correctly lists it as not modelled.\n6. BZ2_bzBuffToBuffDecompress (bzlib.c:1330-1345): OUTBUFF_FULL versus eof for a cut-off stream that fills the buffer exactly. The doc's claim is right.\nAll the line citations in both module docs point at the lines they claim.\n\nDifferential test: I built the vendored libbz2 with tests/vectors/classify.c, which runs uncompressStream's logic, and compared it with `bzip2-oracle -d` on 400 mutated or spliced streams (bit flips, truncations, appended garbage, concatenations, prefixes). The class (ok/magic/data/eof) and the output matched in all 400.\n\nThe module doc lists every difference from a single BZ2_bzBuffToBuffDecompress call: concatenation, trailing garbage, errors dropping the output, no output limit, and the `-f`/IO/MEM/small items that are not modelled. The tests cover the cases the task names: truncation is eof, bad header is magic, bad CRC is data.\n\nNon-blocking notes: the `fuel = 0 => .ok out` arm of decompressFrom is unreachable by the fuel argument, which is fine as written; the Stream error strings are free text, as Error.data allows.",
-    "worker": "imlvts/corey-claude"
+    "merged_sha": "04d4525502b3cbe09f5bb63eb989414c89430bba",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/oracle/decompress/stream/e1",
     "draft": false,
