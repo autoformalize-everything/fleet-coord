@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 2,
+  "epoch": 3,
   "last": {
     "agent": {
       "effort": "max",
@@ -17,7 +17,16 @@
     "summary": "Proved, in projects/bzip2/proofs/Bzip2/Proofs/Crc.lean (the only file changed), that the oracle's table-driven CRC and combined CRC equal the spec's, with no sorry. Public theorems, all resting on propext/Classical.choice/Quot.sound only:\n- crc32_eq_spec (data : ByteArray) : (Oracle.Crc.crc32 data).toBitVec = Spec.Crc.crc32 (data.toList.map UInt8.toBitVec)\n- combine_eq_spec (combined blockCrc : UInt32) : (Oracle.Crc.combine combined blockCrc).toBitVec = Spec.Crc.combineCrc combined.toBitVec blockCrc.toBitVec\n- beyond the two the task names: updateByte_eq_spec (one table lookup is the spec's eight bit steps); update_slice_eq_spec and crc32_slice_eq_spec (the oracle's update/crc32 over any slice data[start, stop), for every start and stop, as (data.toList.drop start).take (stop - start); the previous attempt covered only the default full-array range); streamCrc_eq_spec (foldl of Oracle.Crc.combine from 0 is Spec.Crc.streamCrc).\nProof: each of the 256 table entries equals the spec's byte step on state 0 (decide +kernel); the spec's byte step is xor-linear and splits at the top byte (crcUpdate c b = (c <<< 8) ^^^ crcUpdate 0 (top byte of c ^^^ b)); ByteArray.toList is related to data.data.toList by a short induction on the library's loop, replacing the previous attempt's longer one.\nThis continues the cancelled attempt's file (it already passed verify): I kept its algebra, simplified bit_linear to a single grind call, removed a redundant have, renamed gethigh to truncate_ushiftRight_append, added the slice theorems and bridge, added section comments, and rewrote the module doc (choices: UInt32/UInt8 related through toBitVec; slice and its clamping are the oracle's).\nChecked: (1) every C citation in the module doc read at the cited place: bzlib_private.h:157-160 (BZ_INITIALISE_CRC, 0xffffffffL), 162-165 (BZ_FINALISE_CRC, ~crcVar), 167-172 (BZ_UPDATE_CRC), compress.c:607-608 (combinedCRC rotate-left-1 then xor blockCRC, inside BZ2_compressBlock at compress.c:602), bzlib.c:192 (combinedCRC = 0 in BZ2_bzCompressInit, line 148), bzlib.c:515 (calculatedCombinedCRC = 0 in BZ2_bzDecompressInit, line 492), bzlib.c:832-835 (the decompressor's identical rotate and xor in BZ2_bzDecompress, line 808). I changed the old doc's compress.c:606-608 to 607-608 because line 606 is BZ_FINALISE_CRC of the block CRC, not the combination. (2) Sanity run outside the repo: for a 13-byte array, Oracle.Crc.crc32 d a b equals Spec.Crc.crc32 of (d.toList.drop a).take (b - a) for all a in 0..15, b in 0..17, covering clamped stops and empty slices. (3) git status is clean, nothing untracked; git diff --stat origin/master...HEAD: ' projects/bzip2/proofs/Bzip2/Proofs/Crc.lean | 288 +++ , 1 file changed, 288 insertions(+)'. origin/master was already merged into the branch; verify ran on top of that merge.\nFinal run of `sh -c 'projects/bzip2/tools/verify.sh && projects/bzip2/tools/check-task.sh proofs/crc'` printed: verify: packages: ok; verify: sources: ok; verify: build: ok; verify: style: ok; verify: axioms: ok; verify: lint: ok; verify: test: ok; verify: ok; check-task: proofs/crc: ok (bzip2-tests: 0 passed, 53 skipped, 0 failed: the golden vectors are skipped because compress is not implemented yet, which is not this task's).",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:17:31Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:17:31Z",
+    "kind": "review",
+    "nonce": "c5ef9ea194f0e7bc",
+    "spec": "38abfb02899a90c4",
+    "spec_rev": "97130994e89ec18bd5caa7b62e205f118048ed67",
+    "worker": "imlvts/corey-codex"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/proofs/crc/e1",
