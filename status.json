@@ -2,20 +2,14 @@
   "author": "imlvts/corey-codex",
   "epoch": 2,
   "last": {
-    "agent": {
-      "effort": "high",
-      "model": "claude-sonnet-5-5"
-    },
-    "at": "2026-11-17T00:58:13Z",
-    "comments": [],
+    "at": "2026-11-17T00:58:46Z",
+    "by": "admin",
     "epoch": 2,
-    "outcome": "approve",
-    "reviewed_sha": "f976589f271384a5a6d0a9ab9e5c53a1822b4b09",
-    "summary": "Approve. The change does what the task asks.\n\nChecks I ran:\n- `projects/bzip2/tools/verify.sh`: `verify: packages: ok`, `sources: ok`, `build: ok`, `style: ok`, `axioms: ok`, `lint: ok`, `test: ok`, then `verify: ok` (bzip2-tests: 0 passed, 53 skipped, 0 failed, since the oracle is still stubbed).\n- `projects/bzip2/fuzz/build.sh && projects/bzip2/fuzz/build/ffi_smoke` prints `ffi_smoke: ok` and exits 0. `fuzz/build/` is git-ignored (`.gitignore:11`) and `git status` is clean. Only `fuzz/*` and `lakefile.toml` are touched. The task names no `check-task.sh` check; `checks/` has only oracle, proofs and spec.\n\nClaims I checked against upstream or the generated code:\n1. `bzlib.h:42-55` lists the codes: PARAM_ERROR -2, DATA_ERROR -4, DATA_ERROR_MAGIC -5, UNEXPECTED_EOF -7. These match `errorCode`, and -10 is unused by libbz2 (the highest used is CONFIG_ERROR -9).\n2. `decompress.c:197-208`: a bad 'B', 'Z', 'h' or a block-size byte outside '1'..'9' returns `BZ_DATA_ERROR_MAGIC`. The citation is right.\n3. `bzlib.c:1262-1267`: `BZ2_bzBuffToBuffCompress` returns `BZ_PARAM_ERROR` for a block size level outside 1..9. The C shim's pre-check matches it.\n4. `bzlib.c:1330-1351`: `BZ2_bzBuffToBuffDecompress` makes a single `BZ2_bzDecompress` call and stops at `BZ_STREAM_END`. That supports the module doc's one-stream versus concatenated distinction.\n5. Result layout: the generated `.lake/build/ir/Bzip2/Ffi/Oracle.c` uses `lean_alloc_ctor(0, 1, 12)` with the uint64 at `sizeof(void*)*1` and the uint32 at `sizeof(void*)*1 + 8`. That is exactly what `finish()` reads.\n6. Lean runtime start-up: the shim does not call `lean_initialize_runtime_module()`. I tested a scratch Lean export set (tasks, `IO.mkRef`, GMP bignums, a panic) with and without that call, and it behaved identically. This is not a defect here.\n\nNotes that do not need changes:\n- The smoke test only reaches the `.unimplemented` path today. The success path of `finish()` (reading the output buffer and `consumed`) is not exercised yet; the layout check in item 5 is the only evidence for it. The later fuzz tasks should cover it once the oracle is real.\n- The oracle's `.param` error maps to `BZ_PARAM_ERROR` in Lean, and the C shim also pre-checks the level. The two are redundant but consistent.\n",
-    "worker": "imlvts/corey-claude"
+    "merged_sha": "f976589f271384a5a6d0a9ab9e5c53a1822b4b09",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/fuzz/ffi/e1",
     "draft": false,
