@@ -3,31 +3,31 @@
   "epoch": 4,
   "last": {
     "agent": {
+      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": "claude-sonnet-5-5",
-      "reason": "exit",
-      "session": "7d38ec25-ad02-49ea-997b-78136838ed8b",
-      "turns": 1
+      "model": null
     },
-    "at": "2026-11-17T02:48:22Z",
-    "epoch": 3,
-    "outcome": "success",
-    "progress": "Nothing left in scope.",
-    "summary": "Addressed the review: ByteExact.lean now has #guards (run in every build) that generate in Lean the under/over-10000-byte periodic inputs (ab*4999, ab*5500, a*9999, a*11000, the 1000-byte LCG pattern *9 and *11) and compare compress output at levels 1, 5 and 9 by length and bzip2 CRC32 against the vendored C bzip2's vectors in tests/vectors/byte-exact (values computed from those files). Module doc updated to no longer defer to check.py. Confirmed a wrong CRC makes the build fail (ByteExact.lean:145 guard error), then restored it. The merged origin/master (decompress) still passes. verify.sh: 'verify: packages: ok', 'sources: ok', 'build: ok', 'style: ok', 'axioms: ok', 'lint: ok', 'test: ok', 'verify: ok' (lake test: 53 passed, 0 skipped, 0 failed). git status clean; the diff vs origin/master touches only Compress/*, tests/Bzip2/Test/ByteExact.lean and tests/vectors/byte-exact/*. fuzz/compress_diff.c does not exist on this branch, so the fuzz item does not apply.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T02:55:44Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:55:44Z",
-    "kind": "review",
-    "nonce": "299cfc1b3fd83aa9",
-    "spec": "137ca25c0ff48007",
-    "spec_rev": "5205d6c86af9bb63a2ba090a6251bc4c893ca41e",
+    "at": "2026-11-17T02:59:07Z",
+    "comments": [
+      {
+        "body": "The large periodic #guards call `agrees`, which checks only size and CRC32. That is not the byte-for-byte golden comparison required by the task; distinct compressed streams can have the same size and CRC. `check.py` compares bytes, but it is not run by `lake test` or `verify.sh`. Make the #guards for the under/over-10000 cases compare the full compressed bytes against the vendored golden output (or arrange an equivalent byte comparison in the required test path).",
+        "line": 118,
+        "path": "projects/bzip2/tests/Bzip2/Test/ByteExact.lean"
+      },
+      {
+        "body": "This citation is wrong: `blocksort.c:1083-1088` finds `origPtr`; the choice of `fallbackSort` for blocks below 10000 bytes is at `blocksort.c:1044-1046`. Please cite the decision lines here, as STYLE.md requires.",
+        "line": 8,
+        "path": "projects/bzip2/tests/Bzip2/Test/ByteExact.lean"
+      }
+    ],
+    "epoch": 4,
+    "outcome": "changes",
+    "reviewed_sha": "9a89853deb5b1234b57d0f8d5dec70c6ae221916",
+    "summary": "The sorter implementation matched the vendored compressor on the 24 supplied byte-exact vectors, 108 additional periodic threshold cases, and 9 block-boundary/sample cases. `verify.sh` passed: `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`. The named fuzz harness and a task-specific check are absent. Two task-required fixes remain: make the large golden #guards compare actual bytes, and correct the fallback-threshold citation.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "review",
+  "lease": null,
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/oracle/compress/byte-exact/e1",
     "draft": false,
@@ -39,7 +39,7 @@
     "spec": "137ca25c0ff48007",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/24"
   },
-  "rounds": 1,
+  "rounds": 2,
   "strikes": 0,
   "task": "bzip2/oracle/compress/byte-exact",
   "v": 1
