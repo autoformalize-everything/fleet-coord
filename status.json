@@ -3,32 +3,25 @@
   "epoch": 7,
   "last": {
     "agent": {
-      "cli": "codex",
       "effort": "high",
-      "exit": 0,
-      "model": null,
-      "reason": "exit",
-      "session": "01a1e6cd-8b70-7b42-87cb-3c02014826f5",
-      "turns": 1
+      "model": "claude-sonnet-5-5"
     },
-    "at": "2026-11-17T00:02:17Z",
-    "epoch": 6,
-    "outcome": "success",
-    "progress": "Nothing left for this task.",
-    "summary": "Corrected RLE1 block-boundary documentation to match bzlib.c and expanded C line citations; committed as fd43b94. Checked upstream source lines, clean git status, and allowed-file diff. Required check reported: 'verify: packages: ok', 'verify: sources: ok', 'verify: build: ok', 'verify: style: ok', 'verify: axioms: ok', 'verify: lint: ok', 'verify: test: ok', 'verify: ok', and 'check-task: spec/rle1: ok'.",
-    "worker": "imlvts/corey-codex"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T00:25:56Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T00:25:56Z",
-    "kind": "review",
-    "nonce": "c06bc018ce4fd76f",
-    "spec": "8d9872aa8d6c1279",
-    "spec_rev": "18f4089ca8d6e89c9ef888d6725394a62855a1f4",
+    "at": "2026-11-17T00:27:23Z",
+    "comments": [
+      {
+        "body": "`bzlib.c:639-657` (non-randomised FAST) never sets `state_out_len = 1`; a 1-run is written via `goto s_state_out_len_eq_one` (643, 646), and only 648/653 set 2 and 3. The `= 1` assignment is in the randomised and SMALL branches (563, 733, 782). Reword so the claim matches the cited lines.",
+        "line": 31,
+        "path": "projects/bzip2/spec/Bzip2/Spec/Rle1.lean"
+      }
+    ],
+    "epoch": 7,
+    "outcome": "changes",
+    "reviewed_sha": "fd43b94bdf650c54923e620845263206c4f2847f",
+    "summary": "Verify and check-task pass (`verify: packages/sources/build/style/axioms/lint/test: ok`, `verify: ok`, `check-task: spec/rle1: ok`). Only Rle1.lean is changed. I spot-checked these against the C: (1) the count byte is read with no end-of-block check before it (bzlib.c:658-659). The four-equal-bytes-at-block-end case therefore reaches nblock_used == save_nblock+2, and bzlib.c:633 then returns True and bzlib.c:823 returns BZ_DATA_ERROR. (2) Count bytes 252..255 are unrestricted, so the run is 4+k1 (bzlib.c:659). (3) The byte read at bzlib.c:660 starts a fresh run, so the `a a a a 0 a a a a 0` = 8 example is right. (4) The encoder cuts at 255 at bzlib.c:275-276 and writes len-4 at bzlib.c:243. prepare_new_block (117-126) does not touch state_in_*, and a full block is written without flush_RL (390-392), so the carry claim holds. (5) decompress.c:497 rejects origPtr >= nblock. The model matches the decoder state machine and the encoder, and the roundtrip is stated as a Prop and left to proofs/rle, which the task allows.\n\nOne change is needed, because STYLE.md requires that a claim match the cited lines. Edge case 1 (Rle1.lean:31-33) says that `state_out_len` is set to 1, 2 or 3 at `bzlib.c:639-657`, \"the non-randomised FAST branch\". That branch never sets it to 1. Lines 648 and 653 set 2 and 3, and a 1-run is emitted by `goto s_state_out_len_eq_one` at 643 and 646. The assignment to 1 is in the other three branches (563, 733, 782). Reword it so it matches, e.g. \"a run of 1 is written at once (`goto s_state_out_len_eq_one`, `bzlib.c:643` and `bzlib.c:646`); `state_out_len` is set to 2 or 3 at `bzlib.c:648` and `bzlib.c:653`, and the run is ended by a different byte; the other branches set it to 1, 2 or 3 (`bzlib.c:563-580`)\".\n\nOptional (not required): `bzlib.c:659` is where the count is used, and the count is read at 658. The `flush_RL` range is 252-256 in the module doc but 252-257 on `encFlush`; use one.",
     "worker": "imlvts/corey-claude"
   },
-  "need": "review",
+  "lease": null,
+  "need": "work",
   "pr": {
     "branch": "task/bzip2/spec/rle1/e1",
     "draft": false,
@@ -40,7 +33,7 @@
     "spec": "8d9872aa8d6c1279",
     "url": "https://github.com/autoformalize-everything/afe-oss/pull/4"
   },
-  "rounds": 1,
+  "rounds": 2,
   "strikes": 2,
   "task": "bzip2/spec/rle1",
   "v": 1
