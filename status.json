@@ -4,39 +4,27 @@
   "last": {
     "agent": {
       "effort": "high",
-      "model": "claude-sonnet-5-5"
+      "exit": 0,
+      "model": "claude-opus-5-5",
+      "reason": "exit",
+      "session": "1cf7f96a-9c7b-4b75-8f21-a950435ff347",
+      "turns": 1
     },
-    "at": "2026-11-17T02:31:18Z",
-    "comments": [
-      {
-        "body": "Doc string is wrong: the C decoder reads selectors past BZ_MAX_SELECTORS (18002) but does not store them (`if (i < BZ_MAX_SELECTORS)`, decompress.c:302) and clamps nSelectors (decompress.c:305-306). Reword and cite `decompress.c:299-306`.",
-        "line": 98,
-        "path": "projects/bzip2/spec/Bzip2/Spec/Format.lean"
-      }
-    ],
-    "epoch": 4,
-    "outcome": "changes",
-    "reviewed_sha": "0b854aafbd66c96ff2aa279bb3a3e30bb5b3924c",
-    "summary": "The change is a thorough and mostly accurate spec. `projects/bzip2/tools/verify.sh` passes (verify: packages/sources/build/style/axioms/lint/test: ok, final `verify: ok`) and `tools/check-task.sh spec/format` prints `check-task: spec/format: ok`. Only `spec/Bzip2/Spec/Format.lean` is touched.\n\nWhat I checked against the C source (not memory):\n- Header: 'B','Z','h' and the level byte 0x31..0x39 all give BZ_DATA_ERROR_MAGIC, read byte by byte so a short header is EOF (decompress.c:197-209). Matches `readStream`.\n- `origPtr > 10 + 100000*level` is checked right after the 24 bits, before the symbol map (decompress.c:261-264), and `origPtr >= nblock` after EOB (decompress.c:495-498). Matches `readBlock`.\n- Map, nGroups 2..6, nSelectors>=1, selector unary index >= nGroups, and the 18002 clamp (decompress.c:299-306). Matches.\n- The code-length range check precedes each bit read (decompress.c:327). `readDelta` does the same, and the two EOF/data examples exercise it.\n- The group-selector check (`groupNo >= nSelectors`) precedes the first bit of the next group (decompress.c:76-79). Matches `readSymbols`, with examples.\n- RLE1 output ending right after 4 equal bytes is a data error (nblock_used > save_nblock+1, bzlib.c:560-561) and the randomisation mask is applied to every pre-RLE1 byte (bzlib_private.h:137-149). Matches `derandomise`/`readBlock`. I diffed the 512 `randomNumbers` against randtable.c: identical.\n- Block CRC and combined CRC are checked in BZ2_bzDecompress (bzlib.c:823-848); the mismatch is BZ_DATA_ERROR.\n- uncompressStream: a magic error on stream 1 fails, on a later stream is ignored as trailing garbage; EOF/data in a later stream remain errors (bzip2.c:435-479, 531-543). Matches `decodeAll`.\n- Differential test: I ran `decode` against `bzip2 -dc` on 253 inputs made of truncations, one-bit flips, concatenations and trailing garbage of small real streams; the class (magic/data/eof) and output matched every time. (Later cases were not checked: the interpreted spec is far too slow on a mutated block that decodes to ~1300 bytes, because of the Bwt/Crc spec modules, not this change.)\n\nRequested change (one doc claim that does not match the C code, and a missing citation for a rule the task names):\n- `readSelectors`' doc string says it reads \"all selectors, including those past the 18002 that the C decoder stores\". The C decoder does not store them: it reads them but stores only `i < BZ_MAX_SELECTORS` and then clamps `nSelectors` (decompress.c:299-306). Please reword (e.g. \"reads all nSelectors selectors but keeps only the first 18002, as decompress.c:299-306\") and cite that range, there or in the module doc. The task lists this rule explicitly, and the module doc currently only covers it under the broad `decompress.c:266-334`.\n\nNotes, not requests:\n- `ValidCompression` is as the task words it (decoder size limit `100000*level`, header level, decodes to the input). It also accepts a randomised block, which the compressor never writes (compress.c:643-651) and the compressor's own limit is `100000*level - 19` (bzlib.c nblockMAX); both are looser than what the compressor does, which the task allows.\n- `readSymbols` re-decodes the whole symbol prefix after every symbol, so it is quadratic; fine for a spec but it is why only tiny examples are practical to `decide`.\n- `bzip2 -f` (trycat, bzip2.c:506-517) copying a non-bzip2 input is not modelled; consistent with the module doc.",
-    "worker": "imlvts/corey-claude"
-  },
-  "lease": {
-    "claimed_at": "2026-11-17T02:31:20Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:31:20Z",
-    "kind": "work",
-    "nonce": "2acc996977732dbf",
-    "spec": "7d4f5a36342ee71f",
-    "spec_rev": "cc755cb0d6ad8bfef037ed09292c48ac7098c928",
+    "at": "2026-11-17T02:33:21Z",
+    "epoch": 5,
+    "outcome": "success",
+    "progress": "",
+    "summary": "Addressed the review's one request on projects/bzip2/spec/Bzip2/Spec/Format.lean: readSelectors' doc string now says it reads all nSelectors selectors but keeps only the first 18002, because the C decoder reads the rest without storing them (`if (i < BZ_MAX_SELECTORS)`) and then clamps nSelectors (decompress.c:299-306, read; BZ_MAX_SELECTORS = 2 + 900000/50 at bzlib_private.h:125). The same citation is added to the module doc next to the selector rule. The code (`codes.take 18002`) was already correct, so only the doc changed. Checked after the merge of origin/master: `projects/bzip2/tools/verify.sh && projects/bzip2/tools/check-task.sh spec/format` exits 0 with `verify: packages: ok`, `verify: sources: ok`, `verify: build: ok`, `verify: style: ok`, `verify: axioms: ok`, `verify: lint: ok`, `verify: test: ok`, `verify: ok`, `check-task: spec/format: ok`. `git status` is clean and `git diff --stat origin/master...HEAD` lists only projects/bzip2/spec/Bzip2/Spec/Format.lean.",
     "worker": "imlvts/corey-opus"
   },
-  "need": "work",
+  "lease": null,
+  "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/format/e1",
     "draft": false,
     "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
     "gh_user": "imlvts",
-    "head_sha": "0b854aafbd66c96ff2aa279bb3a3e30bb5b3924c",
+    "head_sha": "b84273274bac950e1eae6c3a289887ce0aebd0c9",
     "number": 20,
     "repo": "autoformalize-everything/afe-oss",
     "spec": "7d4f5a36342ee71f",
