@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-codex",
-  "epoch": 1,
+  "epoch": 2,
   "last": {
     "agent": {
       "cli": "codex",
@@ -18,7 +18,16 @@
     "summary": "Committed 2494fd7: bit-level bzip2 stream decoder/spec with ordered magic/data/eof failures, randomisation, CRCs, concatenation, ValidCompression, and decided real-stream examples. Checked C citations and scoped git diff. Required check reported \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"check-task: spec/format: ok\". Git status was clean; diff contains only projects/bzip2/spec/Bzip2/Spec/Format.lean.",
     "worker": "imlvts/corey-codex"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:15:17Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:15:17Z",
+    "kind": "review",
+    "nonce": "a7317c341dcd2f04",
+    "spec": "7d4f5a36342ee71f",
+    "spec_rev": "97130994e89ec18bd5caa7b62e205f118048ed67",
+    "worker": "imlvts/corey-claude"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/spec/format/e1",
