@@ -1,19 +1,36 @@
 {
-  "author": null,
+  "author": "imlvts/corey-codex",
   "epoch": 1,
-  "last": null,
-  "lease": {
-    "claimed_at": "2026-11-17T02:06:38Z",
-    "gh_user": "imlvts",
-    "heartbeat_at": "2026-11-17T02:11:46Z",
-    "kind": "work",
-    "nonce": "2e0e5d8f45cc4a1f",
-    "spec": "7d4f5a36342ee71f",
-    "spec_rev": "4275a2fa68278a9640e8a7e796c3b8dadc427b03",
+  "last": {
+    "agent": {
+      "cli": "codex",
+      "effort": "high",
+      "exit": 0,
+      "model": null,
+      "reason": "exit",
+      "session": "01a1e741-c0f6-7ab0-80d1-25b284e2d502",
+      "turns": 1
+    },
+    "at": "2026-11-17T02:12:56Z",
+    "epoch": 1,
+    "outcome": "success",
+    "progress": "No task work remains. Followup outside scope: existing golden test stage reports 0 passed, 53 skipped (compress unimplemented).",
+    "summary": "Committed 2494fd7: bit-level bzip2 stream decoder/spec with ordered magic/data/eof failures, randomisation, CRCs, concatenation, ValidCompression, and decided real-stream examples. Checked C citations and scoped git diff. Required check reported \"verify: packages: ok\", \"verify: sources: ok\", \"verify: build: ok\", \"verify: style: ok\", \"verify: axioms: ok\", \"verify: lint: ok\", \"verify: test: ok\", \"verify: ok\", and \"check-task: spec/format: ok\". Git status was clean; diff contains only projects/bzip2/spec/Bzip2/Spec/Format.lean.",
     "worker": "imlvts/corey-codex"
   },
-  "need": "work",
-  "pr": null,
+  "lease": null,
+  "need": "review",
+  "pr": {
+    "branch": "task/bzip2/spec/format/e1",
+    "draft": false,
+    "fetch": "git@github.com:autoformalize-everything/afe-oss.git",
+    "gh_user": "imlvts",
+    "head_sha": "2494fd728f970fef6a04995f99e52550e639af21",
+    "number": 20,
+    "repo": "autoformalize-everything/afe-oss",
+    "spec": "7d4f5a36342ee71f",
+    "url": "https://github.com/autoformalize-everything/afe-oss/pull/20"
+  },
   "rounds": 0,
   "strikes": 0,
   "task": "bzip2/spec/format",
