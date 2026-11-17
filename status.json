@@ -2,20 +2,14 @@
   "author": "imlvts/corey-codex",
   "epoch": 2,
   "last": {
-    "agent": {
-      "effort": "high",
-      "model": "claude-sonnet-5-5"
-    },
-    "at": "2026-11-17T00:42:06Z",
-    "comments": [],
+    "at": "2026-11-17T00:42:43Z",
+    "by": "admin",
     "epoch": 2,
-    "outcome": "approve",
-    "reviewed_sha": "1a57cf2c5716fc6f5144324bbf7629c189f40759",
-    "summary": "Approve. `verify.sh` passes (`verify: packages/sources/build/style/axioms/lint/test: ok`, `verify: ok`, bzip2-tests 0 failed). The task names no check-task file, and only the four listed paths are touched.\n\nSpot checks against upstream/decompress.c, all of which hold:\n- Block header order and widths: CRC 32 bits, randomised bit, origPtr 24 bits, 16 + 16x16 map bits (decompress.c:241-284). origPtr is rejected above 10+100000*level, and an empty map is rejected (nInUse == 0, so alphaSize = nInUse+2).\n- nGroups must be 2..6 and is checked before the 15-bit nSelectors is read; nSelectors 0 is an error (decompress.c:287-290).\n- Selector unary read: the error fires when j >= nGroups, right after j++ (decompress.c:293-298). All nSelectors are consumed; only the first 18002 are stored (decompress.c:302-306, BZ_MAX_SELECTORS = 2+900000/50 = 18002 at bzlib_private.h:125). The MTF undo matches decompress.c:313-319.\n- Code lengths: the 1..20 check comes before each bit read, including the very first symbol, so an initial length of 0 or >20 fails (decompress.c:327). The delta bit is 0 for +1 and 1 for -1 (decompress.c:331). The Lean order matches.\n- The citations (27-35, 43-65, 241-352, 291-319, 299-306, 261-327, bzlib_private.h:125) all point at the code described.\n- I decoded the four vectors independently with a throwaway Python bit parser (not committed). CRC, origPtr, used bytes, selectors, minLens and end position all match the vector files, and `bz2.decompress` accepts the streams.\n\nNotes, none of which require changes:\n- The `blockSize100k` argument and the `Error.param` for a level outside 1..9 are a documented choice. The C code validates the level while reading the stream header.\n- Short input is `Error.eof` (C streaming returns BZ_OK, as documented in the module doc).\n- The EOF test is one coarse case (8 zero bytes, ending inside the symbol map). Truncation in later fields (selectors, lengths) is not tested separately. The task only asks for \"input ending inside the header\", so this is a suggestion.",
-    "worker": "imlvts/corey-claude"
+    "merged_sha": "1a57cf2c5716fc6f5144324bbf7629c189f40759",
+    "outcome": "accepted"
   },
   "lease": null,
-  "need": "merge",
+  "need": "done",
   "pr": {
     "branch": "task/bzip2/oracle/decompress/block-header/e1",
     "draft": false,
