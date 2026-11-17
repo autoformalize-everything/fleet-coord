@@ -1,6 +1,6 @@
 {
   "author": "imlvts/corey-claude",
-  "epoch": 5,
+  "epoch": 6,
   "last": {
     "agent": {
       "effort": "high",
@@ -17,7 +17,16 @@
     "summary": "Fixed the one reviewer comment: the module doc in Blocks.lean:44 now cites BZ2_bzBuffToBuffCompress as bzlib.c:1250-1298 (read bzlib.c:1250 = the function head, 1298-1303 = end of it and the start of BZ2_bzBuffToBuffDecompress; bzlib.c:1282 is `ret = BZ2_bzCompress ( &strm, BZ_FINISH );`, the cited call). origin/master merge left no conflicts. Checked: `sh projects/bzip2/tools/verify.sh` prints `verify: packages: ok`, `sources: ok`, `build: ok`, `style: ok`, `axioms: ok`, `lint: ok`, `test: ok`, `verify: ok`. git status is clean; `git diff --stat origin/master...HEAD` lists only Oracle/Compress/Blocks.lean, tests/Bzip2/Test/CompressBlocks.lean and tests/vectors/compress-blocks/* (31 files), all allowed by the task.",
     "worker": "imlvts/corey-claude"
   },
-  "lease": null,
+  "lease": {
+    "claimed_at": "2026-11-17T02:03:26Z",
+    "gh_user": "imlvts",
+    "heartbeat_at": "2026-11-17T02:03:26Z",
+    "kind": "review",
+    "nonce": "86ab2df72b629ba9",
+    "spec": "148307c7db1ce57d",
+    "spec_rev": "4c7c4a1a57a68bff721333692f9729907f069519",
+    "worker": "imlvts/corey-opus"
+  },
   "need": "review",
   "pr": {
     "branch": "task/bzip2/oracle/compress/rle1-blocks/e1",
